@@ -1,0 +1,56 @@
+import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+
+import { DefaultSeo } from "next-seo";
+import { ThemeProvider } from "next-themes";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
+import { hardhat, polygonMumbai } from "wagmi/chains";
+
+import { DefaultLayout } from "@layouts/default-layout";
+import { ExtendedPage } from "@types";
+
+import SEO from "../../next-seo.config";
+
+import type { AppProps } from "next/app";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+
+const { chains, provider } = configureChains(
+  [polygonMumbai, hardhat],
+  [
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
+    publicProvider(),
+  ],
+);
+
+const { connectors } = getDefaultWallets({
+  appName: "KnowledgeLayer Platform Frontend",
+  chains,
+});
+
+const client = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+  persister: null,
+});
+
+function MyApp({ Component, pageProps }: AppProps) {
+  const getLayout =
+    (Component as ExtendedPage).getLayout ||
+    ((page) => <DefaultLayout>{page}</DefaultLayout>);
+
+  return (
+    <WagmiConfig client={client}>
+      <RainbowKitProvider chains={chains}>
+        <ThemeProvider>
+          <DefaultSeo {...SEO} />
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
+  );
+}
+
+export default MyApp;
