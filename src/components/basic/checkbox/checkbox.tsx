@@ -54,7 +54,7 @@ export const Checkbox = forwardRef(
       className,
       ...props
     }: CheckboxProps,
-    ref?: Ref<HTMLInputElement>
+    ref?: Ref<HTMLInputElement>,
   ) => {
     const id = useId();
 
@@ -68,9 +68,9 @@ export const Checkbox = forwardRef(
       <label
         htmlFor={id}
         className={cx(
-          "inline-flex items-center select-none",
+          "inline-flex select-none items-center",
           disabled ? "cursor-not-allowed" : "cursor-pointer",
-          className
+          className,
         )}
       >
         <input
@@ -89,7 +89,7 @@ export const Checkbox = forwardRef(
             "disabled:opacity-50",
             "disabled:cursor-not-allowed",
             { "cursor-pointer": !disabled },
-            "focus:outline-none focus:ring-offset-0 focus:ring-primary focus:ring-4 focus:ring-opacity-50"
+            "focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50 focus:ring-offset-0",
           )}
         />
         {label && (
@@ -99,7 +99,7 @@ export const Checkbox = forwardRef(
               labelSizeClassName[labelSize],
               !disabled &&
                 (checked ? "opacity-100" : "opacity-50 hover:opacity-100"),
-              { "opacity-50": disabled }
+              { "opacity-50": disabled },
             )}
           >
             {label}
@@ -107,7 +107,7 @@ export const Checkbox = forwardRef(
         )}
       </label>
     );
-  }
+  },
 );
 
 Checkbox.displayName = "Checkbox";

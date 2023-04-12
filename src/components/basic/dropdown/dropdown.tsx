@@ -94,12 +94,12 @@ export const DropdownContent = ({ children, className }: CommonProps) => {
       <Menu.Items
         className={twMerge(
           cx(
-            "absolute -right-2 z-20 top-full",
+            "absolute -right-2 top-full z-20",
             "flex flex-col gap-1",
             "min-w-[220px] p-2",
             "rounded-btn",
             "bg-base-200",
-            "shadow-lg drop-shadow-white ring-1 ring-white/10 shadow-white/10 focus:outline-none",
+            "drop-shadow-white shadow-lg shadow-white/10 ring-1 ring-white/10 focus:outline-none",
             className,
           ),
         )}

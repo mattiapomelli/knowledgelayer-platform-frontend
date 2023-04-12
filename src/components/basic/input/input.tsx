@@ -109,7 +109,7 @@ export const Input = forwardRef(
     return (
       <div
         className={cx(
-          "flex-col relative",
+          "relative flex-col",
           block ? "flex" : "inline-flex",
           className,
         )}

@@ -17,7 +17,7 @@ export const RadioItem = ({
         type="radio"
         className={cx(
           "cursor-pointer text-primary",
-          "focus:outline-none focus:ring-offset-0 focus:ring-primary focus:ring-4 focus:ring-opacity-50",
+          "focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50 focus:ring-offset-0",
           { "mr-2": label },
           className,
         )}

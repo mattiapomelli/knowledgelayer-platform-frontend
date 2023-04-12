@@ -71,7 +71,7 @@ export const Select = ({
   return (
     <div
       className={cx(
-        "flex-col relative",
+        "relative flex-col",
         block ? "flex" : "inline-flex",
         className,
       )}
@@ -87,11 +87,11 @@ export const Select = ({
           {/* Trigger */}
           <Listbox.Button
             className={cx(
-              "relative w-full flex items-center",
+              "relative flex w-full items-center",
               "rounded-btn",
               "border-2",
               "text-left",
-              "focus:outline-none focus-visible:ring-4 focus:ring-primary/30",
+              "focus:outline-none focus:ring-primary/30 focus-visible:ring-4",
               variantClassname[variant],
               sizeClassname[size],
               icon && iconPaddingClassname[size],
@@ -141,7 +141,7 @@ export const Select = ({
                   key={item}
                   className={({ active }) =>
                     cx(
-                      `cursor-pointer select-none relative pr-4 flex items-center`,
+                      `relative flex cursor-pointer select-none items-center pr-4`,
                       {
                         "text-primary bg-primary/10": active,
                       },

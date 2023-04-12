@@ -106,10 +106,10 @@ export const Button = forwardRef(
             ringClassname[color],
             sizeClassname[size],
             { "w-full": block },
-            "disabled:cursor-not-allowed disabled:pointer-events-auto disabled:active:transform-none",
-            { "loading cursor-not-allowed pointer-events-auto": loading },
+            "disabled:pointer-events-auto disabled:cursor-not-allowed disabled:active:transform-none",
+            { "loading pointer-events-auto cursor-not-allowed": loading },
             { "gap-2": leftIcon || rightIcon },
-            "focus:outline-none focus-visible:ring-4 focus:ring-opacity-30",
+            "focus:outline-none focus:ring-opacity-30 focus-visible:ring-4",
             className,
           ),
         )}
