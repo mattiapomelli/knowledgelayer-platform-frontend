@@ -17,7 +17,15 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "type"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "type"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc"
@@ -53,5 +61,10 @@
       }
     }
   ],
-  "ignorePatterns": ["/src/abis/**/*.ts"]
+  "ignorePatterns": ["/src/abis/**/*.ts"],
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cx", "twMerge"]
+    }
+  }
 }
