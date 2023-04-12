@@ -34,7 +34,6 @@
         "alphabetize": { "order": "asc" }
       }
     ],
-    "import/prefer-default-export": "off",
     "simple-import-sort/exports": "error",
     "tailwindcss/migration-from-tailwind-2": "off",
     "unicorn/filename-case": ["error", { "case": "kebabCase" }]

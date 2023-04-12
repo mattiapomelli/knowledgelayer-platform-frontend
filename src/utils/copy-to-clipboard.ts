@@ -4,6 +4,7 @@ export const copyToClipboard = (str: string) => {
    * fallback to older browsers (including Safari)
    * if clipboard API not supported
    */
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- clipboard may be null
   if (!clipboard || typeof clipboard.writeText !== `function`) {
     const textarea = document.createElement(`textarea`);
     textarea.value = str;

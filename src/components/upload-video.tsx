@@ -42,7 +42,7 @@ export const UploadVideo = ({
   );
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    if (acceptedFiles && acceptedFiles.length > 0 && acceptedFiles[0]) {
+    if (acceptedFiles.length > 0 && acceptedFiles[0]) {
       setVideo(acceptedFiles[0]);
     }
   }, []);

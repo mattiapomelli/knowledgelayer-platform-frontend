@@ -9,20 +9,16 @@ interface AddressAvatarProps {
 export const AddressAvatar = ({ address, size = 16 }: AddressAvatarProps) => {
   const iconRef = useRef<HTMLSpanElement>(null);
   const icon = useMemo(
-    () => (address ? jazzicon(size, parseInt(address.slice(2, 10), 16)) : null),
+    () => jazzicon(size, parseInt(address.slice(2, 10), 16)),
     [address, size],
   );
 
   useLayoutEffect(() => {
     const current = iconRef.current;
-    if (icon) {
-      current?.appendChild(icon);
-    }
+    current?.appendChild(icon);
 
     return () => {
-      if (icon) {
-        current?.removeChild(icon);
-      }
+      current?.removeChild(icon);
     };
   }, [icon, iconRef]);
 

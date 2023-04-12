@@ -15,12 +15,11 @@ export const ThemeToggle = () => {
       className="rounded-sm p-0.5 focus:outline-none focus:ring-primary/50 focus-visible:ring-4"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      {mounted &&
-        (theme === "dark" ? (
-          <SunIcon className="h-6 w-6" />
-        ) : (
-          <MoonIcon className="h-6 w-6" />
-        ))}
+      {theme === "dark" ? (
+        <SunIcon className="h-6 w-6" />
+      ) : (
+        <MoonIcon className="h-6 w-6" />
+      )}
     </button>
   );
 };
