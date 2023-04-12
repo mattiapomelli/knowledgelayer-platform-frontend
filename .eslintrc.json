@@ -52,5 +52,6 @@
         "import/no-default-export": "off"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["/src/abis/**/*.ts"]
 }
