@@ -1,12 +1,13 @@
 import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { hardhat, polygonMumbai } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { hardhat, polygonMumbai } from "wagmi/chains";
 
 import { DefaultLayout } from "@layouts/default-layout";
 import { ExtendedPage } from "@types";
@@ -14,7 +15,6 @@ import { ExtendedPage } from "@types";
 import SEO from "../../next-seo.config";
 
 import type { AppProps } from "next/app";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const { chains, provider } = configureChains(
   [
