@@ -1,9 +1,42 @@
-import React from "react";
+import { Spinner } from "@components/basic/spinner";
+import { useCourses } from "@hooks/use-courses";
 
-import type { NextPage } from "next";
+import { CourseCard } from "../components/course-card";
 
-const Home: NextPage = () => {
-  return <div>Home</div>;
+const Catalog = () => {
+  const { data: courses, isLoading } = useCourses();
+
+  if (isLoading) {
+    return (
+      <div className="my-14 flex justify-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (courses?.length === 0)
+    return (
+      <div className="my-14 flex justify-center">
+        <p>No courses yet</p>
+      </div>
+    );
+
+  return (
+    <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
+      {courses?.map((course) => (
+        <CourseCard key={course.id} course={course} linkToPage />
+      ))}
+    </div>
+  );
+};
+
+const Home = () => {
+  return (
+    <>
+      <h1 className="mb-6 text-4xl font-bold">Catalog</h1>
+      <Catalog />
+    </>
+  );
 };
 
 export default Home;

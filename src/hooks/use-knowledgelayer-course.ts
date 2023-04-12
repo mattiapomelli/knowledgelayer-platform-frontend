@@ -1,9 +1,10 @@
 import { useContract, useNetwork, useProvider, useSigner } from "wagmi";
-import { KnowledgeLayerCourseAbi } from "@abis/knowledgeLayerCourse";
+import { hardhat } from "wagmi/chains";
 
+import { KnowledgeLayerCourseAbi } from "@abis/knowledgeLayerCourse";
 import { KnowledgeLayerCourse } from "@abis/types/knowledgeLayerCourse";
+
 import { KNOWLEDGELAYER_COURSE_ADDRESS } from "../constants/addresses";
-import { hardhat } from "wagmi/dist/chains";
 
 export const useKnowledgeLayerCourse = (withSigner: boolean = false) => {
   const provider = useProvider();
