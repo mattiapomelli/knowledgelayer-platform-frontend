@@ -20,14 +20,7 @@ interface UseCreateCourseOptions {
 export const useCreateCourse = (options?: UseCreateCourseOptions) => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
   const mutation = useMutation(
-    async ({
-      name,
-      slug,
-      description,
-      price,
-      image,
-      pdf,
-    }: CreateCourseData) => {
+    async ({ name, slug, description, price }: CreateCourseData) => {
       if (!knowledgeLayerCourse) return;
 
       // const imageUrl = await uploadImage(image);
