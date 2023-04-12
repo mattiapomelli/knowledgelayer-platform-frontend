@@ -1,8 +1,8 @@
 import { useContract, useNetwork, useProvider, useSigner } from "wagmi";
 import { hardhat } from "wagmi/chains";
 
-import { KnowledgeLayerCourseAbi } from "@abis/knowledgeLayerCourse";
-import { KnowledgeLayerCourse } from "@abis/types/knowledgeLayerCourse";
+import { KnowledgeLayerCourseAbi } from "@abis/knowledgelayer-course";
+import { KnowledgeLayerCourse } from "@abis/types/knowledgelayer-course";
 
 import { KNOWLEDGELAYER_COURSE_ADDRESS } from "../constants/addresses";
 
