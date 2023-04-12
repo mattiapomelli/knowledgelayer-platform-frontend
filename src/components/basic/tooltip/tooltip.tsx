@@ -4,11 +4,13 @@ import {
   TooltipPortal,
   TooltipContent,
   TooltipArrow,
-  TooltipContentProps,
   TooltipProvider,
 } from "@radix-ui/react-tooltip";
 import cx from "classnames";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+import type { TooltipContentProps } from "@radix-ui/react-tooltip";
+import type { ReactNode } from "react";
 
 const colorClassname = {
   primary: "bg-primary text-primary-content fill-primary",

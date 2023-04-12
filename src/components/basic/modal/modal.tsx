@@ -1,9 +1,10 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import cx from "classnames";
-import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 import CrossIcon from "@icons/cross.svg";
+
+import type { ReactNode } from "react";
 
 export interface BaseModalProps {
   open: boolean;

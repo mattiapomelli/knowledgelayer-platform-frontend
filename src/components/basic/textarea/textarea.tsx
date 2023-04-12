@@ -1,7 +1,9 @@
 import cx from "classnames";
-import React, { forwardRef, Ref, TextareaHTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 
 import { Label } from "@components/basic/label";
+
+import type { Ref, TextareaHTMLAttributes } from "react";
 
 const variantClassname = {
   solid: "bg-base-300 border-base-300 focus:border-base-300",

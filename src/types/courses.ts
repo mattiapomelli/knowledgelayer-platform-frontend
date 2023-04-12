@@ -1,4 +1,4 @@
-import { BigNumber } from "ethers";
+import type { BigNumber } from "ethers";
 
 export interface Course {
   id: number;

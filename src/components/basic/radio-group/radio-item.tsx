@@ -1,5 +1,6 @@
 import cx from "classnames";
-import { InputHTMLAttributes } from "react";
+
+import type { InputHTMLAttributes } from "react";
 
 interface RadioItemProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

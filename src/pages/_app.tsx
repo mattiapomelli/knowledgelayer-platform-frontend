@@ -15,10 +15,10 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import { DefaultLayout } from "@layouts/default-layout";
-import { ExtendedPage } from "@types";
 
 import SEO from "../../next-seo.config";
 
+import type { ExtendedPage } from "@types";
 import type { AppProps } from "next/app";
 
 const { chains, provider } = configureChains(

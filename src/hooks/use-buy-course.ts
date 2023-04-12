@@ -1,7 +1,8 @@
-import { ContractReceipt } from "ethers";
 import { useMutation } from "wagmi";
 
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
+
+import type { ContractReceipt } from "ethers";
 
 export interface BuyCourseData {
   id: number;

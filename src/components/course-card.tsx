@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 import { Button } from "@components/basic/button";
 import { CopyButton } from "@components/copy-button";
 
-import { Course } from "../types/courses";
+import type { Course } from "../types/courses";
 
 interface CourseCardProps {
   course: Course;

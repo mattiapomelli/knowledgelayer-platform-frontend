@@ -1,7 +1,9 @@
 import cx from "classnames";
-import { forwardRef, InputHTMLAttributes, ReactNode, Ref, useId } from "react";
+import { forwardRef, useId } from "react";
 
 import { Label } from "../label";
+
+import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 
 const iconClass =
   "absolute top-1/2 transform -translate-y-1/2 [&>svg]:max-w-min";

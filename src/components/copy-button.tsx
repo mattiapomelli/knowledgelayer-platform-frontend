@@ -1,8 +1,10 @@
 import { CheckIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-import { Button, ButtonProps } from "@components/basic/button";
+import { Button } from "@components/basic/button";
 import { copyToClipboard } from "@utils/copy-to-clipboard";
+
+import type { ButtonProps } from "@components/basic/button";
 
 interface CopyButtonProps extends ButtonProps {
   text: string;

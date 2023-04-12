@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
-
 import type { NextPage } from "next";
+import type { ReactNode } from "react";
 
 export enum PageAuth {
   Public, // Anyone can access

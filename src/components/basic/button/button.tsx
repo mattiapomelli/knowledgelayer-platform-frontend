@@ -1,6 +1,8 @@
 import cx from "classnames";
-import { ButtonHTMLAttributes, forwardRef, ReactNode, Ref } from "react";
+import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
+
+import type { ButtonHTMLAttributes, ReactNode, Ref } from "react";
 
 const colorClassname = {
   primary: "btn-primary",

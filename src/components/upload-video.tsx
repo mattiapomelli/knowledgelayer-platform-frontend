@@ -42,7 +42,7 @@ export const UploadVideo = ({
   );
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    if (acceptedFiles && acceptedFiles.length > 0 && acceptedFiles?.[0]) {
+    if (acceptedFiles && acceptedFiles.length > 0 && acceptedFiles[0]) {
       setVideo(acceptedFiles[0]);
     }
   }, []);
@@ -69,9 +69,9 @@ export const UploadVideo = ({
         : progress?.[0].phase === "waiting"
         ? "Waiting..."
         : progress?.[0].phase === "uploading"
-        ? `Uploading: ${Math.round(progress?.[0]?.progress * 100)}%`
+        ? `Uploading: ${Math.round(progress[0].progress * 100)}%`
         : progress?.[0].phase === "processing"
-        ? `Processing: ${Math.round(progress?.[0].progress * 100)}%`
+        ? `Processing: ${Math.round(progress[0].progress * 100)}%`
         : null,
     [progress],
   );
@@ -96,7 +96,7 @@ export const UploadVideo = ({
 
       {video && (
         <p className="mt-2">
-          <span className="font-medium">Selected video:</span> {video?.name}
+          <span className="font-medium">Selected video:</span> {video.name}
         </p>
       )}
 

@@ -1,8 +1,9 @@
-import { BigNumber, ContractReceipt } from "ethers";
 import { useMutation } from "wagmi";
 // import { uploadImage, uploadPdf } from "../utils/upload-file";
 
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
+
+import type { BigNumber, ContractReceipt } from "ethers";
 
 export interface CreateCourseData {
   name: string;

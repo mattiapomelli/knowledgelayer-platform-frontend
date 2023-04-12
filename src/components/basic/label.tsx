@@ -1,6 +1,7 @@
 import cx from "classnames";
-import { ElementType, LabelHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
+
+import type { ElementType, LabelHTMLAttributes } from "react";
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   className?: string;

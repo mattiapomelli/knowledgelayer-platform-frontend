@@ -1,5 +1,7 @@
 import cx from "classnames";
-import { forwardRef, InputHTMLAttributes, Ref, useId } from "react";
+import { forwardRef, useId } from "react";
+
+import type { InputHTMLAttributes, Ref } from "react";
 
 const variantClassName = {
   solid: "border-base-300 bg-base-300",

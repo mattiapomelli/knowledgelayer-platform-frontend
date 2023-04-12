@@ -1,8 +1,8 @@
 import { useAccount, useQuery } from "wagmi";
 
-import { Course } from "../types/courses";
-
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
+
+import type { Course } from "../types/courses";
 
 export const useCourses = () => {
   const { address } = useAccount();

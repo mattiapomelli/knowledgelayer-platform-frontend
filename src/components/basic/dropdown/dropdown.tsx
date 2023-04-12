@@ -1,15 +1,15 @@
 import { Menu, Transition } from "@headlessui/react";
 import cx from "classnames";
 import Link from "next/link";
-import {
+import { forwardRef, Fragment } from "react";
+import { twMerge } from "tailwind-merge";
+
+import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   ElementType,
-  forwardRef,
-  Fragment,
   ReactNode,
 } from "react";
-import { twMerge } from "tailwind-merge";
 
 interface CommonProps {
   children: ReactNode;

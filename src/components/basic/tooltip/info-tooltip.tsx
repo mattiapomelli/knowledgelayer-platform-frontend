@@ -1,6 +1,8 @@
 import InfoIcon from "@icons/info.svg";
 
-import { Tooltip, TooltipProps } from "./tooltip";
+import { Tooltip } from "./tooltip";
+
+import type { TooltipProps } from "./tooltip";
 
 export const InfoTooltip = (props: Omit<TooltipProps, "children">) => {
   return (

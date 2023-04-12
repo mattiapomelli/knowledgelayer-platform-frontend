@@ -1,10 +1,12 @@
 import { Listbox, Transition } from "@headlessui/react";
 import cx from "classnames";
-import React, { Fragment, ReactNode } from "react";
+import React, { Fragment } from "react";
 
 import { Label } from "@components/basic/label";
 import CheckIcon from "@icons/check.svg";
 import ChevronDownIcon from "@icons/chevron-down.svg";
+
+import type { ReactNode } from "react";
 
 const variantClassname = {
   solid: "bg-base-300 border-base-300",

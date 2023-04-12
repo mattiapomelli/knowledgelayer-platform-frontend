@@ -1,5 +1,7 @@
 import cx from "classnames";
-import React, { ReactNode } from "react";
+import React from "react";
+
+import type { ReactNode } from "react";
 
 interface ContainerProps {
   children: ReactNode;
