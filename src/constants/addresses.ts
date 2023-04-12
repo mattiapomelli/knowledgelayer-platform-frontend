@@ -1,9 +1,7 @@
-import { chain } from "wagmi";
+import { hardhat } from "wagmi/chains";
 
-import { ChainMap } from "./chains";
-
-export const STORAGE_ADDRESS: ChainMap = {
-  [chain.hardhat.id]: "0x5fbdb2315678afecb367f032d93f642f64180aa3",
-  [chain.mainnet.id]: "",
-  [chain.goerli.id]: "'",
+export const KNOWLEDGELAYER_COURSE_ADDRESS: {
+  [chainId: number]: `0x${string}`;
+} = {
+  [hardhat.id]: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
 };

@@ -17,7 +17,10 @@ import type { AppProps } from "next/app";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const { chains, provider } = configureChains(
-  [polygonMumbai, hardhat],
+  [
+    polygonMumbai,
+    ...(process.env.NEXT_PUBLIC_IS_TESTNET === "true" ? [] : [hardhat]),
+  ],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
     publicProvider(),
