@@ -17,8 +17,6 @@ export const useCourses = () => {
     const events = await knowledgeLayerCourse.queryFilter(eventFilter);
 
     for (const event of events) {
-      if (!event.args) continue;
-
       const id = event.args.courseId;
       const course = await knowledgeLayerCourse.courses(id);
       const { title, slug, description, price, seller, image } = course;
