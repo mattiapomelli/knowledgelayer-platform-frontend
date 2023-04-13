@@ -12,10 +12,12 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
-    console.log("Body: ", req.body);
-
     const { accessKey } = req.body;
     const { address, courseId, chainId } = JSON.parse(accessKey);
+
+    if (!address) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
 
     const provider = new ethers.providers.JsonRpcProvider(RPC_URL[chainId]);
     const knowledgeLayerCourse = new ethers.Contract(
