@@ -22,7 +22,7 @@ const Catalog = () => {
     );
 
   return (
-    <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-autofill">
       {courses?.map((course) => (
         <CourseCard key={course.id} course={course} linkToPage />
       ))}
@@ -33,7 +33,7 @@ const Catalog = () => {
 const Home = () => {
   return (
     <>
-      <h1 className="mb-6 text-4xl font-bold">Courses</h1>
+      <h1 className="mb-6 text-3xl font-bold">Learn something new</h1>
       <Catalog />
     </>
   );

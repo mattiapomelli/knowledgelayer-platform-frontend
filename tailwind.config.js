@@ -24,6 +24,9 @@ module.exports = {
       animation: {
         "fade-in": "fade-in 100ms ease-in-out",
       },
+      gridTemplateColumns: {
+        autofill: "repeat(auto-fill, minmax(18rem, 1fr))",
+      },
     },
   },
   plugins: [
