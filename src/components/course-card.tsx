@@ -14,8 +14,8 @@ interface CourseCardProps {
 export const CourseCard = ({ course }: CourseCardProps) => {
   return (
     <Link href={`/${course.slug}`} key={course.id}>
-      <a className="flex flex-col justify-between gap-2">
-        <div className="rounded-box relative h-32 overflow-hidden">
+      <a className="flex flex-col gap-2">
+        <div className="rounded-box relative h-36 overflow-hidden">
           <Image
             src={course.image}
             layout="fill"
@@ -42,7 +42,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
         </div>
 
         <p className="text-base-content/80">
-          {course.description.substring(0, 200).concat("...")}
+          {course.description.substring(0, 100).concat("...")}
         </p>
       </a>
     </Link>
