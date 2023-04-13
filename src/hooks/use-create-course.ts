@@ -6,7 +6,7 @@ import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
 import type { BigNumber, ContractReceipt } from "ethers";
 
 export interface CreateCourseData {
-  name: string;
+  title: string;
   price: BigNumber;
   image: string;
   slug: string;
@@ -22,7 +22,7 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
   const mutation = useMutation(
     async ({
-      name,
+      title,
       slug,
       description,
       price,
@@ -37,7 +37,7 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
       // await uploadPdf(pdf, slug);
 
       const tx = await knowledgeLayerCourse.createCourse(
-        name,
+        title,
         slug,
         description,
         price,

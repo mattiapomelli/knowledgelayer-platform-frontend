@@ -35,6 +35,14 @@ const Home = () => {
     <>
       <h1 className="mb-6 text-4xl font-bold">Catalog</h1>
       <Catalog />
+      {/* <Player
+        playbackId={"a915y3226a68zhp7"}
+        accessKey={JSON.stringify({
+          address: session.data?.user?.name || "",
+          chainId,
+          courseId: 1,
+        })}
+      /> */}
     </>
   );
 };
