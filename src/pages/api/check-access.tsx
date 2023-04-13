@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
-import { hardhat } from "wagmi/chains";
 
 import { KnowledgeLayerCourseAbi } from "@abis/knowledgelayer-course";
+import { RPC_URL } from "@constants/urls";
 import { KNOWLEDGELAYER_COURSE_ADDRESS } from "constants/addresses";
 
 import type { KnowledgeLayerCourse } from "@abis/types/knowledgelayer-course";
@@ -14,20 +14,19 @@ export default async function handler(
   if (req.method === "POST") {
     console.log("Body: ", req.body);
 
-    const { accessKey: userAddress } = req.body;
+    const { accessKey } = req.body;
+    const { address, courseId, chainId } = JSON.parse(accessKey);
 
-    const provider = new ethers.providers.JsonRpcProvider(
-      "http://localhost:8545",
-    );
+    const provider = new ethers.providers.JsonRpcProvider(RPC_URL[chainId]);
     const knowledgeLayerCourse = new ethers.Contract(
-      KNOWLEDGELAYER_COURSE_ADDRESS[hardhat.id],
+      KNOWLEDGELAYER_COURSE_ADDRESS[chainId],
       KnowledgeLayerCourseAbi,
       provider,
     ) as KnowledgeLayerCourse;
 
-    const balance = await knowledgeLayerCourse.balanceOf(userAddress, 1);
+    const balance = await knowledgeLayerCourse.balanceOf(address, courseId);
     if (balance.gt(0)) {
-      return res.status(200).send({ message: "OK" });
+      return res.status(200).send({ message: "Ok" });
     }
 
     return res.status(401).send({ message: "Unauthorized" });
