@@ -151,7 +151,11 @@ const CreateCoursePage: NextPage = () => {
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="mb-4 text-4xl font-bold">Create new course</h1>
+      <h1 className="mb-6 text-3xl font-bold underline decoration-primary">
+        Share your knowledge
+        <br /> with the world 💎
+      </h1>
+      <h4 className="mt-2 mb-4 text-xl font-bold">New course</h4>
       {isConnecting || isReconnecting ? (
         <div className="my-14 flex justify-center">
           <Spinner />
