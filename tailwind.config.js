@@ -15,6 +15,15 @@ module.exports = {
       colors: {
         "base-content-neutral": "hsl(var(--bc) / 0.6)",
       },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 100ms ease-in-out",
+      },
     },
   },
   plugins: [

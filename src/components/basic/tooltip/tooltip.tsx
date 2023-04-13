@@ -64,7 +64,7 @@ export const Tooltip = ({
             onMouseEnter={onOpen}
             onMouseLeave={onClose}
             className={cx(
-              "animate-fade-in rounded-btn z-30 max-w-[90vw] py-2 px-3",
+              "rounded-btn z-30 max-w-[90vw] animate-fade-in py-2 px-3",
               colorClassname[color],
             )}
             {...props}
