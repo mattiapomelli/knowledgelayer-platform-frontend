@@ -38,6 +38,7 @@ module.exports = {
           ...require("daisyui/src/colors/themes")["[data-theme=light]"],
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
+          "--rounded-box": "0.75rem",
         },
       },
       {
@@ -45,6 +46,7 @@ module.exports = {
           ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
+          "--rounded-box": "0.75rem",
         },
       },
     ],
