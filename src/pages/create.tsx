@@ -122,7 +122,7 @@ const CreateCourseForm = () => {
             accept={{
               "video/*": ["*.mp4"],
             }}
-            label="Video"
+            label="Video lecture"
           />
         )}
 
@@ -151,7 +151,7 @@ const CreateCoursePage: NextPage = () => {
   const { address, isConnecting, isReconnecting } = useAccount();
 
   return (
-    <>
+    <div className="mx-auto max-w-lg">
       <h1 className="mb-4 text-4xl font-bold">Create new course</h1>
       {isConnecting || isReconnecting ? (
         <div className="my-14 flex justify-center">
@@ -169,7 +169,7 @@ const CreateCoursePage: NextPage = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 
