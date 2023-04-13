@@ -1,14 +1,13 @@
-import { useAccount, useQuery } from "wagmi";
+import { useQuery } from "wagmi";
 
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
 
 import type { Course } from "../types/courses";
 
 export const useCourses = () => {
-  const { address } = useAccount();
   const knowledgeLayerCourse = useKnowledgeLayerCourse();
 
-  return useQuery<Course[]>(["courses", address], async () => {
+  return useQuery<Course[]>(["courses"], async () => {
     if (!knowledgeLayerCourse) return [];
 
     /* Get requests */
