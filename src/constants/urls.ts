@@ -10,6 +10,6 @@ export const getAddressExplorerLink = (chainId: number, address: string) => {
 };
 
 export const RPC_URL: Record<number, string> = {
-  [polygonMumbai.id]: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+  [polygonMumbai.id]: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
   [hardhat.id]: "http://localhost:8545",
 };
