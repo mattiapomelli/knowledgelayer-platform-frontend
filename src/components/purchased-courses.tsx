@@ -22,7 +22,7 @@ export const PurchasedCourses = () => {
     return (
       <div className="my-14 flex flex-col items-center gap-3">
         <p>No courses purchased yet</p>
-        <Link href="/catalog">
+        <Link href="/">
           <a>
             <Button>Explore courses</Button>
           </a>

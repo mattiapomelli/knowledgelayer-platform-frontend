@@ -22,7 +22,7 @@ export const CreatedCourses = () => {
         <p>No courses created yet</p>
         <Link href="/create">
           <a>
-            <Button>Create courses</Button>
+            <Button>Create course</Button>
           </a>
         </Link>
       </div>
