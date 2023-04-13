@@ -31,8 +31,8 @@ const CourseInfo = ({ course }: { course: Course }) => {
   };
 
   return (
-    <>
-      <div className="rounded-box relative h-40 overflow-hidden lg:mt-20">
+    <div className="flex flex-col gap-4">
+      <div className="rounded-box relative h-40 overflow-hidden">
         <Image
           src={course.image}
           layout="fill"
@@ -41,12 +41,8 @@ const CourseInfo = ({ course }: { course: Course }) => {
           priority
         />
       </div>
-      <h1 className="mt-4 text-4xl font-bold">{course.title}</h1>
-      <p className="mt-5">{course.description}</p>
-      <div className="rounded-box mt-6 mb-4 flex items-center justify-between bg-base-200 px-4 py-3">
-        <b>Price: </b>
-        <span>{ethers.utils.formatEther(course.price)} MATIC</span>
-      </div>
+      <h1 className="text-4xl font-bold">{course.title}</h1>
+      <p>{course.description}</p>
       {address === course.seller ? (
         <>
           <CoursePlayer course={course} />
@@ -62,35 +58,44 @@ const CourseInfo = ({ course }: { course: Course }) => {
           {hasBoughtCourse ? (
             <CoursePlayer course={course} />
           ) : (
-            <div>
+            <div className="mt-2">
+              <div className="rounded-box flex items-center justify-between bg-base-200 px-4 py-3">
+                <b>Price: </b>
+                <span>{ethers.utils.formatEther(course.price)} MATIC</span>
+              </div>
               <Button
-                className="mt-2 tracking-wider"
+                className="mt-4 tracking-wider"
                 block
                 onClick={onBuyCourse}
                 disabled={isLoading}
                 loading={isLoading}
               >
-                Buy
+                Buy course
               </Button>
             </div>
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 
 const CoursePageInner = ({ slug }: { slug: string }) => {
   const { data: course } = useCourseBySlug(slug);
 
-  if (!course)
+  if (!course) {
     return (
-      <div className="my-32 flex justify-center">
+      <div className="flex justify-center">
         <Spinner />
       </div>
     );
+  }
 
-  return <CourseInfo course={course} />;
+  return (
+    <div className="mx-auto max-w-lg">
+      <CourseInfo course={course} />
+    </div>
+  );
 };
 
 const CoursePage = () => {

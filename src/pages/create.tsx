@@ -85,7 +85,7 @@ const CreateCoursePage: NextPage = () => {
           error={errors.title?.message}
         />
         <Input
-          label="Price (in Euro)"
+          label="Price (MATIC)"
           type="number"
           step="0.0000001"
           block
