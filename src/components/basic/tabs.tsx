@@ -31,7 +31,7 @@ export const Tabs = ({ items, className }: TabsProps) => {
                   "py-2.5 px-4",
                   "focus:outline-none",
                   selected
-                    ? "bg-primary text-secondary-content shadow"
+                    ? "bg-primary text-primary-content shadow"
                     : "bg-base-300 hover:opacity-80",
                 )}
               >

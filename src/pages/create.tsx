@@ -127,8 +127,7 @@ const CreateCourseForm = () => {
         )}
 
         <Button
-          className="mt-2 tracking-wider"
-          size="lg"
+          className="mt-2"
           block
           type="submit"
           loading={isLoading || uploadIsLoading}
