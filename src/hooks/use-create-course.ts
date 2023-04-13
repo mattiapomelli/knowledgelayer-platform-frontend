@@ -1,5 +1,6 @@
 import { useMutation } from "wagmi";
-// import { uploadImage, uploadPdf } from "../utils/upload-file";
+
+import { uploadImage } from "@utils/upload-image";
 
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
 
@@ -8,7 +9,7 @@ import type { BigNumber, ContractReceipt } from "ethers";
 export interface CreateCourseData {
   title: string;
   price: BigNumber;
-  image: string;
+  image: File;
   slug: string;
   description: string;
   videoPlaybackId: string;
@@ -31,17 +32,15 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
     }: CreateCourseData) => {
       if (!knowledgeLayerCourse) return;
 
-      // const imageUrl = await uploadImage(image);
-      // if (!imageUrl) return;
-
-      // await uploadPdf(pdf, slug);
+      const imageUrl = await uploadImage(image);
+      if (!imageUrl) return;
 
       const tx = await knowledgeLayerCourse.createCourse(
         title,
         slug,
         description,
         price,
-        image,
+        imageUrl,
         videoPlaybackId,
       );
       return await tx.wait();

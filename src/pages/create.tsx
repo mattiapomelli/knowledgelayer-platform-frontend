@@ -25,6 +25,7 @@ const CreateCoursePage: NextPage = () => {
 
   const router = useRouter();
 
+  const [image, setImage] = useState<File | undefined>();
   const [video, setVideo] = useState<File | undefined>();
 
   const {
@@ -55,13 +56,11 @@ const CreateCoursePage: NextPage = () => {
     },
   });
 
-  console.log("Asset: ", asset);
-
   const onSubmit = handleSubmit(async (data) => {
     if (!asset) {
       await uploadVideo();
     } else {
-      if (!asset.playbackId) return;
+      if (!asset.playbackId || !image) return;
       const { title, description, price } = data;
 
       createCourse({
@@ -69,7 +68,7 @@ const CreateCoursePage: NextPage = () => {
         slug: slugify(title).toLowerCase(),
         description,
         price: ethers.utils.parseEther(price),
-        image: "",
+        image,
         videoPlaybackId: asset.playbackId,
       });
     }
@@ -100,6 +99,14 @@ const CreateCoursePage: NextPage = () => {
             required: "Description is required",
           })}
           error={errors.description?.message}
+        />
+        <FileDropzone
+          value={image}
+          onValueChange={setImage}
+          accept={{
+            "image/*": [".jpeg", ".png"],
+          }}
+          label="Cover Image"
         />
 
         {asset ? (
