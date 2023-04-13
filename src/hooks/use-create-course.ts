@@ -8,10 +8,10 @@ import type { BigNumber, ContractReceipt } from "ethers";
 export interface CreateCourseData {
   name: string;
   price: BigNumber;
-  image: File;
-  pdf: File;
+  image: string;
   slug: string;
   description: string;
+  videoPlaybackId: string;
 }
 
 interface UseCreateCourseOptions {
@@ -21,7 +21,14 @@ interface UseCreateCourseOptions {
 export const useCreateCourse = (options?: UseCreateCourseOptions) => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
   const mutation = useMutation(
-    async ({ name, slug, description, price }: CreateCourseData) => {
+    async ({
+      name,
+      slug,
+      description,
+      price,
+      image,
+      videoPlaybackId,
+    }: CreateCourseData) => {
       if (!knowledgeLayerCourse) return;
 
       // const imageUrl = await uploadImage(image);
@@ -34,7 +41,8 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
         slug,
         description,
         price,
-        "",
+        image,
+        videoPlaybackId,
       );
       return await tx.wait();
     },

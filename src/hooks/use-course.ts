@@ -11,7 +11,8 @@ export const useCourse = (courseId: number) => {
     if (!knowledgeLayerCourse) return;
 
     const course = await knowledgeLayerCourse.courses(courseId);
-    const { seller, title, slug, description, price, image } = course;
+    const { seller, title, slug, description, price, image, videoPlaybackId } =
+      course;
 
     return {
       id: courseId,
@@ -21,6 +22,7 @@ export const useCourse = (courseId: number) => {
       description,
       price,
       image,
+      videoPlaybackId,
     };
   });
 };

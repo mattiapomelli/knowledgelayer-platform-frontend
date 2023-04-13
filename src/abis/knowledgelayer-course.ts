@@ -105,6 +105,12 @@ export const KnowledgeLayerCourseAbi = [
         name: "image",
         type: "string",
       },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "videoPlaybackId",
+        type: "string",
+      },
     ],
     name: "CourseCreated",
     type: "event",
@@ -354,6 +360,11 @@ export const KnowledgeLayerCourseAbi = [
         name: "image",
         type: "string",
       },
+      {
+        internalType: "string",
+        name: "videoPlaybackId",
+        type: "string",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -383,6 +394,11 @@ export const KnowledgeLayerCourseAbi = [
       {
         internalType: "string",
         name: "_image",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_videoPlaybackId",
         type: "string",
       },
     ],

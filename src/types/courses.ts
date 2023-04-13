@@ -8,4 +8,5 @@ export interface Course {
   description: string;
   price: BigNumber;
   image: string;
+  videoPlaybackId: string;
 }

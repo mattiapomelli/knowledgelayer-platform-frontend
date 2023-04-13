@@ -16,7 +16,15 @@ export const useCourseBySlug = (courseSlug: string) => {
       if (courseId.eq(0)) return;
 
       const course = await knowledgeLayerCourse.courses(courseId);
-      const { title, slug, description, price, seller, image } = course;
+      const {
+        title,
+        slug,
+        description,
+        price,
+        seller,
+        image,
+        videoPlaybackId,
+      } = course;
 
       return {
         id: courseId.toNumber(),
@@ -26,6 +34,7 @@ export const useCourseBySlug = (courseSlug: string) => {
         description,
         price,
         image,
+        videoPlaybackId,
       };
     },
   );

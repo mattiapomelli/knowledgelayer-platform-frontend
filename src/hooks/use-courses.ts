@@ -19,7 +19,15 @@ export const useCourses = () => {
     for (const event of events) {
       const id = event.args.courseId;
       const course = await knowledgeLayerCourse.courses(id);
-      const { title, slug, description, price, seller, image } = course;
+      const {
+        title,
+        slug,
+        description,
+        price,
+        seller,
+        image,
+        videoPlaybackId,
+      } = course;
 
       courses.push({
         id: id.toNumber(),
@@ -29,6 +37,7 @@ export const useCourses = () => {
         price,
         seller: seller as `0x${string}`,
         image,
+        videoPlaybackId,
       });
     }
 

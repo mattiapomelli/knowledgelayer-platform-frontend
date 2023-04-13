@@ -34,7 +34,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "buyCourse(uint256)": FunctionFragment;
     "courses(uint256)": FunctionFragment;
-    "createCourse(string,string,string,uint256,string)": FunctionFragment;
+    "createCourse(string,string,string,uint256,string,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "owner()": FunctionFragment;
     "protocolFee()": FunctionFragment;
@@ -95,6 +95,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       PromiseOrValue<string>,
     ],
   ): string;
@@ -218,7 +219,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "CourseBought(uint256,address,uint256,uint256)": EventFragment;
-    "CourseCreated(uint256,address,string,string,string,uint256,string)": EventFragment;
+    "CourseCreated(uint256,address,string,string,string,uint256,string,string)": EventFragment;
     "CoursePriceUpdated(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "ProtocolFeeUpdated(uint256)": EventFragment;
@@ -271,9 +272,10 @@ export interface CourseCreatedEventObject {
   description: string;
   price: BigNumber;
   image: string;
+  videoPlaybackId: string;
 }
 export type CourseCreatedEvent = TypedEvent<
-  [BigNumber, string, string, string, string, BigNumber, string],
+  [BigNumber, string, string, string, string, BigNumber, string, string],
   CourseCreatedEventObject
 >;
 
@@ -398,13 +400,14 @@ export interface KnowledgeLayerCourse extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<
-      [string, string, string, string, BigNumber, string] & {
+      [string, string, string, string, BigNumber, string, string] & {
         seller: string;
         title: string;
         slug: string;
         description: string;
         price: BigNumber;
         image: string;
+        videoPlaybackId: string;
       }
     >;
 
@@ -414,6 +417,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
       _image: PromiseOrValue<string>,
+      _videoPlaybackId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
@@ -508,13 +512,14 @@ export interface KnowledgeLayerCourse extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides,
   ): Promise<
-    [string, string, string, string, BigNumber, string] & {
+    [string, string, string, string, BigNumber, string, string] & {
       seller: string;
       title: string;
       slug: string;
       description: string;
       price: BigNumber;
       image: string;
+      videoPlaybackId: string;
     }
   >;
 
@@ -524,6 +529,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
     _description: PromiseOrValue<string>,
     _price: PromiseOrValue<BigNumberish>,
     _image: PromiseOrValue<string>,
+    _videoPlaybackId: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
@@ -618,13 +624,14 @@ export interface KnowledgeLayerCourse extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<
-      [string, string, string, string, BigNumber, string] & {
+      [string, string, string, string, BigNumber, string, string] & {
         seller: string;
         title: string;
         slug: string;
         description: string;
         price: BigNumber;
         image: string;
+        videoPlaybackId: string;
       }
     >;
 
@@ -634,6 +641,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
       _image: PromiseOrValue<string>,
+      _videoPlaybackId: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<void>;
 
@@ -730,7 +738,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       fee?: null,
     ): CourseBoughtEventFilter;
 
-    "CourseCreated(uint256,address,string,string,string,uint256,string)"(
+    "CourseCreated(uint256,address,string,string,string,uint256,string,string)"(
       courseId?: PromiseOrValue<BigNumberish> | null,
       seller?: PromiseOrValue<string> | null,
       title?: null,
@@ -738,6 +746,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       description?: null,
       price?: null,
       image?: null,
+      videoPlaybackId?: null,
     ): CourseCreatedEventFilter;
     CourseCreated(
       courseId?: PromiseOrValue<BigNumberish> | null,
@@ -747,6 +756,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       description?: null,
       price?: null,
       image?: null,
+      videoPlaybackId?: null,
     ): CourseCreatedEventFilter;
 
     "CoursePriceUpdated(uint256,uint256)"(
@@ -836,6 +846,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
       _image: PromiseOrValue<string>,
+      _videoPlaybackId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
@@ -938,6 +949,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
       _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
       _image: PromiseOrValue<string>,
+      _videoPlaybackId: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
