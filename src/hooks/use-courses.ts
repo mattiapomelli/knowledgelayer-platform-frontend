@@ -9,7 +9,7 @@ export const useCourses = () => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse();
 
   return useQuery<Course[]>(["courses", address], async () => {
-    if (!knowledgeLayerCourse || !address) return [];
+    if (!knowledgeLayerCourse) return [];
 
     /* Get requests */
     const courses: Course[] = [];
