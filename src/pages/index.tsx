@@ -33,7 +33,10 @@ const Catalog = () => {
 const Home = () => {
   return (
     <>
-      <h1 className="mb-6 text-3xl font-bold">Learn something new</h1>
+      <h1 className="mb-6 text-3xl font-bold underline decoration-primary">
+        Learn something new 🚀
+      </h1>
+      <h4 className="mt-2 mb-4 text-xl font-bold">Courses</h4>
       <Catalog />
     </>
   );
