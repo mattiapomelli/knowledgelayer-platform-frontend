@@ -26,8 +26,8 @@ import type { AppProps } from "next/app";
 
 const { chains, provider } = configureChains(
   [
-    polygonMumbai,
     ...(process.env.NEXT_PUBLIC_IS_TESTNET === "true" ? [] : [hardhat]),
+    polygonMumbai,
   ],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
