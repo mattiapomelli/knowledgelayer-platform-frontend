@@ -8,11 +8,11 @@ import { PurchasedCourses } from "@components/purchased-courses";
 const DashboardPage = () => {
   const items = [
     {
-      label: "Purchased Products",
+      label: "Purchased Courses",
       content: <PurchasedCourses />,
     },
     {
-      label: "Created Products",
+      label: "Created Courses",
       content: <CreatedCourses />,
     },
   ];
