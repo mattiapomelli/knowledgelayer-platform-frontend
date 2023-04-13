@@ -3,11 +3,14 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
+import { useAccount } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { Input } from "@components/basic/input";
+import { Spinner } from "@components/basic/spinner";
 import { TextArea } from "@components/basic/textarea/textarea";
 import { FileDropzone } from "@components/file-dropzone";
+import { WalletStatus } from "@components/wallet/wallet-status";
 import { useCreateCourse } from "@hooks/use-create-course";
 import { useUploadVideo } from "@hooks/use-upload-video";
 
@@ -20,7 +23,7 @@ interface CreateCourseFields {
   description: string;
 }
 
-const CreateCoursePage: NextPage = () => {
+const CreateCourseForm = () => {
   const [asset, setAsset] = useState<Asset | undefined>();
 
   const router = useRouter();
@@ -76,7 +79,6 @@ const CreateCoursePage: NextPage = () => {
 
   return (
     <>
-      <h1 className="mb-4 text-4xl font-bold">Create new course</h1>
       <form className="flex flex-col gap-2" onSubmit={onSubmit}>
         <Input
           label="Title"
@@ -141,6 +143,32 @@ const CreateCoursePage: NextPage = () => {
           </div>
         )}
       </form>
+    </>
+  );
+};
+
+const CreateCoursePage: NextPage = () => {
+  const { address, isConnecting, isReconnecting } = useAccount();
+
+  return (
+    <>
+      <h1 className="mb-4 text-4xl font-bold">Create new course</h1>
+      {isConnecting || isReconnecting ? (
+        <div className="my-14 flex justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          {address ? (
+            <CreateCourseForm />
+          ) : (
+            <div className="my-14 flex flex-col items-center gap-3">
+              <p>Connect your wallet to create a course</p>
+              <WalletStatus />
+            </div>
+          )}
+        </>
+      )}
     </>
   );
 };
