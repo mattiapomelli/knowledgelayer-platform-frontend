@@ -26,6 +26,11 @@ export default async function handler(
       provider,
     ) as KnowledgeLayerCourse;
 
+    const seller = (await knowledgeLayerCourse.courses(courseId)).seller;
+    if (address === seller) {
+      return res.status(200).send({ message: "Ok" });
+    }
+
     const balance = await knowledgeLayerCourse.balanceOf(address, courseId);
     if (balance.gt(0)) {
       return res.status(200).send({ message: "Ok" });
