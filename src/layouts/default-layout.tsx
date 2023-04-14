@@ -8,8 +8,23 @@ export const DefaultLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 pb-20 pt-8">
-        <Container>{children}</Container>
+      <main className="flex-1 pb-20 pt-2">
+        <Container>
+          <div className="rounded-box mb-8 bg-primary/30 py-3 px-4 text-center">
+            Get free MATIC from{" "}
+            <a
+              href="https://faucet.polygon.technology/"
+              className="font-bold hover:underline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Mumbai Faucet
+            </a>{" "}
+            💰
+          </div>
+
+          {children}
+        </Container>
       </main>
       <Footer />
     </div>
