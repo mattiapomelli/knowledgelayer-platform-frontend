@@ -12,6 +12,8 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
+    console.log("Body: ", req.body);
+
     const { accessKey } = req.body;
     const { address, courseId, chainId } = JSON.parse(accessKey);
 
