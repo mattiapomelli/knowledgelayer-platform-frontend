@@ -49,6 +49,8 @@ module.exports = {
       {
         dark: {
           ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
+          primary: "#00911e",
+          "base-100": "#000000",
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
           "--rounded-box": "0.75rem",
