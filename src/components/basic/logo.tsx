@@ -11,9 +11,7 @@ export const Logo = ({ href = "/", className }: LogoProps) => {
     <Link href={href}>
       <a className="flex items-center gap-3">
         <span className="text-3xl">🧠</span>
-        <span className={cx("text-xl font-black", className)}>
-          KnowledgeLayer
-        </span>
+        <span className={cx("text-xl font-black", className)}>uKnow</span>
       </a>
     </Link>
   );
