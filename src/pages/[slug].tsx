@@ -32,7 +32,7 @@ const CourseInfo = ({ course }: { course: Course }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-box relative h-40 overflow-hidden">
+      <div className="rounded-box relative h-56 overflow-hidden">
         <Image
           src={course.image}
           layout="fill"

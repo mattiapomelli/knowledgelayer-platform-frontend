@@ -15,7 +15,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
   return (
     <Link href={`/${course.slug}`} key={course.id}>
       <a className="flex flex-col gap-2">
-        <div className="rounded-box relative h-36 overflow-hidden">
+        <div className="rounded-box relative h-44 overflow-hidden">
           <Image
             src={course.image}
             layout="fill"
@@ -29,7 +29,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
           {course.title}
         </h4>
 
-        <div className="flex items-center gap-4">
+        <div className="mt-1 flex items-center gap-4">
           <span>
             By: <Address address={course.seller} className="font-bold" />
           </span>
@@ -41,7 +41,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
           </span>
         </div>
 
-        <p className="text-base-content/80">
+        <p className="text-base-content/70">
           {course.description.substring(0, 100).concat("...")}
         </p>
       </a>
