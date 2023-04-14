@@ -1,5 +1,6 @@
-import { useChainId, useDisconnect } from "wagmi";
+import { useDisconnect } from "wagmi";
 
+import { CHAIN } from "@constants/chains";
 import { getAddressExplorerLink } from "@constants/urls";
 import CopyIcon from "@icons/copy.svg";
 import DisconnectIcon from "@icons/disconnect.svg";
@@ -20,7 +21,6 @@ interface WalletDropdownProps {
 }
 
 export const WalletDropdown = ({ address }: WalletDropdownProps) => {
-  const chainId = useChainId();
   const { disconnect } = useDisconnect();
 
   return (
@@ -39,7 +39,7 @@ export const WalletDropdown = ({ address }: WalletDropdownProps) => {
           Copy address
         </DropdownItem>
         <DropdownItem
-          href={getAddressExplorerLink(chainId, address)}
+          href={getAddressExplorerLink(CHAIN.id, address)}
           target="_blank"
           rel="noopener noreferrer"
           as="a"

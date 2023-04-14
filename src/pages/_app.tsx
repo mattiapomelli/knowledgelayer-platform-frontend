@@ -12,10 +12,10 @@ import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { hardhat, polygonMumbai } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
+import { CHAIN } from "@constants/chains";
 import { DefaultLayout } from "@layouts/default-layout";
 
 import SEO from "../../next-seo.config";
@@ -25,10 +25,7 @@ import type { Session } from "next-auth";
 import type { AppProps } from "next/app";
 
 const { chains, provider } = configureChains(
-  [
-    ...(process.env.NEXT_PUBLIC_IS_TESTNET === "true" ? [] : [hardhat]),
-    polygonMumbai,
-  ],
+  [CHAIN],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
     publicProvider(),

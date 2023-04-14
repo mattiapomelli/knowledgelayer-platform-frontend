@@ -1,6 +1,7 @@
 import { Player } from "@livepeer/react";
 import { useSession } from "next-auth/react";
-import { useChainId } from "wagmi";
+
+import { CHAIN } from "@constants/chains";
 
 import type { Course } from "types/courses";
 
@@ -10,7 +11,6 @@ interface CoursePlayerProps {
 }
 
 export const CoursePlayer = ({ course, className }: CoursePlayerProps) => {
-  const chainId = useChainId();
   const session = useSession();
 
   return (
@@ -19,7 +19,7 @@ export const CoursePlayer = ({ course, className }: CoursePlayerProps) => {
         playbackId={course.videoPlaybackId}
         accessKey={JSON.stringify({
           address: session.data?.user?.name || "",
-          chainId,
+          chainId: CHAIN.id,
           courseId: course.id,
         })}
       />

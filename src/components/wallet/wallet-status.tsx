@@ -1,14 +1,14 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import { useAccount, useSwitchNetwork } from "wagmi";
 
 import { Button } from "@components/basic/button";
+import { CHAIN } from "@constants/chains";
 
 import { WalletDropdown } from "./wallet-dropdown";
 
 export const WalletStatus = () => {
   const { address } = useAccount();
 
-  const { chains } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
 
   return (
@@ -21,10 +21,10 @@ export const WalletStatus = () => {
             <Button
               size="sm"
               color="error"
-              onClick={() => switchNetwork?.(chains[0].id)}
+              onClick={() => switchNetwork?.(CHAIN.id)}
               type="button"
             >
-              Switch to {chains[0].name}
+              Switch to {CHAIN.name}
             </Button>
           );
         }
