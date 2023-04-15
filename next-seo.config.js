@@ -1,4 +1,4 @@
-const title = "My App";
+const title = "uKnow";
 const description = "This is my awesome app";
 const url = "https://beta.cryvia.xyz/";
 
@@ -10,7 +10,7 @@ export default {
   openGraph: {
     type: "website",
     locale: "en_IE",
-    site_name: "My App",
+    site_name: title,
     title,
     description,
   },
