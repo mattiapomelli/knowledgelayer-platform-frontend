@@ -6,16 +6,16 @@ import SunIcon from "@icons/sun.svg";
 
 export const ThemeToggle = () => {
   const mounted = useHasMounted();
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   if (!mounted) return null;
 
   return (
     <button
       className="rounded-sm p-0.5 focus:outline-none focus:ring-primary/50 focus-visible:ring-4"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
-      {theme === "dark" ? (
+      {resolvedTheme === "dark" ? (
         <SunIcon className="h-6 w-6" />
       ) : (
         <MoonIcon className="h-6 w-6" />
