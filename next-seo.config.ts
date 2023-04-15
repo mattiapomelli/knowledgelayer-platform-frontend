@@ -1,9 +1,10 @@
+import type { DefaultSeoProps } from "next-seo";
+
 const title = "uKnow";
 const description = "This is my awesome app";
 const url = "https://beta.cryvia.xyz/";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const config: DefaultSeoProps = {
   title,
   description,
   canonical: url,
@@ -20,3 +21,5 @@ export default {
     cardType: "summary_large_image",
   },
 };
+
+export default config;
