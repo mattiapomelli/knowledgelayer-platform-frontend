@@ -1,7 +1,7 @@
 import type { DefaultSeoProps } from "next-seo";
 
 const title = "uKnow";
-const description = "This is my awesome app";
+const description = "Learn and teach anything";
 const url = "https://beta.cryvia.xyz/";
 
 const config: DefaultSeoProps = {
