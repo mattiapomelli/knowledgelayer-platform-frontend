@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# uKnow, a forkable course marketplace on KnowledgeLayer
+
+KnowledgeLayer is a developer toolkit for building web3 educational platforms.
+
+uKnow is a forkable codebase that allows to quickly setup a course marketplace integrating with [KnowledgeLayer](https://github.com/knowledgelayer/knowledgelayer-contracts).
+
+It's built on [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Wagmi](https://wagmi.sh/) and uses [Livepeer](https://livepeer.org/) for video.
+
 
 ## Getting Started
 
