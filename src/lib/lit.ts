@@ -76,6 +76,44 @@ class Lit {
 
     return { decryptedString };
   }
+
+  async encryptToIpfs(data: string) {
+    if (!this.litNodeClient) {
+      await this.connect();
+    }
+
+    const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain });
+
+    if (!this.litNodeClient) return;
+    const ipfsCid = await LitJsSdk.encryptToIpfs({
+      authSig,
+      accessControlConditions,
+      chain,
+      string: data,
+      litNodeClient: this.litNodeClient,
+      infuraId: process.env.NEXT_PUBLIC_INFURA_ID || "",
+      infuraSecretKey: process.env.NEXT_PUBLIC_INFURA_SECRET || "",
+    });
+
+    return ipfsCid;
+  }
+
+  async decryptFromIpfs(ipfsCid: string) {
+    if (!this.litNodeClient) {
+      await this.connect();
+    }
+
+    const authSig = await LitJsSdk.checkAndSignAuthMessage({ chain });
+    if (!this.litNodeClient) return;
+
+    const decryptedString = await LitJsSdk.decryptFromIpfs({
+      authSig,
+      ipfsCid, // This is returned from the above encryption
+      litNodeClient: this.litNodeClient,
+    });
+
+    return decryptedString;
+  }
 }
 
 export const lit = new Lit();
