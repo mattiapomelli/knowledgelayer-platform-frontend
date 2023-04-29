@@ -16,3 +16,10 @@
 body {
   @apply font-main;
 }
+
+/* Needed to override DaisyUI styles which conflict with Lit's SDK modal */
+.modal {
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
+}
