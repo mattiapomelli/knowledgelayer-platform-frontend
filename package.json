@@ -14,7 +14,7 @@
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.17",
     "@lit-protocol/lit-node-client": "^2.1.135",
-    "@livepeer/react": "^2.4.2",
+    "@livepeer/react": "^2.4.3",
     "@metamask/jazzicon": "^2.0.0",
     "@radix-ui/react-dialog": "^1.0.0",
     "@radix-ui/react-tooltip": "^1.0.0",
