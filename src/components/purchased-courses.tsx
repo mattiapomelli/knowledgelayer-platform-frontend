@@ -2,13 +2,12 @@ import Link from "next/link";
 
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course-card";
-
-import { useBoughtCourses } from "../hooks/use-bought-courses";
+import { useUserPurchasedCourses } from "@lib/users/use-user-purchased-courses";
 
 import { Button } from "./basic/button";
 
 export const PurchasedCourses = () => {
-  const { data: boughtCourses, isLoading } = useBoughtCourses();
+  const { data: boughtCourses, isLoading } = useUserPurchasedCourses(1);
 
   if (isLoading) {
     return (

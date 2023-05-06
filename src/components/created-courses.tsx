@@ -1,12 +1,13 @@
 import Link from "next/link";
 
+import { useUserCreatedCourses } from "@lib/users/use-user-created-courses";
+
 import { Button } from "../components/basic/button";
 import { Spinner } from "../components/basic/spinner";
 import { CourseCard } from "../components/course-card";
-import { useCreatedCourses } from "../hooks/use-created-courses";
 
 export const CreatedCourses = () => {
-  const { data: createdCourses, isLoading } = useCreatedCourses();
+  const { data: createdCourses, isLoading } = useUserCreatedCourses(1);
 
   if (isLoading) {
     return (
