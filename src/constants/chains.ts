@@ -1,13 +1,11 @@
 import { hardhat, polygonMumbai } from "wagmi/chains";
 
+import { env } from "env.mjs";
+
 export type ChainMap = { [chainId: number]: string };
 
 const getDefaultChain = () => {
-  if (!process.env.NEXT_PUBLIC_CHAIN) {
-    throw new Error("NEXT_PUBLIC_CHAIN envinronment variable must be defined");
-  }
-
-  switch (process.env.NEXT_PUBLIC_CHAIN) {
+  switch (env.NEXT_PUBLIC_CHAIN) {
     case "localhost":
       return hardhat;
     case "testnet":
