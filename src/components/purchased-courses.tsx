@@ -6,8 +6,8 @@ import { useUserPurchasedCourses } from "@lib/users/use-user-purchased-courses";
 
 import { Button } from "./basic/button";
 
-export const PurchasedCourses = () => {
-  const { data: boughtCourses, isLoading } = useUserPurchasedCourses(1);
+export const PurchasedCourses = ({ userId }: { userId: string }) => {
+  const { data: purchasedCourses, isLoading } = useUserPurchasedCourses(userId);
 
   if (isLoading) {
     return (
@@ -17,7 +17,7 @@ export const PurchasedCourses = () => {
     );
   }
 
-  if (boughtCourses?.length === 0)
+  if (purchasedCourses?.length === 0)
     return (
       <div className="my-14 flex flex-col items-center gap-3">
         <p>No courses purchased yet</p>
@@ -31,7 +31,7 @@ export const PurchasedCourses = () => {
 
   return (
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-autofill">
-      {boughtCourses?.map((course) => (
+      {purchasedCourses?.map((course) => (
         <CourseCard key={course.id} course={course} />
       ))}
     </div>

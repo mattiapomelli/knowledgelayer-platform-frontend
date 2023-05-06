@@ -6,7 +6,7 @@ import { graphQlRequest } from "@utils/graphql-client";
 import type { Course } from "@lib/courses/types";
 
 const getUserCreatedCourses = gql`
-  query GetUserCourses($id: Int!) {
+  query GetUserCourses($id: String!) {
     user(id: $id) {
       createdCourses {
         id
@@ -36,10 +36,10 @@ export interface UserCreatedCourses {
   };
 }
 
-export const useUserCreatedCourses = (profileId: number) => {
-  return useQuery(["user-created-courses", profileId], async () =>
+export const useUserCreatedCourses = (userId: string) => {
+  return useQuery(["user-created-courses", userId], async () =>
     graphQlRequest<UserCreatedCourses>(getUserCreatedCourses, {
-      id: profileId,
+      id: userId,
     }).then((data) => data.user.createdCourses),
   );
 };

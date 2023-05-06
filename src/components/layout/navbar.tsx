@@ -10,6 +10,7 @@ import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
 import { WalletStatus } from "@components/wallet/wallet-status";
 import { useTransitionControl } from "@hooks/use-transition-control";
+import { useUserByAddress } from "@lib/users/use-user-by-address";
 
 import { Container } from "./container";
 import { MobileMenu } from "./mobile-menu";
@@ -36,10 +37,12 @@ const NavItem = ({ text, href }: NavItemProps) => {
 };
 
 export const Navbar = () => {
-  const { isConnecting, isReconnecting } = useAccount();
+  const { isConnecting, isReconnecting, address } = useAccount();
   const [showMenu, setShowMenu] = useState(false);
 
   const [show] = useTransitionControl(isReconnecting || isConnecting);
+
+  const { data: user } = useUserByAddress(address || "");
 
   return (
     <header className="relative">
@@ -56,7 +59,7 @@ export const Navbar = () => {
         >
           <div className="flex items-center gap-4">
             <div className="hidden items-center gap-2 md:flex">
-              <NavItem text="Dashboard" href="/dashboard" />
+              <NavItem text="Dashboard" href={`/users/${user?.id}`} />
               <NavItem text="Create course" href="/create" />
             </div>
             <ThemeToggle />

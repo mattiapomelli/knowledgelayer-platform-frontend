@@ -1,19 +1,20 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { Button } from "@components/basic/button";
 import { Tabs } from "@components/basic/tabs";
 import { CreatedCourses } from "@components/created-courses";
 import { PurchasedCourses } from "@components/purchased-courses";
 
-const DashboardPage = () => {
+const UserPageInner = ({ userId }: { userId: string }) => {
   const items = [
     {
       label: "Purchased Courses",
-      content: <PurchasedCourses />,
+      content: <PurchasedCourses userId={userId} />,
     },
     {
       label: "Created Courses",
-      content: <CreatedCourses />,
+      content: <CreatedCourses userId={userId} />,
     },
   ];
 
@@ -36,4 +37,15 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+const UserPage = () => {
+  const router = useRouter();
+  const id = router.query.id?.toString();
+
+  console.log("ID: ", id);
+
+  if (!id) return null;
+
+  return <UserPageInner userId={id} />;
+};
+
+export default UserPage;

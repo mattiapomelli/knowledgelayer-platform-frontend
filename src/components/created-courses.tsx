@@ -6,8 +6,8 @@ import { Button } from "../components/basic/button";
 import { Spinner } from "../components/basic/spinner";
 import { CourseCard } from "../components/course-card";
 
-export const CreatedCourses = () => {
-  const { data: createdCourses, isLoading } = useUserCreatedCourses(1);
+export const CreatedCourses = ({ userId }: { userId: string }) => {
+  const { data: createdCourses, isLoading } = useUserCreatedCourses(userId);
 
   if (isLoading) {
     return (
