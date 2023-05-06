@@ -8,12 +8,12 @@ import { Spinner } from "@components/basic/spinner";
 import { CopyButton } from "@components/copy-button";
 import { CoursePlayer } from "@components/course-player";
 import { useBuyCourse } from "@hooks/use-buy-course";
-import { useHasBoughtCourse } from "@hooks/use-has-bought-course";
 import { useCourse } from "@lib/courses/use-course";
+import { useHasBoughtCourse } from "@lib/courses/use-has-bought-course";
 
-import type { Course } from "@lib/courses/types";
+import type { CourseWithLessons } from "@lib/courses/types";
 
-const CourseInfo = ({ course }: { course: Course }) => {
+const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
   const { address } = useAccount();
   const router = useRouter();
   const { mutate: buyCourse, isLoading } = useBuyCourse({
@@ -22,7 +22,7 @@ const CourseInfo = ({ course }: { course: Course }) => {
     },
   });
 
-  const { data: hasBoughtCourse } = useHasBoughtCourse(Number(course.id));
+  const { data: hasBoughtCourse } = useHasBoughtCourse(course.id);
 
   const onBuyCourse = async () => {
     buyCourse({
@@ -101,8 +101,6 @@ const CoursePageInner = ({ id }: { id: string }) => {
 const CoursePage = () => {
   const router = useRouter();
   const id = router.query.id?.toString();
-
-  console.log("ID: ", id);
 
   if (!id) return null;
 

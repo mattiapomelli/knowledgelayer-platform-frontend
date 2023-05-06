@@ -10,7 +10,6 @@ export interface Course {
   price: string;
   token: Token;
   image: string;
-  videoPlaybackId: string;
 }
 
 export interface CourseDescription {

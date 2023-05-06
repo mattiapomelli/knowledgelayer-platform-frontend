@@ -41,8 +41,6 @@ const UserPage = () => {
   const router = useRouter();
   const id = router.query.id?.toString();
 
-  console.log("ID: ", id);
-
   if (!id) return null;
 
   return <UserPageInner userId={id} />;

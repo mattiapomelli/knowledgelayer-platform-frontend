@@ -4,10 +4,10 @@ import { useAccount } from "wagmi";
 
 import { CHAIN } from "@constants/chains";
 
-import type { Course } from "@lib/courses/types";
+import type { CourseWithLessons } from "@lib/courses/types";
 
 interface CoursePlayerProps {
-  course: Course;
+  course: CourseWithLessons;
   className?: string;
 }
 
@@ -18,7 +18,7 @@ export const CoursePlayer = ({ course, className }: CoursePlayerProps) => {
   return (
     <div className={className}>
       <Player
-        playbackId={course.videoPlaybackId}
+        playbackId={course.description.lessons[0].videoPlaybackId}
         accessKey={JSON.stringify({
           // address: session.data?.user?.name || "",
           address,
