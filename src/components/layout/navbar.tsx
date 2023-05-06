@@ -11,7 +11,6 @@ import { ThemeToggle } from "@components/basic/theme-toggle";
 import { WalletStatus } from "@components/wallet/wallet-status";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
-import { Container } from "./container";
 import { MobileMenu } from "./mobile-menu";
 
 interface NavItemProps {
@@ -43,7 +42,7 @@ export const Navbar = () => {
 
   return (
     <header className="relative">
-      <Container className="flex h-20 w-full items-center justify-between">
+      <div className="container flex h-20 w-full items-center justify-between">
         <Logo className="hidden sm:block" />
         <Transition
           show={show}
@@ -78,7 +77,7 @@ export const Navbar = () => {
             </button>
           </div>
         </Transition>
-      </Container>
+      </div>
 
       {/* Mobile Mobile */}
       <MobileMenu

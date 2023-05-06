@@ -3,8 +3,6 @@ import cx from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { Container } from "@components/layout/container";
-
 import type { Dispatch, SetStateAction } from "react";
 
 interface NavItemProps {
@@ -63,12 +61,12 @@ export const MobileMenu = ({
         onClick={closeMenu}
       />
       <div className="rounded-b-box absolute top-full z-30 w-full bg-base-100 pb-6">
-        <Container>
+        <div className="container">
           <nav className="flex flex-col space-y-2">
             <NavItem text="Dashboard" href="/dashboard" onClick={closeMenu} />
             <NavItem text="Create course" href="/create" onClick={closeMenu} />
           </nav>
-        </Container>
+        </div>
       </div>
     </Transition>
   );

@@ -104,7 +104,11 @@ const CoursePage = () => {
 
   if (!slug) return null;
 
-  return <CoursePageInner slug={slug} />;
+  return (
+    <div className="container">
+      <CoursePageInner slug={slug} />
+    </div>
+  );
 };
 
 export default CoursePage;

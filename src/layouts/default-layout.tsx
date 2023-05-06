@@ -1,4 +1,3 @@
-import { Container } from "@components/layout/container";
 import { Footer } from "@components/layout/footer";
 import { Navbar } from "@components/layout/navbar";
 
@@ -9,7 +8,7 @@ export const DefaultLayout = ({ children }: { children: ReactNode }) => {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <main className="flex-1 pb-20 pt-2">
-        <Container>
+        <div className="container">
           <div className="rounded-box mb-8 bg-primary/30 py-3 px-4 text-center">
             Get free MATIC from{" "}
             <a
@@ -22,9 +21,8 @@ export const DefaultLayout = ({ children }: { children: ReactNode }) => {
             </a>{" "}
             💰
           </div>
-
-          {children}
-        </Container>
+        </div>
+        {children}
       </main>
       <Footer />
     </div>
