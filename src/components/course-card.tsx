@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Address } from "./address";
 
-import type { Course } from "../types/courses";
+import type { Course } from "@lib/courses/types";
 
 interface CourseCardProps {
   course: Course;
@@ -31,7 +31,8 @@ export const CourseCard = ({ course }: CourseCardProps) => {
 
         <div className="mt-1 flex items-center gap-4">
           <span>
-            By: <Address address={course.seller} className="font-bold" />
+            By:{" "}
+            <Address address={course.seller.address} className="font-bold" />
           </span>
           <span>
             Price:{" "}
@@ -42,7 +43,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
         </div>
 
         <p className="text-base-content/70">
-          {course.description.substring(0, 100).concat("...")}
+          {course.description.about.substring(0, 100).concat("...")}
         </p>
       </a>
     </Link>

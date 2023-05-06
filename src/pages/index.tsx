@@ -1,5 +1,5 @@
 import { Spinner } from "@components/basic/spinner";
-import { useCourses } from "@hooks/use-courses";
+import { useCourses } from "@lib/courses/use-courses";
 
 import { CourseCard } from "../components/course-card";
 
