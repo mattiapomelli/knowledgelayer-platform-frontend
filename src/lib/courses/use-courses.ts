@@ -16,7 +16,7 @@ const getAllCourses = gql`
         address
       }
       token {
-        id
+        address
       }
       price
       description {

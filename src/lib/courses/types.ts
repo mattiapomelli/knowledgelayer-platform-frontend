@@ -6,7 +6,6 @@ export interface Course {
   updatedAt: string;
   seller: User;
   title: string;
-  slug: string;
   description: CourseDescription;
   price: string;
   token: Token;

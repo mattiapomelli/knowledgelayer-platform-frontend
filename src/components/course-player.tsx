@@ -4,7 +4,7 @@ import { useAccount } from "wagmi";
 
 import { CHAIN } from "@constants/chains";
 
-import type { Course } from "types/courses";
+import type { Course } from "@lib/courses/types";
 
 interface CoursePlayerProps {
   course: Course;

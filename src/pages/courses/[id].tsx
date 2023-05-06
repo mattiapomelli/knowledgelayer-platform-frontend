@@ -8,10 +8,10 @@ import { Spinner } from "@components/basic/spinner";
 import { CopyButton } from "@components/copy-button";
 import { CoursePlayer } from "@components/course-player";
 import { useBuyCourse } from "@hooks/use-buy-course";
-import { useCourseBySlug } from "@hooks/use-course-by-slug";
 import { useHasBoughtCourse } from "@hooks/use-has-bought-course";
+import { useCourse } from "@lib/courses/use-course";
 
-import type { Course } from "../types/courses";
+import type { Course } from "@lib/courses/types";
 
 const CourseInfo = ({ course }: { course: Course }) => {
   const { address } = useAccount();
@@ -22,11 +22,11 @@ const CourseInfo = ({ course }: { course: Course }) => {
     },
   });
 
-  const { data: hasBoughtCourse } = useHasBoughtCourse(course.id);
+  const { data: hasBoughtCourse } = useHasBoughtCourse(Number(course.id));
 
   const onBuyCourse = async () => {
     buyCourse({
-      id: course.id,
+      id: Number(course.id),
     });
   };
 
@@ -42,8 +42,8 @@ const CourseInfo = ({ course }: { course: Course }) => {
         />
       </div>
       <h1 className="text-4xl font-bold">{course.title}</h1>
-      <p>{course.description}</p>
-      {address === course.seller ? (
+      <p>{course.description.about}</p>
+      {address === course.seller.address ? (
         <>
           <CoursePlayer course={course} />
           <CopyButton
@@ -80,8 +80,8 @@ const CourseInfo = ({ course }: { course: Course }) => {
   );
 };
 
-const CoursePageInner = ({ slug }: { slug: string }) => {
-  const { data: course } = useCourseBySlug(slug);
+const CoursePageInner = ({ id }: { id: string }) => {
+  const { data: course } = useCourse(id);
 
   if (!course) {
     return (
@@ -100,11 +100,13 @@ const CoursePageInner = ({ slug }: { slug: string }) => {
 
 const CoursePage = () => {
   const router = useRouter();
-  const slug = router.query.slug?.toString();
+  const id = router.query.id?.toString();
 
-  if (!slug) return null;
+  console.log("ID: ", id);
 
-  return <CoursePageInner slug={slug} />;
+  if (!id) return null;
+
+  return <CoursePageInner id={id} />;
 };
 
 export default CoursePage;
