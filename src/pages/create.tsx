@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import slugify from "slugify";
 import { useAccount } from "wagmi";
 
 import { Button } from "@components/basic/button";
@@ -11,8 +10,8 @@ import { Spinner } from "@components/basic/spinner";
 import { TextArea } from "@components/basic/textarea/textarea";
 import { FileDropzone } from "@components/file-dropzone";
 import { WalletStatus } from "@components/wallet/wallet-status";
-import { useCreateCourse } from "@hooks/use-create-course";
 import { useUploadVideo } from "@hooks/use-upload-video";
+import { useCreateCourse } from "@lib/courses/use-create-course";
 
 import type { Asset } from "@livepeer/react";
 import type { NextPage } from "next";
@@ -20,7 +19,7 @@ import type { NextPage } from "next";
 interface CreateCourseFields {
   title: string;
   price: string;
-  description: string;
+  about: string;
 }
 
 const CreateCourseForm = () => {
@@ -52,10 +51,10 @@ const CreateCourseForm = () => {
       reset();
 
       if (!receipt) return;
-      const slug = receipt.events?.find((e) => e.event === "CourseCreated")
-        ?.args?.slug;
+      const courseId = receipt.events?.find((e) => e.event === "CourseCreated")
+        ?.args?.courseId;
 
-      router.push(`/${slug}`);
+      router.push(`/courses/${courseId}`);
     },
   });
 
@@ -64,15 +63,20 @@ const CreateCourseForm = () => {
       await uploadVideo();
     } else {
       if (!asset.playbackId || !image) return;
-      const { title, description, price } = data;
+      const { title, about, price } = data;
 
       createCourse({
-        title,
-        slug: slugify(title).toLowerCase(),
-        description,
         price: ethers.utils.parseEther(price),
+        title,
+        about,
         image,
-        videoPlaybackId: asset.playbackId,
+        lessons: [
+          {
+            title: "Lesson 1",
+            about: "Lesson 1 description",
+            videoPlaybackId: asset.playbackId,
+          },
+        ],
       });
     }
   });
@@ -97,10 +101,10 @@ const CreateCourseForm = () => {
         <TextArea
           label="Description"
           rows={3}
-          {...register("description", {
+          {...register("about", {
             required: "Description is required",
           })}
-          error={errors.description?.message}
+          error={errors.about?.message}
         />
         <FileDropzone
           value={image}
