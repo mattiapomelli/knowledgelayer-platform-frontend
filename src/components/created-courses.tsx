@@ -1,12 +1,15 @@
 import Link from "next/link";
 
 import { useUserCreatedCourses } from "@lib/users/use-user-created-courses";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { Button } from "../components/basic/button";
 import { Spinner } from "../components/basic/spinner";
 import { CourseCard } from "../components/course-card";
 
-export const CreatedCourses = ({ userId }: { userId: string }) => {
+import { WalletStatus } from "./wallet/wallet-status";
+
+export const CreatedCoursesInner = ({ userId }: { userId: string }) => {
   const { data: createdCourses, isLoading } = useUserCreatedCourses(userId);
 
   if (isLoading) {
@@ -36,4 +39,19 @@ export const CreatedCourses = ({ userId }: { userId: string }) => {
       ))}
     </div>
   );
+};
+
+export const CreatedCourses = () => {
+  const { user } = useKnowledgeLayerContext();
+
+  if (!user) {
+    return (
+      <div className="my-14 flex flex-col items-center gap-3">
+        <p>Connect your wallet to see your created courses</p>
+        <WalletStatus />
+      </div>
+    );
+  }
+
+  return <CreatedCoursesInner userId={user.id} />;
 };

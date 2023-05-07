@@ -3,10 +3,12 @@ import Link from "next/link";
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course-card";
 import { useUserPurchasedCourses } from "@lib/users/use-user-purchased-courses";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { Button } from "./basic/button";
+import { WalletStatus } from "./wallet/wallet-status";
 
-export const PurchasedCourses = ({ userId }: { userId: string }) => {
+export const PurchasedCoursesInner = ({ userId }: { userId: string }) => {
   const { data: purchasedCourses, isLoading } = useUserPurchasedCourses(userId);
 
   if (isLoading) {
@@ -36,4 +38,19 @@ export const PurchasedCourses = ({ userId }: { userId: string }) => {
       ))}
     </div>
   );
+};
+
+export const PurchasedCourses = () => {
+  const { user } = useKnowledgeLayerContext();
+
+  if (!user) {
+    return (
+      <div className="my-14 flex flex-col items-center gap-3">
+        <p>Connect your wallet to see your purchased courses</p>
+        <WalletStatus />
+      </div>
+    );
+  }
+
+  return <PurchasedCoursesInner userId={user.id} />;
 };
