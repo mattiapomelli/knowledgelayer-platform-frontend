@@ -17,6 +17,7 @@ import { publicProvider } from "wagmi/providers/public";
 
 import { CHAIN } from "@constants/chains";
 import { DefaultLayout } from "@layouts/default-layout";
+import { KnowledgeLayerProvider } from "context/knowledgelayer-provider";
 
 import SEO from "../../next-seo.config";
 
@@ -62,8 +63,10 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
           <RainbowKitProvider chains={chains}>
             <LivepeerConfig client={livePeerClient}>
               <ThemeProvider>
-                <DefaultSeo {...SEO} />
-                {getLayout(<Component {...pageProps} />)}
+                <KnowledgeLayerProvider>
+                  <DefaultSeo {...SEO} />
+                  {getLayout(<Component {...pageProps} />)}
+                </KnowledgeLayerProvider>
               </ThemeProvider>
             </LivepeerConfig>
           </RainbowKitProvider>
