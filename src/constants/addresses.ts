@@ -1,5 +1,12 @@
 import { hardhat, polygonMumbai } from "wagmi/chains";
 
+export const KNOWLEDGELAYER_ID_ADDRESS: {
+  [chainId: number]: `0x${string}`;
+} = {
+  [hardhat.id]: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  [polygonMumbai.id]: "0xEF76300FbbA3eA40801469409a93dD3d7a36d45B",
+};
+
 export const KNOWLEDGELAYER_PLATFORM_ID_ADDRESS: {
   [chainId: number]: `0x${string}`;
 } = {
