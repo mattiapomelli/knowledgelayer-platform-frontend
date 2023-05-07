@@ -5,3 +5,5 @@ if (!process.env.NEXT_PUBLIC_PLATFORM_ID) {
 }
 
 export const PLATFORM_ID = process.env.NEXT_PUBLIC_PLATFORM_ID;
+
+export const FEE_DIVIDER = 10000;

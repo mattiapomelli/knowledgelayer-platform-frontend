@@ -7,7 +7,7 @@ import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { CopyButton } from "@components/copy-button";
 import { CoursePlayer } from "@components/course-player";
-import { useBuyCourse } from "@hooks/use-buy-course";
+import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasBoughtCourse } from "@lib/courses/use-has-bought-course";
 
@@ -26,7 +26,7 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
 
   const onBuyCourse = async () => {
     buyCourse({
-      id: Number(course.id),
+      id: course.id,
     });
   };
 
