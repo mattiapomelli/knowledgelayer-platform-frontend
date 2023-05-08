@@ -38,23 +38,21 @@ export const CourseBanner = ({ course }: { course: CourseWithLessons }) => {
         </div>
 
         <div className="flex flex-col">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1">
-              <span className="font-semibold">Seller:</span>
-              <span>{seller.handle}</span>
-            </div>
-            <p className="flex gap-1">
-              <StarRating rating={Number(seller.rating)} />
-
-              <p className="flex items-center text-sm">
-                {"("}
-                {seller.reviews}
-                {")"}
-              </p>
-            </p>
-
-            <Address className="text-sm" address={seller.address} />
+          <div className="flex items-center gap-1">
+            <span className="font-semibold">Seller:</span>
+            <span>{seller.handle}</span>
           </div>
+          <p className="flex gap-1">
+            <StarRating rating={Number(seller.rating)} />
+
+            <p className="flex items-center text-sm">
+              {"("}
+              {seller.reviews}
+              {")"}
+            </p>
+          </p>
+
+          <Address className="text-sm" address={seller.address} />
         </div>
       </div>
     </div>
