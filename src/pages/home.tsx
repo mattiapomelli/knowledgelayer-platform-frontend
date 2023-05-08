@@ -21,7 +21,7 @@ const Catalog = () => {
               className="rounded-box flex cursor-pointer flex-col gap-2 p-2 hover:bg-base-300 md:flex-row"
             >
               <div className="flex items-center">
-                <div className="relative h-32 w-32 overflow-hidden rounded-md">
+                <div className="relative h-32 w-full overflow-hidden rounded-md md:w-32">
                   <Image
                     src={course.description.image_url}
                     alt=""
