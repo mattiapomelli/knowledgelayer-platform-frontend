@@ -9,7 +9,7 @@ import type { CourseWithLessons } from "types/tmp";
 export const CourseBanner = ({ course }: { course: CourseWithLessons }) => {
   const { title, description, seller } = course;
   return (
-    <div className="container sticky left-0 top-0 w-screen text-secondary-content">
+    <div className="container sticky left-0 top-0 -mt-4 w-screen bg-base-100 pt-4 text-secondary-content">
       <div className="container rounded-box flex flex-wrap justify-between gap-2 bg-course-banner py-4">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold">{title}</h1>
