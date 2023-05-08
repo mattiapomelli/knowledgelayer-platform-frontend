@@ -31,7 +31,7 @@ const DashboardPage = () => {
           </Link>
         </div>
       </div>
-      <Tabs items={items} className="mt-12 mb-8" />
+      <Tabs items={items} className="mb-8 mt-12" />
     </div>
   );
 };

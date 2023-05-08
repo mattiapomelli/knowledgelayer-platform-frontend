@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["yvgbeqzuvfqmewtltglq.supabase.co"],
+    domains: ["yvgbeqzuvfqmewtltglq.supabase.co", "source.unsplash.com"],
   },
   webpack: (config) => {
     config.module.rules.push({

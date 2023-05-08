@@ -32,12 +32,42 @@ const mockedCourse: CourseWithLessons = {
     lessons: [
       {
         title: "Lesson 1",
-        about: "This is the first lesson",
+        about: "What are your students going to learn in this lesson?",
         videoPlaybackId: "1234567890",
       },
       {
         title: "Lesson 2",
-        about: "This is the second lesson",
+        about: "Tools to teach like a pro",
+        videoPlaybackId: "1234567890",
+      },
+      {
+        title: "Lesson 3",
+        about: "How to make a course from scratch",
+        videoPlaybackId: "1234567890",
+      },
+      {
+        title: "Lesson 4",
+        about: "How to make your students happy",
+        videoPlaybackId: "1234567890",
+      },
+      {
+        title: "Lesson 5",
+        about: "Some random stuff about teaching",
+        videoPlaybackId: "1234567890",
+      },
+      {
+        title: "Lesson 6",
+        about: "Master the art of teaching",
+        videoPlaybackId: "1234567890",
+      },
+      {
+        title: "Lesson 7",
+        about: "Get a PhD in teaching",
+        videoPlaybackId: "1234567890",
+      },
+      {
+        title: "Lesson 8",
+        about: "Burn your PhD in teaching",
         videoPlaybackId: "1234567890",
       },
     ],
@@ -57,7 +87,21 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
   return (
     <div>
       <CourseBanner course={course} />
-      <div className="container">ciao</div>
+      <div className="container pt-4">
+        <div className="flex flex-col gap-4">
+          {course.description.lessons.map((lesson) => (
+            <div
+              key={lesson.title}
+              className="group flex cursor-pointer flex-col gap-2"
+            >
+              <h2 className="text-2xl font-bold group-hover:underline">
+                {lesson.title}
+              </h2>
+              <p>{lesson.about}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
