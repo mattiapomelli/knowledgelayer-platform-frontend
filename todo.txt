@@ -1,0 +1,46 @@
+- Paymeny event in contracts
+- useRelaseCoursePaymetnq
+
+
+
+
+- richiedere signature quando cambia address
+- se utente non signa mostrare messaggio
+
+- upgrade Next 13
+
+
+const exampleAsset: Asset = {
+  id: "65d21861-ac6b-4049-b006-9f993710ff25",
+  hash: [
+    {
+      hash: "6155187d0a2eb9f372a22a012dc8b31f",
+      algorithm: "md5",
+    },
+    {
+      hash: "9cbe23f9c8677fb35fb45dd0836cf75fc6f9be42b0043ac6c8a801c15d9f747c",
+      algorithm: "sha256",
+    },
+  ],
+  name: "3-sec-video.mp4",
+  size: 9896,
+  status: {
+    phase: "ready",
+    updatedAt: 1681397582764,
+  },
+  createdAt: 1681397465830,
+  videoSpec: {
+    format: "mp4",
+    duration: 3,
+  },
+  playbackId: "65d2fcsrdjsdc8xt",
+  playbackPolicy: {
+    type: "webhook",
+    webhookId: "de36cfa4-3675-45ab-912f-5c0485602a4d",
+    webhookContext: {},
+  },
+  playbackUrl:
+    "https://playback.livepeer.studio/asset/hls/65d2fcsrdjsdc8xt/index.m3u8",
+  downloadUrl:
+    "https://playback.livepeer.studio/asset/hls/65d2fcsrdjsdc8xt/video",
+};
