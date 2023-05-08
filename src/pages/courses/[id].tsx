@@ -28,7 +28,7 @@ const mockedCourse: CourseWithLessons = {
     about: "This is a course about how to make a course",
     keywords: ["course", "learn to teach"],
     keywords_raw: "course, learn to teach",
-    image_url: "https://source.unsplash.com/random/800x600",
+    image_url: "https://source.unsplash.com/random/800x600?course,teaching",
     lessons: [
       {
         title: "Lesson 1",
@@ -80,7 +80,7 @@ const mockedCourse: CourseWithLessons = {
     decimals: "18",
     allowed: true,
   },
-  image: "https://source.unsplash.com/random/800x600",
+  image: "https://source.unsplash.com/random/800x600?course,teaching",
 };
 
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
@@ -88,7 +88,7 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
     <div>
       <CourseBanner course={course} />
       <div className="container pt-4">
-        <div className="flex flex-col gap-4">
+        <div className="container flex flex-col gap-4">
           {course.description.lessons.map((lesson) => (
             <div
               key={lesson.title}
