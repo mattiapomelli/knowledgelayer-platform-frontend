@@ -12,7 +12,9 @@ const Catalog = () => {
     <div className="grid grid-cols-12 gap-x-2">
       {/* first collumn is 2/5 of space */}
       <div className="rounded-box col-span-12">
-        <h4 className="mb-6 text-2xl font-bold">Courses</h4>
+        <h4 className="sticky top-0 z-10 -mt-4 bg-base-100 pb-6 pt-4 text-2xl font-bold">
+          Courses
+        </h4>
 
         <div className="flex flex-col gap-4">
           {mockedCourses.map((course) => (
