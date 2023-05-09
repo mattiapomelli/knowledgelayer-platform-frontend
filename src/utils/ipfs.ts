@@ -12,7 +12,11 @@ export const uploadToIPFS = async (data: Record<string, unknown>) => {
         authorization: ipfsUrl
           ? ""
           : "Basic " +
-            btoa(process.env.INFURA_ID + ":" + process.env.INFURA_SECRET),
+            btoa(
+              process.env.NEXT_PUBLIC_INFURA_ID +
+                ":" +
+                process.env.NEXT_PUBLIC_INFURA_SECRET,
+            ),
       },
     });
 
