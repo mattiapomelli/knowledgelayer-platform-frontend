@@ -86,7 +86,7 @@ export const CreateCourseForm = () => {
     setVideos((videos) =>
       Array(lessons.length)
         .fill(new File([], ""))
-        .map((v, i) => (i === index ? video : videos[i])),
+        .map((_, i) => (i === index ? video : videos[i] || new File([], ""))),
     );
   };
 
@@ -178,25 +178,17 @@ export const CreateCourseForm = () => {
                   })}
                   error={errors.lessons?.[index]?.about?.message}
                 />
-                {assets?.[index] ? (
-                  <div className="rounded-box border-success bg-success/50 px-4 py-3">
-                    Video uploaded ✅
-                  </div>
-                ) : (
-                  <>
-                    <FileDropzone
-                      value={videos[index]}
-                      onValueChange={(video) => {
-                        onVideoChange(video, index);
-                      }}
-                      accept={{
-                        "video/*": ["*.mp4"],
-                      }}
-                      label={`Lesson ${index + 1} Video Lecture`}
-                    />
-                    <p>{progressFormatted?.[index]}</p>
-                  </>
-                )}
+                <FileDropzone
+                  value={videos[index]}
+                  onValueChange={(video) => {
+                    onVideoChange(video, index);
+                  }}
+                  accept={{
+                    "video/*": ["*.mp4"],
+                  }}
+                  label={`Lesson ${index + 1} Video Lecture`}
+                />
+                <p>{progressFormatted?.[index]}</p>
               </div>
             ))}
             <Button
