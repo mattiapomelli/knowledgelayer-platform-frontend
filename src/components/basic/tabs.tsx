@@ -28,7 +28,7 @@ export const Tabs = ({ items, className }: TabsProps) => {
                 className={cx(
                   "rounded-btn",
                   "text-sm font-medium",
-                  "py-2.5 px-4",
+                  "px-4 py-2.5",
                   "focus:outline-none",
                   selected
                     ? "bg-primary text-primary-content shadow"

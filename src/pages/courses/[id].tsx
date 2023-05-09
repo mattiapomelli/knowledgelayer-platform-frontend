@@ -1,9 +1,13 @@
+import { Tab } from "@headlessui/react";
+import cx from "classnames";
 import { ethers } from "ethers";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
+import { LessonPlayer } from "@components/lesson-player";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasBoughtCourse } from "@lib/courses/use-has-bought-course";
@@ -61,20 +65,34 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-4">
-        <h2 className="mb-2 text-2xl font-bold">Lessons</h2>
-        {course.description.lessons.map((lesson) => (
-          <div
-            key={lesson.title}
-            className="rounded-box flex cursor-pointer flex-col gap-2 bg-base-200 p-4"
-          >
-            <h3 className="text-xl font-bold group-hover:underline">
-              {lesson.title}
-            </h3>
-            <p>{lesson.about}</p>
-          </div>
-        ))}
-      </div>
+      <Tab.Group>
+        <Tab.List className="flex flex-1 flex-col gap-4">
+          <h2 className="mb-2 text-2xl font-bold">Lessons</h2>
+          {course.description.lessons.map((lesson, index) => (
+            <Tab key={index} as={Fragment}>
+              {({ selected }) => (
+                <div
+                  className={cx(
+                    "rounded-box flex flex-col gap-2 bg-base-200 p-4",
+                    { "cursor-pointer hover:bg-base-300": hasBoughtCourse },
+                  )}
+                >
+                  <h3 className="text-xl font-bold group-hover:underline">
+                    {lesson.title}
+                  </h3>
+                  <p>{lesson.about}</p>
+                  {selected && hasBoughtCourse && (
+                    <LessonPlayer
+                      courseId={course.id}
+                      videoPlaybackId={lesson.videoPlaybackId}
+                    />
+                  )}
+                </div>
+              )}
+            </Tab>
+          ))}
+        </Tab.List>
+      </Tab.Group>
     </div>
   );
 };
