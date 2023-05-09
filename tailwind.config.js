@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         "base-content-neutral": "hsl(var(--bc) / 0.6)",
+        "course-banner": "hsl(var(--course-banner))",
       },
       keyframes: {
         "fade-in": {
@@ -44,6 +45,7 @@ module.exports = {
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
           "--rounded-box": "0.75rem",
+          "--course-banner": "259, 73%, 27%",
         },
       },
       {
@@ -55,6 +57,7 @@ module.exports = {
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
           "--rounded-box": "0.75rem",
+          "--course-banner": "228, 68%, 29%",
         },
       },
     ],

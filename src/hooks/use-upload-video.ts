@@ -1,6 +1,8 @@
 import { useCreateAsset } from "@livepeer/react";
 import { useEffect, useMemo } from "react";
 
+import { env } from "env.mjs";
+
 import type { Asset } from "@livepeer/react";
 
 interface UseUploadVideoOptions {
@@ -26,7 +28,7 @@ export const useUploadVideo = (
               playbackPolicy: {
                 type: "webhook",
                 // This is the id of the webhook you created in step 2
-                webhookId: process.env.NEXT_PUBLIC_LIVEPEER_WEBHOOK_ID || "",
+                webhookId: env.NEXT_PUBLIC_LIVEPEER_WEBHOOK_ID || "",
                 webhookContext: {
                   // This is the context you want to pass to your webhook
                   // It can be anything you want, and it will be passed back to your webhook

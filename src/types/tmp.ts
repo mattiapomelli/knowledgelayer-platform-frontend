@@ -1,13 +1,24 @@
-import type { User } from "@lib/users/types";
+export interface User {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  handle: string;
+  address: `0x${string}`;
+  rating: string;
+  reviews: string;
+  // description: string;
+}
 
 export interface Course {
   id: string;
   createdAt: string;
   updatedAt: string;
   seller: User;
+  title: string;
   description: CourseDescription;
   price: string;
   token: Token;
+  image: string;
 }
 
 export interface CourseDescription {

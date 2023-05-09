@@ -18,6 +18,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { CHAIN } from "@constants/chains";
 import { DefaultLayout } from "@layouts/default-layout";
 import { KnowledgeLayerProvider } from "context/knowledgelayer-provider";
+import { env } from "env.mjs";
 
 import SEO from "../../next-seo.config";
 
@@ -28,7 +29,7 @@ import type { AppProps } from "next/app";
 const { chains, provider } = configureChains(
   [CHAIN],
   [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
+    alchemyProvider({ apiKey: env.NEXT_PUBLIC_ALCHEMY_API_KEY || "" }),
     publicProvider(),
   ],
 );
@@ -47,7 +48,7 @@ const client = createClient({
 
 const livePeerClient = createReactClient({
   provider: studioProvider({
-    apiKey: process.env.NEXT_PUBLIC_LIVEPEER_API_KEY || "",
+    apiKey: env.NEXT_PUBLIC_LIVEPEER_API_KEY || "",
   }),
 });
 

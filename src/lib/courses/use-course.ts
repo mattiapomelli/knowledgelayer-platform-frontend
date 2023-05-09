@@ -17,6 +17,8 @@ const getCourse = gql`
       }
       token {
         address
+        decimals
+        symbol
       }
       price
       description {

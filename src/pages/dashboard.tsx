@@ -18,7 +18,7 @@ const DashboardPage = () => {
   ];
 
   return (
-    <>
+    <div className="container">
       <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
         <h1 className="text-3xl font-bold underline decoration-primary">
           Dashboard 📋
@@ -31,8 +31,8 @@ const DashboardPage = () => {
           </Link>
         </div>
       </div>
-      <Tabs items={items} className="mt-12 mb-8" />
-    </>
+      <Tabs items={items} className="mb-8 mt-12" />
+    </div>
   );
 };
 

@@ -154,28 +154,30 @@ const CreateCoursePage: NextPage = () => {
   const { address, isConnecting, isReconnecting } = useAccount();
 
   return (
-    <div className="mx-auto max-w-lg">
-      <h1 className="mb-6 text-3xl font-bold underline decoration-primary">
-        Share your knowledge
-        <br /> with the world 💎
-      </h1>
-      <h4 className="mt-2 mb-4 text-xl font-bold">New course</h4>
-      {isConnecting || isReconnecting ? (
-        <div className="my-14 flex justify-center">
-          <Spinner />
-        </div>
-      ) : (
-        <>
-          {address ? (
-            <CreateCourseForm />
-          ) : (
-            <div className="my-14 flex flex-col items-center gap-3">
-              <p>Connect your wallet to create a course</p>
-              <WalletStatus />
-            </div>
-          )}
-        </>
-      )}
+    <div className="container">
+      <div className="mx-auto max-w-lg">
+        <h1 className="mb-6 text-3xl font-bold underline decoration-primary">
+          Share your knowledge
+          <br /> with the world 💎
+        </h1>
+        <h4 className="mt-2 mb-4 text-xl font-bold">New course</h4>
+        {isConnecting || isReconnecting ? (
+          <div className="my-14 flex justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            {address ? (
+              <CreateCourseForm />
+            ) : (
+              <div className="my-14 flex flex-col items-center gap-3">
+                <p>Connect your wallet to create a course</p>
+                <WalletStatus />
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
