@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
+import { Address } from "@components/address";
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { LessonPlayer } from "@components/lesson-player";
@@ -43,13 +44,21 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
         </div>
         <h1 className="text-3xl font-bold">{course.description.title}</h1>
         <p className="text-lg">{course.description.about}</p>
-        <div className="flex items-center gap-2">
-          <b>Price: </b>
+
+        <div className="my-2 flex flex-col gap-2">
           <span>
-            {ethers.utils.formatUnits(course.price, course.token.decimals)}{" "}
-            {course.token.symbol}
+            By:{" "}
+            <Address address={course.seller.address} className="font-bold" />
+          </span>
+          <span>
+            Price:{" "}
+            <span className="font-bold">
+              {ethers.utils.formatUnits(course.price, course.token.decimals)}{" "}
+              {course.token.symbol}
+            </span>
           </span>
         </div>
+
         {hasBoughtCourse ? (
           <div className="rounded-box bg-success/20 p-4">
             You are enrolled in this course!

@@ -17,7 +17,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
       <a className="flex flex-col gap-2">
         <div className="rounded-box relative h-44 overflow-hidden">
           <Image
-            src={course.image}
+            src={course.description.image_url}
             layout="fill"
             objectFit="cover"
             alt="Course"
@@ -26,7 +26,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
         </div>
 
         <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
-          {course.title}
+          {course.description.title}
         </h4>
 
         <div className="mt-1 flex items-center gap-4">
