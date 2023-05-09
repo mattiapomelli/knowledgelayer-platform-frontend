@@ -94,7 +94,6 @@ export const CreateCourseForm = () => {
     if (!assets?.length) {
       await uploadVideos();
     } else {
-      // if (!image) return;
       if (!image) return;
       const { title, about, price, lessons } = data;
 
@@ -103,13 +102,6 @@ export const CreateCourseForm = () => {
         title,
         about,
         image,
-        // lessons: [
-        //   {
-        //     title: "Lesson 1",
-        //     about: "Lesson 1 description",
-        //     videoPlaybackId: asset.playbackId,
-        //   },
-        // ],
         lessons: lessons.map((lesson, index) => ({
           title: lesson.title,
           about: lesson.about,
