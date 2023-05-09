@@ -83,7 +83,7 @@ export const useUploadVideos = (
         ? `Uploading: ${Math.round(p.progress * 100)}%`
         : p.phase === "processing"
         ? `Processing: ${Math.round(p.progress * 100)}%`
-        : null,
+        : "Uploaded ✅",
     );
   }, [progress]);
 
