@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
+import { useAccount } from "wagmi";
 
 import { Address } from "@components/address";
 import { Button } from "@components/basic/button";
@@ -16,6 +17,7 @@ import { useHasBoughtCourse } from "@lib/courses/use-has-bought-course";
 import type { CourseWithLessons } from "@lib/courses/types";
 
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
+  const { address } = useAccount();
   const router = useRouter();
   const { data: hasBoughtCourse } = useHasBoughtCourse(course.id);
   const { mutate: buyCourse, isLoading } = useBuyCourse({
@@ -23,6 +25,9 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
       router.push(`/dashboard`);
     },
   });
+
+  const isSeller =
+    address?.toLowerCase() === course.seller.address.toLowerCase();
 
   const onBuyCourse = async () => {
     buyCourse({
@@ -59,18 +64,22 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
           </span>
         </div>
 
-        {hasBoughtCourse ? (
-          <div className="rounded-box bg-success/20 p-4">
-            You are enrolled in this course!
-          </div>
-        ) : (
-          <Button
-            className="tracking-wider"
-            onClick={onBuyCourse}
-            disabled={isLoading}
-          >
-            Enroll
-          </Button>
+        {!isSeller && (
+          <>
+            {hasBoughtCourse ? (
+              <div className="rounded-box bg-success/20 p-4">
+                You are enrolled in this course!
+              </div>
+            ) : (
+              <Button
+                className="tracking-wider"
+                onClick={onBuyCourse}
+                disabled={isLoading}
+              >
+                Enroll
+              </Button>
+            )}
+          </>
         )}
       </div>
 
@@ -90,7 +99,7 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
                     {lesson.title}
                   </h3>
                   <p>{lesson.about}</p>
-                  {selected && hasBoughtCourse && (
+                  {selected && (hasBoughtCourse || isSeller) && (
                     <LessonPlayer
                       courseId={course.id}
                       videoPlaybackId={lesson.videoPlaybackId}
