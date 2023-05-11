@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import slugify from "slugify";
 import { useAccount } from "wagmi";
 
 import { Button } from "@components/basic/button";
@@ -112,7 +111,7 @@ const CreateCourseForm = () => {
         />
 
         {asset ? (
-          <div className="rounded-box border-success bg-success/50 py-3 px-4">
+          <div className="rounded-box border-success bg-success/50 px-4 py-3">
             Video uploaded ✅
           </div>
         ) : (
@@ -155,7 +154,7 @@ const CreateCoursePage: NextPage = () => {
         Share your knowledge
         <br /> with the world 💎
       </h1>
-      <h4 className="mt-2 mb-4 text-xl font-bold">New course</h4>
+      <h4 className="mb-4 mt-2 text-xl font-bold">New course</h4>
       {isConnecting || isReconnecting ? (
         <div className="my-14 flex justify-center">
           <Spinner />

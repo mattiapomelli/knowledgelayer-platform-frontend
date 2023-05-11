@@ -3,10 +3,15 @@ import type { BigNumber } from "ethers";
 export interface Course {
   id: number;
   seller: `0x${string}`;
-  title: string;
-  slug: string;
-  description: string;
   price: BigNumber;
-  image: string;
+  dataUri: string;
+  metadata: CourseMetadata;
+}
+
+export interface CourseMetadata {
+  title: string;
+  description: string;
+  imageUrl: string;
+  keywords: string[];
   videoPlaybackId: string;
 }

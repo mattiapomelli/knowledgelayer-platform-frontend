@@ -13,11 +13,11 @@ interface CourseCardProps {
 
 export const CourseCard = ({ course }: CourseCardProps) => {
   return (
-    <Link href={`/${course.slug}`} key={course.id}>
+    <Link href={`/${course.id}`} key={course.id}>
       <a className="flex flex-col gap-2">
         <div className="rounded-box relative h-44 overflow-hidden">
           <Image
-            src={course.image}
+            src={course.metadata.imageUrl}
             layout="fill"
             objectFit="cover"
             alt="Course"
@@ -26,7 +26,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
         </div>
 
         <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
-          {course.title}
+          {course.metadata.title}
         </h4>
 
         <div className="mt-1 flex items-center gap-4">
@@ -42,7 +42,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
         </div>
 
         <p className="text-base-content/70">
-          {course.description.substring(0, 100).concat("...")}
+          {course.metadata.description.substring(0, 100).concat("...")}
         </p>
       </a>
     </Link>
