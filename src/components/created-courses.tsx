@@ -3,10 +3,13 @@ import Link from "next/link";
 import { Button } from "../components/basic/button";
 import { Spinner } from "../components/basic/spinner";
 import { CourseCard } from "../components/course-card";
-import { useCreatedCourses } from "../hooks/use-created-courses";
+import { useCourses } from "../hooks/use-courses";
 
-export const CreatedCourses = () => {
-  const { data: createdCourses, isLoading } = useCreatedCourses();
+export const CreatedCourses = ({ user }: { user: `0x${string}` }) => {
+  // console.log("User: ", user);
+  const { data: createdCourses, isLoading } = useCourses({
+    seller: user,
+  });
 
   if (isLoading) {
     return (

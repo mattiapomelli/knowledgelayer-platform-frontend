@@ -3,12 +3,14 @@ import Link from "next/link";
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course-card";
 
-import { useBoughtCourses } from "../hooks/use-bought-courses";
+import { usePurchasedCourses } from "../hooks/use-purchased-courses";
 
 import { Button } from "./basic/button";
 
-export const PurchasedCourses = () => {
-  const { data: boughtCourses, isLoading } = useBoughtCourses();
+export const PurchasedCourses = ({ user }: { user: `0x${string}` }) => {
+  const { data: boughtCourses, isLoading } = usePurchasedCourses({
+    buyer: user,
+  });
 
   if (isLoading) {
     return (
