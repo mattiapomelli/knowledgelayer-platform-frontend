@@ -1,8 +1,10 @@
 import { useQuery } from "wagmi";
 
+import { fetchFromIpfs } from "@utils/ipfs";
+
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
 
-import type { Course } from "../types/courses";
+import type { Course, CourseMetadata } from "../types/courses";
 
 export const useCourse = (courseId: number) => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse();
@@ -11,18 +13,16 @@ export const useCourse = (courseId: number) => {
     if (!knowledgeLayerCourse) return;
 
     const course = await knowledgeLayerCourse.courses(courseId);
-    const { seller, title, slug, description, price, image, videoPlaybackId } =
-      course;
+    const { seller, price, dataUri } = course;
+
+    const metadata = await fetchFromIpfs<CourseMetadata>(dataUri);
 
     return {
       id: courseId,
       seller: seller as `0x${string}`,
-      title,
-      slug,
-      description,
       price,
-      image,
-      videoPlaybackId,
+      dataUri,
+      metadata,
     };
   });
 };

@@ -5,8 +5,7 @@ import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
 import type { ContractReceipt } from "ethers";
 
 export interface BuyCourseData {
-  id: number;
-  withEuro?: boolean;
+  courseId: number;
 }
 
 interface UseBuyCourseOptions {
@@ -17,12 +16,12 @@ export const useBuyCourse = (options?: UseBuyCourseOptions) => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
 
   const mutation = useMutation(
-    async ({ id, withEuro }: BuyCourseData) => {
+    async ({ courseId }: BuyCourseData) => {
       if (!knowledgeLayerCourse) return;
 
-      const price = (await knowledgeLayerCourse.courses(id)).price;
-      const tx = await knowledgeLayerCourse.buyCourse(id, {
-        value: withEuro ? 0 : price,
+      const price = (await knowledgeLayerCourse.courses(courseId)).price;
+      const tx = await knowledgeLayerCourse.buyCourse(courseId, {
+        value: price,
       });
 
       return await tx.wait();

@@ -1,5 +1,6 @@
 import { useMutation } from "wagmi";
 
+import { uploadToIPFS } from "@utils/ipfs";
 import { uploadImage } from "@utils/upload-image";
 
 import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
@@ -10,8 +11,8 @@ export interface CreateCourseData {
   title: string;
   price: BigNumber;
   image: File;
-  slug: string;
   description: string;
+  keywords: string[];
   videoPlaybackId: string;
 }
 
@@ -24,10 +25,10 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
   const mutation = useMutation(
     async ({
       title,
-      slug,
       description,
       price,
       image,
+      keywords,
       videoPlaybackId,
     }: CreateCourseData) => {
       if (!knowledgeLayerCourse) return;
@@ -35,14 +36,17 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
       const imageUrl = await uploadImage(image);
       if (!imageUrl) return;
 
-      const tx = await knowledgeLayerCourse.createCourse(
+      const dataUri = await uploadToIPFS({
         title,
-        slug,
         description,
-        price,
         imageUrl,
+        keywords,
         videoPlaybackId,
-      );
+      });
+
+      if (!dataUri) return;
+
+      const tx = await knowledgeLayerCourse.createCourse(price, dataUri);
       return await tx.wait();
     },
     {

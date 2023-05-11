@@ -2,11 +2,11 @@ import { useAccount, useQuery } from "wagmi";
 
 import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
 
-export const useHasBoughtCourse = (courseId: number) => {
+export const useHasPurchasedCourse = (courseId: number) => {
   const { address } = useAccount();
   const knowledgeLayerCourse = useKnowledgeLayerCourse();
 
-  return useQuery(["has-bought-course", courseId, address], async () => {
+  return useQuery(["has-purchased-course", courseId, address], async () => {
     if (!knowledgeLayerCourse || !address) return false;
 
     const eventFilter = knowledgeLayerCourse.filters.CourseBought(
