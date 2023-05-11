@@ -34,7 +34,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "buyCourse(uint256)": FunctionFragment;
     "courses(uint256)": FunctionFragment;
-    "createCourse(string,string,string,uint256,string,string)": FunctionFragment;
+    "createCourse(uint256,string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "owner()": FunctionFragment;
     "protocolFee()": FunctionFragment;
@@ -43,10 +43,9 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setProtocolFee(uint16)": FunctionFragment;
-    "slugToId(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateCoursePrice(uint256,uint256)": FunctionFragment;
+    "updateCourse(uint256,uint256,string)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
   };
 
@@ -65,10 +64,9 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
       | "safeTransferFrom"
       | "setApprovalForAll"
       | "setProtocolFee"
-      | "slugToId"
       | "supportsInterface"
       | "transferOwnership"
-      | "updateCoursePrice"
+      | "updateCourse"
       | "uri",
   ): FunctionFragment;
 
@@ -90,14 +88,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createCourse",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-    ],
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
@@ -141,10 +132,6 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>],
   ): string;
   encodeFunctionData(
-    functionFragment: "slugToId",
-    values: [PromiseOrValue<string>],
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>],
   ): string;
@@ -153,8 +140,12 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     values: [PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
-    functionFragment: "updateCoursePrice",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+    functionFragment: "updateCourse",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+    ],
   ): string;
   encodeFunctionData(
     functionFragment: "uri",
@@ -201,7 +192,6 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     functionFragment: "setProtocolFee",
     data: BytesLike,
   ): Result;
-  decodeFunctionResult(functionFragment: "slugToId", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike,
@@ -211,7 +201,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     data: BytesLike,
   ): Result;
   decodeFunctionResult(
-    functionFragment: "updateCoursePrice",
+    functionFragment: "updateCourse",
     data: BytesLike,
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
@@ -219,7 +209,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "CourseBought(uint256,address,uint256,uint256)": EventFragment;
-    "CourseCreated(uint256,address,string,string,string,uint256,string,string)": EventFragment;
+    "CourseCreated(uint256,address,uint256,string)": EventFragment;
     "CoursePriceUpdated(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "ProtocolFeeUpdated(uint256)": EventFragment;
@@ -267,15 +257,11 @@ export type CourseBoughtEventFilter = TypedEventFilter<CourseBoughtEvent>;
 export interface CourseCreatedEventObject {
   courseId: BigNumber;
   seller: string;
-  title: string;
-  slug: string;
-  description: string;
   price: BigNumber;
-  image: string;
-  videoPlaybackId: string;
+  dataUri: string;
 }
 export type CourseCreatedEvent = TypedEvent<
-  [BigNumber, string, string, string, string, BigNumber, string, string],
+  [BigNumber, string, BigNumber, string],
   CourseCreatedEventObject
 >;
 
@@ -400,24 +386,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<
-      [string, string, string, string, BigNumber, string, string] & {
+      [string, BigNumber, string] & {
         seller: string;
-        title: string;
-        slug: string;
-        description: string;
         price: BigNumber;
-        image: string;
-        videoPlaybackId: string;
+        dataUri: string;
       }
     >;
 
     createCourse(
-      _title: PromiseOrValue<string>,
-      _slug: PromiseOrValue<string>,
-      _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
-      _image: PromiseOrValue<string>,
-      _videoPlaybackId: PromiseOrValue<string>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
@@ -464,11 +442,6 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
-    slugToId(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<[BigNumber]>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
@@ -479,14 +452,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
-    updateCoursePrice(
+    updateCourse(
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
     uri(
-      _id: PromiseOrValue<BigNumberish>,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<[string]>;
   };
@@ -512,24 +486,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides,
   ): Promise<
-    [string, string, string, string, BigNumber, string, string] & {
+    [string, BigNumber, string] & {
       seller: string;
-      title: string;
-      slug: string;
-      description: string;
       price: BigNumber;
-      image: string;
-      videoPlaybackId: string;
+      dataUri: string;
     }
   >;
 
   createCourse(
-    _title: PromiseOrValue<string>,
-    _slug: PromiseOrValue<string>,
-    _description: PromiseOrValue<string>,
     _price: PromiseOrValue<BigNumberish>,
-    _image: PromiseOrValue<string>,
-    _videoPlaybackId: PromiseOrValue<string>,
+    _dataUri: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
@@ -576,11 +542,6 @@ export interface KnowledgeLayerCourse extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
-  slugToId(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides,
-  ): Promise<BigNumber>;
-
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides,
@@ -591,14 +552,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
-  updateCoursePrice(
+  updateCourse(
     _courseId: PromiseOrValue<BigNumberish>,
     _price: PromiseOrValue<BigNumberish>,
+    _dataUri: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
   uri(
-    _id: PromiseOrValue<BigNumberish>,
+    arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides,
   ): Promise<string>;
 
@@ -624,24 +586,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<
-      [string, string, string, string, BigNumber, string, string] & {
+      [string, BigNumber, string] & {
         seller: string;
-        title: string;
-        slug: string;
-        description: string;
         price: BigNumber;
-        image: string;
-        videoPlaybackId: string;
+        dataUri: string;
       }
     >;
 
     createCourse(
-      _title: PromiseOrValue<string>,
-      _slug: PromiseOrValue<string>,
-      _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
-      _image: PromiseOrValue<string>,
-      _videoPlaybackId: PromiseOrValue<string>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<void>;
 
@@ -686,11 +640,6 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<void>;
 
-    slugToId(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
@@ -701,14 +650,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<void>;
 
-    updateCoursePrice(
+    updateCourse(
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<void>;
 
     uri(
-      _id: PromiseOrValue<BigNumberish>,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<string>;
   };
@@ -738,25 +688,17 @@ export interface KnowledgeLayerCourse extends BaseContract {
       fee?: null,
     ): CourseBoughtEventFilter;
 
-    "CourseCreated(uint256,address,string,string,string,uint256,string,string)"(
+    "CourseCreated(uint256,address,uint256,string)"(
       courseId?: PromiseOrValue<BigNumberish> | null,
       seller?: PromiseOrValue<string> | null,
-      title?: null,
-      slug?: null,
-      description?: null,
       price?: null,
-      image?: null,
-      videoPlaybackId?: null,
+      dataUri?: null,
     ): CourseCreatedEventFilter;
     CourseCreated(
       courseId?: PromiseOrValue<BigNumberish> | null,
       seller?: PromiseOrValue<string> | null,
-      title?: null,
-      slug?: null,
-      description?: null,
       price?: null,
-      image?: null,
-      videoPlaybackId?: null,
+      dataUri?: null,
     ): CourseCreatedEventFilter;
 
     "CoursePriceUpdated(uint256,uint256)"(
@@ -841,12 +783,8 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<BigNumber>;
 
     createCourse(
-      _title: PromiseOrValue<string>,
-      _slug: PromiseOrValue<string>,
-      _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
-      _image: PromiseOrValue<string>,
-      _videoPlaybackId: PromiseOrValue<string>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
@@ -893,11 +831,6 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
-    slugToId(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
@@ -908,14 +841,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
-    updateCoursePrice(
+    updateCourse(
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
     uri(
-      _id: PromiseOrValue<BigNumberish>,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<BigNumber>;
   };
@@ -944,12 +878,8 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     createCourse(
-      _title: PromiseOrValue<string>,
-      _slug: PromiseOrValue<string>,
-      _description: PromiseOrValue<string>,
       _price: PromiseOrValue<BigNumberish>,
-      _image: PromiseOrValue<string>,
-      _videoPlaybackId: PromiseOrValue<string>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
@@ -996,11 +926,6 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
-    slugToId(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<PopulatedTransaction>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
@@ -1011,14 +936,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
-    updateCoursePrice(
+    updateCourse(
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
     uri(
-      _id: PromiseOrValue<BigNumberish>,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
   };

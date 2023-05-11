@@ -77,24 +77,6 @@ export const KnowledgeLayerCourseAbi = [
       },
       {
         indexed: false,
-        internalType: "string",
-        name: "title",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "slug",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "description",
-        type: "string",
-      },
-      {
-        indexed: false,
         internalType: "uint256",
         name: "price",
         type: "uint256",
@@ -102,13 +84,7 @@ export const KnowledgeLayerCourseAbi = [
       {
         indexed: false,
         internalType: "string",
-        name: "image",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "videoPlaybackId",
+        name: "dataUri",
         type: "string",
       },
     ],
@@ -336,33 +312,13 @@ export const KnowledgeLayerCourseAbi = [
         type: "address",
       },
       {
-        internalType: "string",
-        name: "title",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "slug",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "description",
-        type: "string",
-      },
-      {
         internalType: "uint256",
         name: "price",
         type: "uint256",
       },
       {
         internalType: "string",
-        name: "image",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "videoPlaybackId",
+        name: "dataUri",
         type: "string",
       },
     ],
@@ -372,33 +328,13 @@ export const KnowledgeLayerCourseAbi = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "_title",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_slug",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_description",
-        type: "string",
-      },
-      {
         internalType: "uint256",
         name: "_price",
         type: "uint256",
       },
       {
         internalType: "string",
-        name: "_image",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_videoPlaybackId",
+        name: "_dataUri",
         type: "string",
       },
     ],
@@ -564,25 +500,6 @@ export const KnowledgeLayerCourseAbi = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    name: "slugToId",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "bytes4",
         name: "interfaceId",
         type: "bytes4",
@@ -624,8 +541,13 @@ export const KnowledgeLayerCourseAbi = [
         name: "_price",
         type: "uint256",
       },
+      {
+        internalType: "string",
+        name: "_dataUri",
+        type: "string",
+      },
     ],
-    name: "updateCoursePrice",
+    name: "updateCourse",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -634,7 +556,7 @@ export const KnowledgeLayerCourseAbi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_id",
+        name: "",
         type: "uint256",
       },
     ],
