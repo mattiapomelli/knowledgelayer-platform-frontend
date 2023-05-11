@@ -6,7 +6,6 @@ import { CourseCard } from "@components/course-card";
 import { useCourses } from "@lib/courses/use-courses";
 
 export const CreatedCourses = ({ user }: { user: `0x${string}` }) => {
-  // console.log("User: ", user);
   const { data: createdCourses, isLoading } = useCourses({
     seller: user,
   });

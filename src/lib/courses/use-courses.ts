@@ -6,13 +6,11 @@ import { fetchFromIpfs } from "@utils/ipfs";
 import type { Course, CourseMetadata } from "./types";
 
 interface UseCoursesParams {
-  seller?: string;
+  seller?: `0x${string}`;
 }
 
 export const useCourses = (params?: UseCoursesParams) => {
   const { seller = null } = params ?? {};
-
-  console.log("User: ", seller);
 
   const knowledgeLayerCourse = useKnowledgeLayerCourse();
 
