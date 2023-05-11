@@ -1,9 +1,8 @@
 import { useMutation } from "wagmi";
 
+import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
 import { uploadToIPFS } from "@utils/ipfs";
 import { uploadImage } from "@utils/upload-image";
-
-import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
 
 import type { BigNumber, ContractReceipt } from "ethers";
 

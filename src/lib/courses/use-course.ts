@@ -1,10 +1,9 @@
 import { useQuery } from "wagmi";
 
+import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
 import { fetchFromIpfs } from "@utils/ipfs";
 
-import { useKnowledgeLayerCourse } from "./use-knowledgelayer-course";
-
-import type { Course, CourseMetadata } from "../types/courses";
+import type { Course, CourseMetadata } from "./types";
 
 export const useCourse = (courseId: number) => {
   const knowledgeLayerCourse = useKnowledgeLayerCourse();

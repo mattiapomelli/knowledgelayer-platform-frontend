@@ -7,11 +7,11 @@ import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { CopyButton } from "@components/copy-button";
 import { CoursePlayer } from "@components/course-player";
-import { useBuyCourse } from "@hooks/use-buy-course";
-import { useCourse } from "@hooks/use-course";
-import { useHasPurchasedCourse } from "@hooks/use-has-purchased-course";
+import { useCourse } from "@lib/courses/use-course";
+import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
+import { useBuyCourse } from "lib/courses/use-buy-course";
 
-import type { Course } from "../../types/courses";
+import type { Course } from "../../lib/courses/types";
 
 const CourseInfo = ({ course }: { course: Course }) => {
   const { address } = useAccount();

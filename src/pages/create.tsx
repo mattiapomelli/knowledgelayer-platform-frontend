@@ -10,8 +10,8 @@ import { Spinner } from "@components/basic/spinner";
 import { TextArea } from "@components/basic/textarea/textarea";
 import { FileDropzone } from "@components/file-dropzone";
 import { WalletStatus } from "@components/wallet/wallet-status";
-import { useCreateCourse } from "@hooks/use-create-course";
 import { useUploadVideo } from "@hooks/use-upload-video";
+import { useCreateCourse } from "@lib/courses/use-create-course";
 
 import type { Asset } from "@livepeer/react";
 import type { NextPage } from "next";
