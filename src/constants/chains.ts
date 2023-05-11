@@ -4,7 +4,7 @@ import { env } from "env.mjs";
 
 export type ChainMap = { [chainId: number]: string };
 
-const getDefaultChain = () => {
+const getChain = () => {
   switch (env.NEXT_PUBLIC_CHAIN) {
     case "localhost":
       return hardhat;
@@ -15,4 +15,4 @@ const getDefaultChain = () => {
   }
 };
 
-export const CHAIN = getDefaultChain();
+export const CHAIN = getChain();
