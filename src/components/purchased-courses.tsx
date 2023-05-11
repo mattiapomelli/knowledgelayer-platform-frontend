@@ -1,11 +1,9 @@
 import Link from "next/link";
 
+import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course-card";
-
-import { usePurchasedCourses } from "../hooks/use-purchased-courses";
-
-import { Button } from "./basic/button";
+import { usePurchasedCourses } from "@lib/courses/use-purchased-courses";
 
 export const PurchasedCourses = ({ user }: { user: `0x${string}` }) => {
   const { data: boughtCourses, isLoading } = usePurchasedCourses({
