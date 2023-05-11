@@ -11,7 +11,7 @@ import { useBuyCourse } from "@hooks/use-buy-course";
 import { useCourse } from "@hooks/use-course";
 import { useHasPurchasedCourse } from "@hooks/use-has-purchased-course";
 
-import type { Course } from "../types/courses";
+import type { Course } from "../../types/courses";
 
 const CourseInfo = ({ course }: { course: Course }) => {
   const { address } = useAccount();
