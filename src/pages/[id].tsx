@@ -8,8 +8,8 @@ import { Spinner } from "@components/basic/spinner";
 import { CopyButton } from "@components/copy-button";
 import { CoursePlayer } from "@components/course-player";
 import { useBuyCourse } from "@hooks/use-buy-course";
-import { useCourseBySlug } from "@hooks/use-course-by-slug";
-import { useHasBoughtCourse } from "@hooks/use-has-bought-course";
+import { useCourse } from "@hooks/use-course";
+import { useHasPurchasedCourse } from "@hooks/use-has-purchased-course";
 
 import type { Course } from "../types/courses";
 
@@ -22,11 +22,11 @@ const CourseInfo = ({ course }: { course: Course }) => {
     },
   });
 
-  const { data: hasBoughtCourse } = useHasBoughtCourse(course.id);
+  const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
 
   const onBuyCourse = async () => {
     buyCourse({
-      id: course.id,
+      courseId: course.id,
     });
   };
 
@@ -34,15 +34,15 @@ const CourseInfo = ({ course }: { course: Course }) => {
     <div className="flex flex-col gap-4">
       <div className="rounded-box relative h-56 overflow-hidden">
         <Image
-          src={course.image}
+          src={course.metadata.imageUrl}
           layout="fill"
           objectFit="cover"
           alt="course"
           priority
         />
       </div>
-      <h1 className="text-4xl font-bold">{course.title}</h1>
-      <p>{course.description}</p>
+      <h1 className="text-4xl font-bold">{course.metadata.title}</h1>
+      <p>{course.metadata.description}</p>
       {address === course.seller ? (
         <>
           <CoursePlayer course={course} />
@@ -55,7 +55,7 @@ const CourseInfo = ({ course }: { course: Course }) => {
         </>
       ) : (
         <>
-          {hasBoughtCourse ? (
+          {hasPurchasedCourse ? (
             <CoursePlayer course={course} />
           ) : (
             <div className="mt-2">
@@ -80,8 +80,8 @@ const CourseInfo = ({ course }: { course: Course }) => {
   );
 };
 
-const CoursePageInner = ({ slug }: { slug: string }) => {
-  const { data: course } = useCourseBySlug(slug);
+const CoursePageInner = ({ courseId }: { courseId: number }) => {
+  const { data: course } = useCourse(courseId);
 
   if (!course) {
     return (
@@ -100,11 +100,11 @@ const CoursePageInner = ({ slug }: { slug: string }) => {
 
 const CoursePage = () => {
   const router = useRouter();
-  const slug = router.query.slug?.toString();
+  const courseId = router.query.id?.toString();
 
-  if (!slug) return null;
+  if (!courseId) return null;
 
-  return <CoursePageInner slug={slug} />;
+  return <CoursePageInner courseId={Number(courseId)} />;
 };
 
 export default CoursePage;
