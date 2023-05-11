@@ -51,10 +51,10 @@ const CreateCourseForm = () => {
       reset();
 
       if (!receipt) return;
-      const slug = receipt.events?.find((e) => e.event === "CourseCreated")
-        ?.args?.slug;
+      const id = receipt.events?.find((e) => e.event === "CourseCreated")?.args
+        ?.courseId;
 
-      router.push(`/${slug}`);
+      router.push(`/courses/${id}`);
     },
   });
 
@@ -67,11 +67,11 @@ const CreateCourseForm = () => {
 
       createCourse({
         title,
-        slug: slugify(title).toLowerCase(),
         description,
         price: ethers.utils.parseEther(price),
         image,
         videoPlaybackId: asset.playbackId,
+        keywords: [],
       });
     }
   });

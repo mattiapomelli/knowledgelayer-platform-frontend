@@ -13,7 +13,7 @@ interface CourseCardProps {
 
 export const CourseCard = ({ course }: CourseCardProps) => {
   return (
-    <Link href={`/${course.id}`} key={course.id}>
+    <Link href={`/courses/${course.id}`} key={course.id}>
       <a className="flex flex-col gap-2">
         <div className="rounded-box relative h-44 overflow-hidden">
           <Image
