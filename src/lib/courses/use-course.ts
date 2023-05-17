@@ -14,6 +14,7 @@ const getCourse = gql`
       seller {
         id
         address
+        handle
       }
       token {
         address

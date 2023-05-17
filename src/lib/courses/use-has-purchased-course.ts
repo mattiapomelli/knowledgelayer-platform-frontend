@@ -2,7 +2,7 @@ import { useAccount, useQuery } from "wagmi";
 
 import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
 
-export const useHasBoughtCourse = (courseId: string) => {
+export const useHasPurchasedCourse = (courseId: string) => {
   const { address } = useAccount();
 
   const knowledgeLayerCourse = useKnowledgeLayerCourse();

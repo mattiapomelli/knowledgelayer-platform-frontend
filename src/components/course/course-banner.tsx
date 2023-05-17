@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Address } from "@components/address";
 import { Button } from "@components/basic/button";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
-import { useHasBoughtCourse } from "@lib/courses/use-has-bought-course";
+import { useHasBoughtCourse } from "@lib/courses/use-has-purchased-course";
 
 import type { CourseWithLessons } from "types/tmp";
 

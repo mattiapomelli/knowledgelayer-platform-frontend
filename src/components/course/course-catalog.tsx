@@ -1,3 +1,5 @@
+import cx from "classnames";
+
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course/course-card";
 import { useCourses } from "@lib/courses/use-courses";
@@ -33,7 +35,7 @@ const CourseCatalogInner = () => {
 export const CourseCatalog = ({ className }: { className?: string }) => {
   return (
     <div className={className}>
-      <h4 className="text-xl font-bold">Courses</h4>
+      <h4 className={cx("mb-4 mt-2 text-xl font-bold", className)}>Courses</h4>
       <CourseCatalogInner />
     </div>
   );
