@@ -22,7 +22,7 @@ export const DefaultLayout = ({ children }: { children: ReactNode }) => {
             💰
           </div>
         </div> */}
-        {children}
+        <div className="container">{children}</div>
       </main>
       <Footer />
     </div>

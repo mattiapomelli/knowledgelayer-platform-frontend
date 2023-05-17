@@ -6,5 +6,13 @@ export interface User {
   address: `0x${string}`;
   rating: string;
   reviews: string;
-  // description: string;
+  description?: UserDescription;
+}
+
+export interface UserDescription {
+  title?: string;
+  about?: string;
+  name?: string;
+  role?: string;
+  image_url?: string;
 }
