@@ -26,6 +26,7 @@ const getCourse = gql`
         title
         about
         image_url
+        keywords
         lessons {
           title
           videoPlaybackId

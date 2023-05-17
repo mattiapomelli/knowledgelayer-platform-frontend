@@ -23,6 +23,7 @@ const getAllCourses = gql`
         title
         about
         image_url
+        keywords
       }
     }
   }

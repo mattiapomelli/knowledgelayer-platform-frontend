@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
+import { CourseCategory } from "@components/course/course-category";
 import { CourseLessons } from "@components/course/course-lessons";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
@@ -64,6 +65,11 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
           </Link>
         </div>
         <p className="mt-4">{course.description.about}</p>
+        <div className="mt-3 flex gap-2">
+          {course.description.keywords.map((category) => (
+            <CourseCategory key={category} category={category} />
+          ))}
+        </div>
         {!isSeller && (
           <>
             {hasPurchasedCourse ? (

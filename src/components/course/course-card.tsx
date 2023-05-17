@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { Address } from "../address";
 
+import { CourseCategory } from "./course-category";
+
 import type { Course } from "@lib/courses/types";
 
 interface CourseCardProps {
@@ -47,6 +49,11 @@ export const CourseCard = ({ course }: CourseCardProps) => {
       <p className="text-base-content/70">
         {course.description.about.substring(0, 100).concat("...")}
       </p>
+      <div className="mt-1.5 flex space-x-2">
+        {course.description.keywords.map((category) => (
+          <CourseCategory key={category} category={category} />
+        ))}
+      </div>
     </Link>
   );
 };
