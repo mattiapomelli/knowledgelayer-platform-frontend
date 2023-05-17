@@ -6,6 +6,8 @@ import { CourseCard } from "../components/course-card";
 const Catalog = () => {
   const { data: courses, isLoading } = useCourses();
 
+  const filteredCourses = courses?.filter((course) => course.description);
+
   if (isLoading) {
     return (
       <div className="my-14 flex justify-center">
@@ -14,7 +16,7 @@ const Catalog = () => {
     );
   }
 
-  if (courses?.length === 0)
+  if (filteredCourses?.length === 0)
     return (
       <div className="my-14 flex justify-center">
         <p>No courses yet</p>
@@ -23,7 +25,7 @@ const Catalog = () => {
 
   return (
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-autofill">
-      {courses?.map((course) => (
+      {filteredCourses?.map((course) => (
         <CourseCard key={course.id} course={course} linkToPage />
       ))}
     </div>

@@ -13,39 +13,40 @@ interface CourseCardProps {
 
 export const CourseCard = ({ course }: CourseCardProps) => {
   return (
-    <Link href={`/courses/${course.id}`} key={course.id}>
-      <a className="flex flex-col gap-2">
-        <div className="rounded-box relative h-44 overflow-hidden">
-          <Image
-            src={course.description.image_url}
-            layout="fill"
-            objectFit="cover"
-            alt="Course"
-            priority
-          />
-        </div>
+    <Link
+      href={`/courses/${course.id}`}
+      key={course.id}
+      className="flex flex-col gap-2"
+    >
+      <div className="rounded-box relative h-44 overflow-hidden">
+        <Image
+          src={course.description.image_url}
+          fill
+          alt="Course"
+          priority
+          className="object-cover"
+        />
+      </div>
 
-        <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
-          {course.description.title}
-        </h4>
+      <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
+        {course.description.title}
+      </h4>
 
-        <div className="mt-1 flex items-center gap-4">
-          <span>
-            By:{" "}
-            <Address address={course.seller.address} className="font-bold" />
+      <div className="mt-1 flex items-center gap-4">
+        <span>
+          By: <Address address={course.seller.address} className="font-bold" />
+        </span>
+        <span>
+          Price:{" "}
+          <span className="font-bold">
+            {ethers.utils.formatEther(course.price)} MATIC
           </span>
-          <span>
-            Price:{" "}
-            <span className="font-bold">
-              {ethers.utils.formatEther(course.price)} MATIC
-            </span>
-          </span>
-        </div>
+        </span>
+      </div>
 
-        <p className="text-base-content/70">
-          {course.description.about.substring(0, 100).concat("...")}
-        </p>
-      </a>
+      <p className="text-base-content/70">
+        {course.description.about.substring(0, 100).concat("...")}
+      </p>
     </Link>
   );
 };

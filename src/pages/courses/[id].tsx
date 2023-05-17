@@ -42,9 +42,8 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
           <Image
             src={course.description.image_url}
             alt="Course image"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-box"
+            fill
+            className="rounded-box object-cover"
           />
         </div>
         <h1 className="text-3xl font-bold">{course.description.title}</h1>

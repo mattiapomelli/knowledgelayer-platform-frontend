@@ -25,9 +25,7 @@ export const CreatedCoursesInner = ({ userId }: { userId: string }) => {
       <div className="my-14 flex flex-col items-center gap-3">
         <p>No courses created yet</p>
         <Link href="/create">
-          <a>
-            <Button>Create course</Button>
-          </a>
+          <Button>Create course</Button>
         </Link>
       </div>
     );

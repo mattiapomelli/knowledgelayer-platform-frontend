@@ -22,14 +22,13 @@ const NavItem = ({ text, href }: NavItemProps) => {
   const router = useRouter();
 
   return (
-    <Link href={href}>
-      <a
-        className={cx("rounded-btn px-4 py-2 font-medium hover:bg-base-200", {
-          "bg-base-200": router.pathname.startsWith(href),
-        })}
-      >
-        {text}
-      </a>
+    <Link
+      href={href}
+      className={cx("rounded-btn px-4 py-2 font-medium hover:bg-base-200", {
+        "bg-base-200": router.pathname.startsWith(href),
+      })}
+    >
+      {text}
     </Link>
   );
 };

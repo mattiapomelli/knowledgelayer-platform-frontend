@@ -26,9 +26,9 @@ const Catalog = () => {
                 <div className="relative h-32 w-full overflow-hidden rounded-md md:w-32">
                   <Image
                     src={course.description.image_url}
-                    alt=""
-                    objectFit="cover"
-                    layout="fill"
+                    alt="Course Image"
+                    fill
+                    className="object-cover"
                   />
                 </div>
               </div>
