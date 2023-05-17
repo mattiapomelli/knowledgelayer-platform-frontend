@@ -20,9 +20,7 @@ const DashboardPage = () => {
   return (
     <div className="container">
       <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-        <h1 className="text-3xl font-bold underline decoration-primary">
-          Dashboard 📋
-        </h1>
+        <h1 className="text-3xl font-bold underline decoration-primary">Dashboard 📋</h1>
         <div className="flex gap-2">
           <Link href="/create">
             <a>
