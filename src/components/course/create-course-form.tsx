@@ -7,6 +7,7 @@ import { Button } from "@components/basic/button";
 import { Input } from "@components/basic/input";
 import { TextArea } from "@components/basic/textarea/textarea";
 import { FileDropzone } from "@components/file-dropzone";
+import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useUploadVideos } from "@hooks/use-upload-videos";
 import { useCreateCourse } from "@lib/courses/use-create-course";
 import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
@@ -28,6 +29,7 @@ interface CreateCourseFields {
 export const CreateCourseForm = () => {
   const { user } = useKnowledgeLayerContext();
   const router = useRouter();
+  const openCreateProfileModal = useCreateProfileModal();
 
   const [assets, setAssets] = useState<Asset[] | undefined>();
   const [image, setImage] = useState<File | undefined>();
@@ -203,7 +205,11 @@ export const CreateCourseForm = () => {
         </div>
 
         <div className="mt-8 flex flex-col gap-2">
-          {!user && <Button block>Create KL Id</Button>}
+          {!user && (
+            <Button block onClick={openCreateProfileModal} type="button">
+              Create KL Id
+            </Button>
+          )}
           <Button
             block
             type="submit"

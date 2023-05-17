@@ -8,6 +8,7 @@ import {
 } from "@livepeer/react";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { useAtom } from "jotai";
 import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
@@ -15,7 +16,9 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
+import { ConnectModal } from "@components/modals/create-profile-modal";
 import { CHAIN } from "@constants/chains";
+import { createProfileModalAtom } from "@hooks/use-create-profile-modal";
 import { DefaultLayout } from "@layouts/default-layout";
 import { KnowledgeLayerProvider } from "context/knowledgelayer-provider";
 import { env } from "env.mjs";
@@ -53,6 +56,8 @@ const livePeerClient = createReactClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
+  const [open, setOpen] = useAtom(createProfileModalAtom);
+
   const getLayout =
     (Component as ExtendedPage).getLayout ||
     ((page) => <DefaultLayout>{page}</DefaultLayout>);
@@ -67,6 +72,7 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
                 <KnowledgeLayerProvider>
                   <DefaultSeo {...SEO} />
                   {getLayout(<Component {...pageProps} />)}
+                  <ConnectModal open={open} onClose={() => setOpen(false)} />
                 </KnowledgeLayerProvider>
               </ThemeProvider>
             </LivepeerConfig>

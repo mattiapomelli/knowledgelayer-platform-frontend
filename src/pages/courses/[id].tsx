@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { CourseLessons } from "@components/course/course-lessons";
+import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
@@ -16,6 +17,8 @@ import type { CourseWithLessons } from "@lib/courses/types";
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
   const { user } = useKnowledgeLayerContext();
   const router = useRouter();
+  const openCreateProfileModal = useCreateProfileModal();
+
   const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
   const { mutate: buyCourse, isLoading } = useBuyCourse({
     onSuccess() {
@@ -70,7 +73,7 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
             ) : (
               <div className="mt-6 flex flex-col gap-2">
                 {!user && (
-                  <Button size="lg" block>
+                  <Button size="lg" block onClick={openCreateProfileModal}>
                     Create KL Id
                   </Button>
                 )}

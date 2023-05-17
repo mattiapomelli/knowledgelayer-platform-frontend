@@ -3,14 +3,16 @@ import { useAccount, useSwitchNetwork } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { CHAIN } from "@constants/chains";
+import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { UserDropdown } from "./user-dropdown";
 
 export const UserStatus = () => {
   const { user } = useKnowledgeLayerContext();
-  const { address } = useAccount();
+  const openCreateProfileModal = useCreateProfileModal();
 
+  const { address } = useAccount();
   const { switchNetwork } = useSwitchNetwork();
 
   return (
@@ -32,7 +34,7 @@ export const UserStatus = () => {
         }
 
         if (connected && address && !user) {
-          return <Button onClick={openConnectModal}>Create KL Id</Button>;
+          return <Button onClick={openCreateProfileModal}>Create KL Id</Button>;
         }
 
         if (connected && address && user) {
