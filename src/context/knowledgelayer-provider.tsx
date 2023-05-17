@@ -19,6 +19,15 @@ const getUserByAddress = gql`
   query GetUserByAddress($address: String!) {
     users(where: { address: $address }, first: 1) {
       id
+      createdAt
+      handle
+      address
+      description {
+        title
+        about
+        name
+        role
+      }
     }
   }
 `;
@@ -41,8 +50,6 @@ export const KnowledgeLayerProvider = ({
       const res = await graphQlRequest<{ users: User[] }>(getUserByAddress, {
         address: address.toLowerCase(),
       });
-
-      console.log("Here: ", res);
 
       if (res.users.length === 0) {
         setUser(null);

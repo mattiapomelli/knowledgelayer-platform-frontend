@@ -8,7 +8,7 @@ import { useAccount } from "wagmi";
 
 import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
-import { WalletStatus } from "@components/wallet/wallet-status";
+import { UserStatus } from "@components/user/user-status";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
 import { MobileMenu } from "./mobile-menu";
@@ -57,7 +57,7 @@ export const Navbar = () => {
               <NavItem text="Create course" href="/create" />
             </div>
             <ThemeToggle />
-            <WalletStatus />
+            <UserStatus />
 
             <button
               onClick={() => setShowMenu((show) => !show)}

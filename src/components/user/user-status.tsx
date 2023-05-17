@@ -3,10 +3,12 @@ import { useAccount, useSwitchNetwork } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { CHAIN } from "@constants/chains";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
-import { WalletDropdown } from "./wallet-dropdown";
+import { UserDropdown } from "./user-dropdown";
 
-export const WalletStatus = () => {
+export const UserStatus = () => {
+  const { user } = useKnowledgeLayerContext();
   const { address } = useAccount();
 
   const { switchNetwork } = useSwitchNetwork();
@@ -29,8 +31,12 @@ export const WalletStatus = () => {
           );
         }
 
-        if (connected && address) {
-          return <WalletDropdown address={address} />;
+        if (connected && address && !user) {
+          return <Button onClick={openConnectModal}>Create KL Id</Button>;
+        }
+
+        if (connected && address && user) {
+          return <UserDropdown user={user} />;
         }
 
         return <Button onClick={openConnectModal}>Connect Wallet</Button>;

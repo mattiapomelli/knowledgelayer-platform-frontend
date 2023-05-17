@@ -3,7 +3,7 @@ import { useAccount } from "wagmi";
 
 import { Spinner } from "@components/basic/spinner";
 import { CreateCourseForm } from "@components/course/create-course-form";
-import { WalletStatus } from "@components/wallet/wallet-status";
+import { UserStatus } from "@components/user/user-status";
 
 import type { NextPage } from "next";
 
@@ -21,8 +21,8 @@ const CreateCoursePage: NextPage = () => {
   if (!address) {
     return (
       <div className="my-14 flex flex-col items-center gap-3">
-        <p>Connect your wallet to create a course</p>
-        <WalletStatus />
+        <p>Connect your KL id</p>
+        <UserStatus />
       </div>
     );
   }
