@@ -5,10 +5,10 @@ import { graphQlRequest } from "@utils/graphql-client";
 
 import type { Course } from "@lib/courses/types";
 
-const getUserEnrolledCourses = gql`
-  query GetUserEnrolledCourses($id: String!) {
+const getCreatedCourses = gql`
+  query GetCreatedCourses($id: String!) {
     user(id: $id) {
-      purchasedCourses(where: { description_not: null }) {
+      createdCourses(where: { description_not: null }) {
         id
         createdAt
         updatedAt
@@ -30,16 +30,16 @@ const getUserEnrolledCourses = gql`
   }
 `;
 
-export interface UserEnrolledCourses {
+export interface UserCreatedCourses {
   user: {
-    purchasedCourses: Course[];
+    createdCourses: Course[];
   };
 }
 
-export const useUserEnrolledCourses = (userId: string) => {
-  return useQuery(["user-enrolled-courses", userId], async () =>
-    graphQlRequest<UserEnrolledCourses>(getUserEnrolledCourses, {
+export const useCreatedCourses = (userId: string) => {
+  return useQuery(["created-courses", userId], async () =>
+    graphQlRequest<UserCreatedCourses>(getCreatedCourses, {
       id: userId,
-    }).then((data) => data.user.purchasedCourses),
+    }).then((data) => data.user.createdCourses),
   );
 };

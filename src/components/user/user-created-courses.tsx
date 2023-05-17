@@ -2,14 +2,14 @@ import Link from "next/link";
 
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course/course-card";
-import { useUserCreatedCourses } from "@lib/users/use-user-created-courses";
+import { useCreatedCourses } from "@lib/courses/use-created-courses";
 
 import { Button } from "../basic/button";
 
 import type { User } from "@lib/users/types";
 
 export const UserCreatedCoursesInner = ({ user }: { user: User }) => {
-  const { data: createdCourses, isLoading } = useUserCreatedCourses(user.id);
+  const { data: createdCourses, isLoading } = useCreatedCourses(user.id);
 
   if (isLoading) {
     return (

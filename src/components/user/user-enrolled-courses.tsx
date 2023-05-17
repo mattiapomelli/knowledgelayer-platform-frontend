@@ -1,15 +1,15 @@
+import { useEnrolledCourses } from "@lib/courses/use-enrolled-courses";
 import Link from "next/link";
 
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course/course-card";
-import { useUserEnrolledCourses } from "@lib/users/use-user-enrolled-courses";
 
 import { Button } from "../basic/button";
 
 import type { User } from "@lib/users/types";
 
 export const UserEnrolledCoursesInner = ({ user }: { user: User }) => {
-  const { data: enrolledCourses, isLoading } = useUserEnrolledCourses(user.id);
+  const { data: enrolledCourses, isLoading } = useEnrolledCourses(user.id);
 
   if (isLoading) {
     return (
