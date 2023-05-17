@@ -17,18 +17,17 @@ const NavItem = ({ text, href, onClick }: NavItemProps) => {
   const router = useRouter();
 
   return (
-    <Link href={href}>
-      <a
-        onClick={onClick}
-        className={cx(
-          "rounded-btn flex items-center py-2 px-4 font-medium hover:bg-base-200",
-          {
-            "bg-base-200": router.pathname === href,
-          },
-        )}
-      >
-        {text}
-      </a>
+    <Link
+      href={href}
+      onClick={onClick}
+      className={cx(
+        "rounded-btn flex items-center px-4 py-2 font-medium hover:bg-base-200",
+        {
+          "bg-base-200": router.pathname === href,
+        },
+      )}
+    >
+      {text}
     </Link>
   );
 };
