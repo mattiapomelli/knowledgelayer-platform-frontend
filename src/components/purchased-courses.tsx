@@ -23,9 +23,7 @@ export const PurchasedCourses = ({ user }: { user: `0x${string}` }) => {
       <div className="my-14 flex flex-col items-center gap-3">
         <p>No courses purchased yet</p>
         <Link href="/">
-          <a>
-            <Button>Explore courses</Button>
-          </a>
+          <Button>Explore courses</Button>
         </Link>
       </div>
     );

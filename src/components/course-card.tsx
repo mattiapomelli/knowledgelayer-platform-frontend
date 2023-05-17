@@ -13,38 +13,37 @@ interface CourseCardProps {
 
 export const CourseCard = ({ course }: CourseCardProps) => {
   return (
-    <Link href={`/courses/${course.id}`} key={course.id}>
-      <a className="flex flex-col gap-2">
-        <div className="rounded-box relative h-44 overflow-hidden">
-          <Image
-            src={course.metadata.imageUrl}
-            layout="fill"
-            objectFit="cover"
-            alt="Course"
-            priority
-          />
-        </div>
-
-        <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
-          {course.metadata.title}
-        </h4>
-
-        <div className="mt-1 flex items-center gap-4">
-          <span>
-            By: <Address address={course.seller} className="font-bold" />
+    <Link
+      href={`/courses/${course.id}`}
+      key={course.id}
+      className="flex flex-col gap-2"
+    >
+      <div className="rounded-box relative h-44 overflow-hidden">
+        <Image
+          src={course.metadata.imageUrl}
+          fill
+          className="object-cover"
+          alt="Course"
+          priority
+        />
+      </div>
+      <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
+        {course.metadata.title}
+      </h4>
+      <div className="mt-1 flex items-center gap-4">
+        <span>
+          By: <Address address={course.seller} className="font-bold" />
+        </span>
+        <span>
+          Price:{" "}
+          <span className="font-bold">
+            {ethers.utils.formatEther(course.price)} MATIC
           </span>
-          <span>
-            Price:{" "}
-            <span className="font-bold">
-              {ethers.utils.formatEther(course.price)} MATIC
-            </span>
-          </span>
-        </div>
-
-        <p className="text-base-content/70">
-          {course.metadata.description.substring(0, 100).concat("...")}
-        </p>
-      </a>
+        </span>
+      </div>
+      <p className="text-base-content/70">
+        {course.metadata.description.substring(0, 100).concat("...")}
+      </p>
     </Link>
   );
 };

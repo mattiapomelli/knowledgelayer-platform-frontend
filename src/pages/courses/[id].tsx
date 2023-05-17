@@ -35,8 +35,8 @@ const CourseInfo = ({ course }: { course: Course }) => {
       <div className="rounded-box relative h-56 overflow-hidden">
         <Image
           src={course.metadata.imageUrl}
-          layout="fill"
-          objectFit="cover"
+          fill
+          className="object-cover"
           alt="course"
           priority
         />

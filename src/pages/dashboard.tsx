@@ -34,9 +34,7 @@ const DashboardPage = () => {
         </h1>
         <div className="flex gap-2">
           <Link href="/create">
-            <a>
-              <Button>Create course</Button>
-            </a>
+            <Button>Create course</Button>
           </Link>
         </div>
       </div>
@@ -52,9 +50,7 @@ const DashboardPage = () => {
             <div className="my-14 flex flex-col items-center gap-3">
               <p>Connect your wallet to see your dashboard</p>
               <Link href="/create">
-                <a>
-                  <WalletStatus />
-                </a>
+                <WalletStatus />
               </Link>
             </div>
           )}

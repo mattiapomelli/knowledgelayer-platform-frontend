@@ -25,10 +25,8 @@ export const WrappedLink = forwardRef<HTMLAnchorElement, WrappedLinkProps>(
     const { href, children, ...rest } = props;
 
     return (
-      <Link href={href}>
-        <a ref={ref} {...rest}>
-          {children}
-        </a>
+      <Link href={href} ref={ref} {...rest}>
+        {children}
       </Link>
     );
   },
@@ -54,7 +52,7 @@ export const DropdownItem = ({
           className={twMerge(
             cx(
               "flex items-center",
-              "py-2 px-4",
+              "px-4 py-2",
               "rounded-btn",
               "cursor-pointer",
               "font-medium",
