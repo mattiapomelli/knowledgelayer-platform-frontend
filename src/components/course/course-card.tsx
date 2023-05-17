@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Address } from "./address";
+import { Address } from "../address";
 
 import type { Course } from "@lib/courses/types";
 
@@ -16,7 +16,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
     <Link
       href={`/courses/${course.id}`}
       key={course.id}
-      className="flex flex-col gap-2"
+      className="rounded-box flex flex-col gap-2 bg-base-200 p-4 hover:bg-base-300"
     >
       <div className="rounded-box relative h-44 overflow-hidden">
         <Image
@@ -28,7 +28,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
         />
       </div>
 
-      <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
+      <h4 className="mt-1 block text-xl font-semibold">
         {course.description.title}
       </h4>
 

@@ -1,7 +1,7 @@
 import { Spinner } from "@components/basic/spinner";
 import { useCourses } from "@lib/courses/use-courses";
 
-import { CourseCard } from "../components/course-card";
+import { CourseCard } from "../components/course/course-card";
 
 const Catalog = () => {
   const { data: courses, isLoading } = useCourses();

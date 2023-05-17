@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Spinner } from "@components/basic/spinner";
-import { CourseCard } from "@components/course-card";
+import { CourseCard } from "@components/course/course-card";
 import { useUserPurchasedCourses } from "@lib/users/use-user-purchased-courses";
 import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 

@@ -10,9 +10,8 @@ export interface LogoProps {
 export const Logo = ({ href = "/", className }: LogoProps) => {
   return (
     <Link href={href} className="flex items-center gap-3">
-      {/* <span className="text-3xl">🧠</span> */}
       <Image src="/logo.png" width={30} height={30} alt="Logo" />
-      <span className={cx("text-xl font-black", className)}>uKnow</span>
+      <span className={cx("text-xl font-extrabold", className)}>uKnow</span>
     </Link>
   );
 };

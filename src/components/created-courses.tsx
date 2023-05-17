@@ -5,8 +5,8 @@ import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { Button } from "../components/basic/button";
 import { Spinner } from "../components/basic/spinner";
-import { CourseCard } from "../components/course-card";
 
+import { CourseCard } from "./course/course-card";
 import { WalletStatus } from "./wallet/wallet-status";
 
 export const CreatedCoursesInner = ({ userId }: { userId: string }) => {

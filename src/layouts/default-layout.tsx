@@ -7,9 +7,9 @@ export const DefaultLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 pb-20 pt-2">
-        <div className="container">
-          <div className="rounded-box mb-8 bg-primary/30 py-3 px-4 text-center">
+      <main className="flex-1 overflow-x-hidden pb-20 pt-8">
+        {/* <div className="container">
+          <div className="rounded-box mb-8 bg-primary/30 px-4 py-3 text-center">
             Get free MATIC from{" "}
             <a
               href="https://faucet.polygon.technology/"
@@ -21,7 +21,7 @@ export const DefaultLayout = ({ children }: { children: ReactNode }) => {
             </a>{" "}
             💰
           </div>
-        </div>
+        </div> */}
         {children}
       </main>
       <Footer />
