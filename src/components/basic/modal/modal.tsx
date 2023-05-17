@@ -38,7 +38,7 @@ export const Modal = ({
                 "w-[94%] max-w-md",
                 "bg-base-100",
                 "rounded-btn",
-                "py-4 px-5",
+                "px-5 py-4",
                 "relative",
                 "max-h-[90vh]",
                 "focus:outline-none",
@@ -49,7 +49,7 @@ export const Modal = ({
             <Dialog.Close
               className={cx(
                 "rounded-full p-1",
-                "absolute top-2 right-2",
+                "absolute right-2 top-2",
                 "focus:outline-none",
                 "focus-visible:ring",
                 "focus-visible:ring-primary",

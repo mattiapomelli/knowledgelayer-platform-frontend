@@ -39,7 +39,11 @@ export const FileDropzone = ({
 
   return (
     <div>
-      {label && <Label>{label}</Label>}
+      {label && (
+        <div className="label py-0">
+          <Label>{label}</Label>
+        </div>
+      )}
       {hasMounted && (
         <div
           {...getRootProps()}

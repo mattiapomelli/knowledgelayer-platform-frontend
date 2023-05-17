@@ -2,9 +2,9 @@ import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Address } from "./address";
+import { Address } from "../address";
 
-import type { Course } from "../lib/courses/types";
+import type { Course } from "@lib/courses/types";
 
 interface CourseCardProps {
   course: Course;
@@ -16,23 +16,25 @@ export const CourseCard = ({ course }: CourseCardProps) => {
     <Link
       href={`/courses/${course.id}`}
       key={course.id}
-      className="flex flex-col gap-2"
+      className="rounded-box flex flex-col gap-2 bg-base-200 p-4 hover:bg-base-300"
     >
       <div className="rounded-box relative h-44 overflow-hidden">
         <Image
-          src={course.metadata.imageUrl}
+          src={course.description.image_url}
           fill
-          className="object-cover"
           alt="Course"
           priority
+          className="object-cover"
         />
       </div>
-      <h4 className="mt-1 block text-xl font-semibold hover:opacity-80">
-        {course.metadata.title}
+
+      <h4 className="mt-1 block text-xl font-semibold">
+        {course.description.title}
       </h4>
+
       <div className="mt-1 flex items-center gap-4">
         <span>
-          By: <Address address={course.seller} className="font-bold" />
+          By: <Address address={course.seller.address} className="font-bold" />
         </span>
         <span>
           Price:{" "}
@@ -41,8 +43,9 @@ export const CourseCard = ({ course }: CourseCardProps) => {
           </span>
         </span>
       </div>
+
       <p className="text-base-content/70">
-        {course.metadata.description.substring(0, 100).concat("...")}
+        {course.description.about.substring(0, 100).concat("...")}
       </p>
     </Link>
   );

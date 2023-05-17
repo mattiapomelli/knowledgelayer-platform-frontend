@@ -10,10 +10,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        main: ["Manrope", ...fontFamily.sans],
+        main: ["Rubik", ...fontFamily.sans],
       },
       colors: {
         "base-content-neutral": "hsl(var(--bc) / 0.6)",
+        "course-banner": "hsl(var(--course-banner))",
       },
       keyframes: {
         "fade-in": {
@@ -44,17 +45,21 @@ module.exports = {
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
           "--rounded-box": "0.75rem",
+          "--course-banner": "259, 73%, 27%",
         },
       },
       {
         dark: {
           ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
-          primary: "#0c94e8",
-          "base-100": "#000000",
+          primary: "#bff164",
+          "primary-content": "#365313",
+          accent: "#498c3e",
+          "base-100": "#0d1a26",
+          "base-200": "#172c40",
+          "base-300": "#193147",
           "base-content": "#eeeeee",
           "--btn-text-case": "none",
           "--rounded-btn": "0.75rem",
-          "--rounded-box": "0.75rem",
         },
       },
     ],

@@ -1,27 +1,45 @@
+import { gql } from "graphql-request";
 import { useQuery } from "wagmi";
 
-import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
-import { fetchFromIpfs } from "@utils/ipfs";
+import { graphQlRequest } from "@utils/graphql-client";
 
-import type { Course, CourseMetadata } from "./types";
+import type { CourseWithLessons } from "./types";
 
-export const useCourse = (courseId: number) => {
-  const knowledgeLayerCourse = useKnowledgeLayerCourse();
+const getCourse = gql`
+  query getCourse($id: String!) {
+    course(id: $id) {
+      id
+      createdAt
+      updatedAt
+      seller {
+        id
+        address
+        handle
+      }
+      token {
+        address
+        decimals
+        symbol
+      }
+      price
+      description {
+        title
+        about
+        image_url
+        lessons {
+          title
+          videoPlaybackId
+          about
+        }
+      }
+    }
+  }
+`;
 
-  return useQuery<Course | undefined>(["course", courseId], async () => {
-    if (!knowledgeLayerCourse) return;
-
-    const course = await knowledgeLayerCourse.courses(courseId);
-    const { seller, price, dataUri } = course;
-
-    const metadata = await fetchFromIpfs<CourseMetadata>(dataUri);
-
-    return {
-      id: courseId,
-      seller: seller as `0x${string}`,
-      price,
-      dataUri,
-      metadata,
-    };
-  });
+export const useCourse = (id: string) => {
+  return useQuery(["course", id], async () =>
+    graphQlRequest<{ course: CourseWithLessons }>(getCourse, { id }).then(
+      (data) => data.course,
+    ),
+  );
 };

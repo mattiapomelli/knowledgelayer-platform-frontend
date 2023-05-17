@@ -1,11 +1,16 @@
 import { useMutation } from "wagmi";
 
-import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
+import { FEE_DIVIDER, PLATFORM_ID } from "@constants/common";
+import { useKnowledgeLayerEscrow } from "@hooks/use-knowledgelayer-escrow";
+import { useKnowledgeLayerPlatformID } from "@hooks/use-knowledgelayer-platform-id";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
+
+import { useKnowledgeLayerCourse } from "../../hooks/use-knowledgelayer-course";
 
 import type { ContractReceipt } from "ethers";
 
 export interface BuyCourseData {
-  courseId: number;
+  id: string;
 }
 
 interface UseBuyCourseOptions {
@@ -13,16 +18,40 @@ interface UseBuyCourseOptions {
 }
 
 export const useBuyCourse = (options?: UseBuyCourseOptions) => {
-  const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
+  const { user } = useKnowledgeLayerContext();
+
+  const knowledgeLayerPlatformID = useKnowledgeLayerPlatformID();
+  const knowledgeLayerCourse = useKnowledgeLayerCourse();
+  const knowledgeLayerEscrow = useKnowledgeLayerEscrow(true);
 
   const mutation = useMutation(
-    async ({ courseId }: BuyCourseData) => {
-      if (!knowledgeLayerCourse) return;
+    async ({ id }: BuyCourseData) => {
+      if (
+        !user ||
+        !knowledgeLayerPlatformID ||
+        !knowledgeLayerCourse ||
+        !knowledgeLayerEscrow
+      )
+        return;
 
-      const price = (await knowledgeLayerCourse.courses(courseId)).price;
-      const tx = await knowledgeLayerCourse.buyCourse(courseId, {
-        value: price,
-      });
+      const course = await knowledgeLayerCourse.courses(id);
+      const originFee = await knowledgeLayerPlatformID.getOriginFee(
+        course.platformId,
+      );
+      const buyFee = await knowledgeLayerPlatformID.getBuyFee(PLATFORM_ID);
+      const protocolFee = await knowledgeLayerEscrow.protocolFee();
+      const totalPrice = course.price.add(
+        course.price.mul(originFee + buyFee + protocolFee).div(FEE_DIVIDER),
+      );
+
+      const tx = await knowledgeLayerEscrow.createTransaction(
+        user.id,
+        id,
+        PLATFORM_ID,
+        {
+          value: totalPrice,
+        },
+      );
 
       return await tx.wait();
     },

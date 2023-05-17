@@ -1,43 +1,18 @@
-import { Spinner } from "@components/basic/spinner";
-import { useCourses } from "@lib/courses/use-courses";
-
-import { CourseCard } from "../components/course-card";
-
-const Catalog = () => {
-  const { data: courses, isLoading } = useCourses();
-
-  if (isLoading) {
-    return (
-      <div className="my-14 flex justify-center">
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (courses?.length === 0)
-    return (
-      <div className="my-14 flex justify-center">
-        <p>No courses yet</p>
-      </div>
-    );
-
-  return (
-    <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-autofill">
-      {courses?.map((course) => (
-        <CourseCard key={course.id} course={course} linkToPage />
-      ))}
-    </div>
-  );
-};
+import { CourseCatalog } from "@components/course/course-catalog";
+import { UsersList } from "@components/user/users-list";
 
 const Home = () => {
   return (
     <>
       <h1 className="mb-6 text-3xl font-bold underline decoration-primary">
-        Learn something new 🚀
+        Learn something new! 🚀
       </h1>
-      <h4 className="mb-4 mt-2 text-xl font-bold">Courses</h4>
-      <Catalog />
+      <div className="flex flex-col gap-10 md:flex-row">
+        <CourseCatalog className="flex-1" />
+        <div className="flex flex-col gap-6 md:w-[300px]">
+          <UsersList className="w-full" />
+        </div>
+      </div>
     </>
   );
 };

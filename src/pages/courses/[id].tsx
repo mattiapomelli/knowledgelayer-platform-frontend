@@ -1,89 +1,109 @@
 import { ethers } from "ethers";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAccount } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
-import { CopyButton } from "@components/copy-button";
-import { CoursePlayer } from "@components/course-player";
+import { CourseLessons } from "@components/course/course-lessons";
+import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
+import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
-import { useBuyCourse } from "lib/courses/use-buy-course";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
-import type { Course } from "../../lib/courses/types";
+import type { CourseWithLessons } from "@lib/courses/types";
 
-const CourseInfo = ({ course }: { course: Course }) => {
-  const { address } = useAccount();
+const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
+  const { user } = useKnowledgeLayerContext();
   const router = useRouter();
+  const openCreateProfileModal = useCreateProfileModal();
+
+  const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
   const { mutate: buyCourse, isLoading } = useBuyCourse({
     onSuccess() {
-      router.push(`/dashboard`);
+      router.push(`/user/${user?.id}`);
     },
   });
 
-  const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
+  const isSeller = user?.id === course.seller.id;
 
   const onBuyCourse = async () => {
     buyCourse({
-      courseId: course.id,
+      id: course.id,
     });
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="rounded-box relative h-56 overflow-hidden">
-        <Image
-          src={course.metadata.imageUrl}
-          fill
-          className="object-cover"
-          alt="course"
-          priority
-        />
-      </div>
-      <h1 className="text-4xl font-bold">{course.metadata.title}</h1>
-      <p>{course.metadata.description}</p>
-      {address === course.seller ? (
-        <>
-          <CoursePlayer course={course} />
-          <CopyButton
-            text={window.location.href}
-            className="mt-2 tracking-wider"
-            block
-            label="Copy link"
+    <div className="flex flex-col gap-14 md:flex-row lg:gap-20">
+      <div className="flex-1">
+        <div className="rounded-box relative h-40 overflow-hidden">
+          <Image
+            src={course.description.image_url}
+            fill
+            className="object-cover"
+            alt="course"
+            priority
           />
-        </>
-      ) : (
-        <>
-          {hasPurchasedCourse ? (
-            <CoursePlayer course={course} />
-          ) : (
-            <div className="mt-2">
-              <div className="rounded-box flex items-center justify-between bg-base-200 px-4 py-3">
-                <b>Price: </b>
-                <span>{ethers.utils.formatEther(course.price)} MATIC</span>
+        </div>
+        <h1 className="mt-4 text-3xl font-bold">{course.description.title}</h1>
+        <div className="flex items-center gap-2">
+          <div className="relative mt-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            <Image
+              src={course.seller.description?.image_url || "/placeholder.png"}
+              fill
+              className="object-cover"
+              alt="Profile"
+              priority
+            />
+          </div>
+          <Link href={`/user/${course.seller.id}`}>
+            <h4 className="mt-1 text-lg font-semibold hover:opacity-70">
+              {course.seller.handle}
+            </h4>
+          </Link>
+        </div>
+        <p className="mt-4">{course.description.about}</p>
+        {!isSeller && (
+          <>
+            {hasPurchasedCourse ? (
+              <div className="rounded-box mt-6 bg-success/40 px-4 py-2 text-center">
+                You are enrolled! ✅
               </div>
-              <Button
-                className="mt-4 tracking-wider"
-                block
-                onClick={onBuyCourse}
-                disabled={isLoading}
-                loading={isLoading}
-              >
-                Buy course
-              </Button>
-            </div>
-          )}
-        </>
-      )}
+            ) : (
+              <div className="mt-6 flex flex-col gap-2">
+                {!user && (
+                  <Button size="lg" block onClick={openCreateProfileModal}>
+                    Create KL Id
+                  </Button>
+                )}
+                <Button
+                  size="lg"
+                  block
+                  onClick={onBuyCourse}
+                  loading={isLoading}
+                  disabled={isLoading || !user}
+                >
+                  Enroll
+                </Button>
+                <span className="text-center font-bold">
+                  {ethers.utils.formatEther(course.price)} {course.token.symbol}
+                </span>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      <CourseLessons course={course} showVideos={hasPurchasedCourse} />
     </div>
   );
 };
 
-const CoursePageInner = ({ courseId }: { courseId: number }) => {
-  const { data: course } = useCourse(courseId);
+const CoursePageInner = ({ id }: { id: string }) => {
+  const { data: course, isLoading } = useCourse(id);
 
-  if (!course) {
+  if (!course || isLoading) {
     return (
       <div className="flex justify-center">
         <Spinner />
@@ -91,20 +111,16 @@ const CoursePageInner = ({ courseId }: { courseId: number }) => {
     );
   }
 
-  return (
-    <div className="mx-auto max-w-lg">
-      <CourseInfo course={course} />
-    </div>
-  );
+  return <CourseInfo course={course} />;
 };
 
 const CoursePage = () => {
   const router = useRouter();
-  const courseId = router.query.id?.toString();
+  const id = router.query.id?.toString();
 
-  if (!courseId) return null;
+  if (!id) return null;
 
-  return <CoursePageInner courseId={Number(courseId)} />;
+  return <CoursePageInner id={id} />;
 };
 
 export default CoursePage;

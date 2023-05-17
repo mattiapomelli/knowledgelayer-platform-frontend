@@ -1,6 +1,12 @@
 export const KnowledgeLayerCourseAbi = [
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "address",
+        name: "_knowledgeLayerIdAddress",
+        type: "address",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -39,10 +45,16 @@ export const KnowledgeLayerCourseAbi = [
         type: "uint256",
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "buyer",
-        type: "address",
+        indexed: false,
+        internalType: "uint256",
+        name: "ownerId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "platformId",
+        type: "uint256",
       },
       {
         indexed: false,
@@ -52,34 +64,9 @@ export const KnowledgeLayerCourseAbi = [
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "fee",
-        type: "uint256",
-      },
-    ],
-    name: "CourseBought",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "courseId",
-        type: "uint256",
-      },
-      {
-        indexed: true,
         internalType: "address",
-        name: "seller",
+        name: "token",
         type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
       },
       {
         indexed: false,
@@ -106,40 +93,95 @@ export const KnowledgeLayerCourseAbi = [
         name: "price",
         type: "uint256",
       },
-    ],
-    name: "CoursePriceUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
       {
         indexed: false,
-        internalType: "uint256",
-        name: "fee",
-        type: "uint256",
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "dataUri",
+        type: "string",
       },
     ],
-    name: "ProtocolFeeUpdated",
+    name: "CourseUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "previousAdminRole",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "newAdminRole",
+        type: "bytes32",
+      },
+    ],
+    name: "RoleAdminChanged",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+    ],
+    name: "RoleGranted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address",
+      },
+    ],
+    name: "RoleRevoked",
     type: "event",
   },
   {
@@ -236,6 +278,32 @@ export const KnowledgeLayerCourseAbi = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "DEFAULT_ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "ESCROW_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -287,13 +355,18 @@ export const KnowledgeLayerCourseAbi = [
     inputs: [
       {
         internalType: "uint256",
+        name: "_profileId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "_courseId",
         type: "uint256",
       },
     ],
     name: "buyCourse",
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -307,14 +380,24 @@ export const KnowledgeLayerCourseAbi = [
     name: "courses",
     outputs: [
       {
-        internalType: "address",
-        name: "seller",
-        type: "address",
+        internalType: "uint256",
+        name: "ownerId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "platformId",
+        type: "uint256",
       },
       {
         internalType: "uint256",
         name: "price",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
       },
       {
         internalType: "string",
@@ -329,8 +412,23 @@ export const KnowledgeLayerCourseAbi = [
     inputs: [
       {
         internalType: "uint256",
+        name: "_profileId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_platformId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "_price",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
       },
       {
         internalType: "string",
@@ -341,6 +439,113 @@ export const KnowledgeLayerCourseAbi = [
     name: "createCourse",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_courseId",
+        type: "uint256",
+      },
+    ],
+    name: "getCourse",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "ownerId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "platformId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "price",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "token",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "dataUri",
+            type: "string",
+          },
+        ],
+        internalType: "struct KnowledgeLayerCourse.Course",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+    ],
+    name: "getRoleAdmin",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "grantRole",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "hasRole",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -368,34 +573,37 @@ export const KnowledgeLayerCourseAbi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
       {
         internalType: "address",
-        name: "",
+        name: "account",
         type: "address",
       },
     ],
-    stateMutability: "view",
+    name: "renounceRole",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
-    inputs: [],
-    name: "protocolFee",
-    outputs: [
+    inputs: [
       {
-        internalType: "uint16",
-        name: "",
-        type: "uint16",
+        internalType: "bytes32",
+        name: "role",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
+    name: "revokeRole",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -487,19 +695,6 @@ export const KnowledgeLayerCourseAbi = [
   {
     inputs: [
       {
-        internalType: "uint16",
-        name: "_protocolFee",
-        type: "uint16",
-      },
-    ],
-    name: "setProtocolFee",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "bytes4",
         name: "interfaceId",
         type: "bytes4",
@@ -519,18 +714,10 @@ export const KnowledgeLayerCourseAbi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
+        internalType: "uint256",
+        name: "_profileId",
+        type: "uint256",
       },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       {
         internalType: "uint256",
         name: "_courseId",
@@ -540,6 +727,11 @@ export const KnowledgeLayerCourseAbi = [
         internalType: "uint256",
         name: "_price",
         type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_token",
+        type: "address",
       },
       {
         internalType: "string",

@@ -1,18 +1,25 @@
 import { useMutation } from "wagmi";
 
-import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
+import { ETH_ADDRESS, PLATFORM_ID } from "@constants/common";
 import { uploadToIPFS } from "@utils/ipfs";
 import { uploadImage } from "@utils/upload-image";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
+
+import { useKnowledgeLayerCourse } from "../../hooks/use-knowledgelayer-course";
 
 import type { BigNumber, ContractReceipt } from "ethers";
 
 export interface CreateCourseData {
-  title: string;
   price: BigNumber;
+  title: string;
+  about: string;
   image: File;
-  description: string;
   keywords: string[];
-  videoPlaybackId: string;
+  lessons: {
+    title: string;
+    about: string;
+    videoPlaybackId: string;
+  }[];
 }
 
 interface UseCreateCourseOptions {
@@ -20,32 +27,39 @@ interface UseCreateCourseOptions {
 }
 
 export const useCreateCourse = (options?: UseCreateCourseOptions) => {
+  const { user } = useKnowledgeLayerContext();
+
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
   const mutation = useMutation(
     async ({
       title,
-      description,
-      price,
+      about,
       image,
+      price,
       keywords,
-      videoPlaybackId,
+      lessons,
     }: CreateCourseData) => {
-      if (!knowledgeLayerCourse) return;
+      if (!knowledgeLayerCourse || !user) return;
 
       const imageUrl = await uploadImage(image);
       if (!imageUrl) return;
 
       const dataUri = await uploadToIPFS({
         title,
-        description,
-        imageUrl,
+        about,
+        image_url: imageUrl,
         keywords,
-        videoPlaybackId,
+        lessons,
       });
-
       if (!dataUri) return;
 
-      const tx = await knowledgeLayerCourse.createCourse(price, dataUri);
+      const tx = await knowledgeLayerCourse.createCourse(
+        user.id,
+        PLATFORM_ID,
+        price,
+        ETH_ADDRESS,
+        dataUri,
+      );
       return await tx.wait();
     },
     {

@@ -1,10 +1,15 @@
 import { ethers } from "ethers";
 
 import { KnowledgeLayerCourseAbi } from "@abis/knowledgelayer-course";
+import { KnowledgeLayerIDAbi } from "@abis/knowledgelayer-id";
 import { RPC_URL } from "@constants/urls";
-import { KNOWLEDGELAYER_COURSE_ADDRESS } from "constants/addresses";
+import {
+  KNOWLEDGELAYER_COURSE_ADDRESS,
+  KNOWLEDGELAYER_ID_ADDRESS,
+} from "constants/addresses";
 
 import type { KnowledgeLayerCourse } from "@abis/types/knowledgelayer-course";
+import type { KnowledgeLayerID } from "@abis/types/knowledgelayer-id";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -27,9 +32,16 @@ export default async function handler(
       KnowledgeLayerCourseAbi,
       provider,
     ) as KnowledgeLayerCourse;
+    const knowledgeLayerID = new ethers.Contract(
+      KNOWLEDGELAYER_ID_ADDRESS[chainId],
+      KnowledgeLayerIDAbi,
+      provider,
+    ) as KnowledgeLayerID;
 
-    const seller = (await knowledgeLayerCourse.courses(courseId)).seller;
-    if (address === seller) {
+    const sellerId = (await knowledgeLayerCourse.courses(courseId)).ownerId;
+    const sellerAddress = await knowledgeLayerID.ownerOf(sellerId);
+
+    if (address === sellerAddress) {
       return res.status(200).send({ message: "Ok" });
     }
 

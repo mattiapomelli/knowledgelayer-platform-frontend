@@ -8,10 +8,9 @@ import { useAccount } from "wagmi";
 
 import { Logo } from "@components/basic/logo";
 import { ThemeToggle } from "@components/basic/theme-toggle";
-import { WalletStatus } from "@components/wallet/wallet-status";
+import { UserStatus } from "@components/user/user-status";
 import { useTransitionControl } from "@hooks/use-transition-control";
 
-import { Container } from "./container";
 import { MobileMenu } from "./mobile-menu";
 
 interface NavItemProps {
@@ -42,7 +41,7 @@ export const Navbar = () => {
 
   return (
     <header className="relative">
-      <Container className="flex h-20 w-full items-center justify-between">
+      <div className="container flex h-20 w-full items-center justify-between">
         <Logo className="hidden sm:block" />
         <Transition
           show={show}
@@ -55,11 +54,10 @@ export const Navbar = () => {
         >
           <div className="flex items-center gap-4">
             <div className="hidden items-center gap-2 md:flex">
-              <NavItem text="Dashboard" href="/dashboard" />
               <NavItem text="Create course" href="/create" />
             </div>
             <ThemeToggle />
-            <WalletStatus />
+            <UserStatus />
 
             <button
               onClick={() => setShowMenu((show) => !show)}
@@ -77,7 +75,7 @@ export const Navbar = () => {
             </button>
           </div>
         </Transition>
-      </Container>
+      </div>
 
       {/* Mobile Mobile */}
       <MobileMenu

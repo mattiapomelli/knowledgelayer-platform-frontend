@@ -9,7 +9,6 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -28,48 +27,86 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace KnowledgeLayerCourse {
+  export type CourseStruct = {
+    ownerId: PromiseOrValue<BigNumberish>;
+    platformId: PromiseOrValue<BigNumberish>;
+    price: PromiseOrValue<BigNumberish>;
+    token: PromiseOrValue<string>;
+    dataUri: PromiseOrValue<string>;
+  };
+
+  export type CourseStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string,
+    string,
+  ] & {
+    ownerId: BigNumber;
+    platformId: BigNumber;
+    price: BigNumber;
+    token: string;
+    dataUri: string;
+  };
+}
+
 export interface KnowledgeLayerCourseInterface extends utils.Interface {
   functions: {
+    "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "ESCROW_ROLE()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
-    "buyCourse(uint256)": FunctionFragment;
+    "buyCourse(uint256,uint256)": FunctionFragment;
     "courses(uint256)": FunctionFragment;
-    "createCourse(uint256,string)": FunctionFragment;
+    "createCourse(uint256,uint256,uint256,address,string)": FunctionFragment;
+    "getCourse(uint256)": FunctionFragment;
+    "getRoleAdmin(bytes32)": FunctionFragment;
+    "grantRole(bytes32,address)": FunctionFragment;
+    "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "owner()": FunctionFragment;
-    "protocolFee()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
+    "renounceRole(bytes32,address)": FunctionFragment;
+    "revokeRole(bytes32,address)": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setProtocolFee(uint16)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
-    "updateCourse(uint256,uint256,string)": FunctionFragment;
+    "updateCourse(uint256,uint256,uint256,address,string)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DEFAULT_ADMIN_ROLE"
+      | "ESCROW_ROLE"
       | "balanceOf"
       | "balanceOfBatch"
       | "buyCourse"
       | "courses"
       | "createCourse"
+      | "getCourse"
+      | "getRoleAdmin"
+      | "grantRole"
+      | "hasRole"
       | "isApprovedForAll"
-      | "owner"
-      | "protocolFee"
-      | "renounceOwnership"
+      | "renounceRole"
+      | "revokeRole"
       | "safeBatchTransferFrom"
       | "safeTransferFrom"
       | "setApprovalForAll"
-      | "setProtocolFee"
       | "supportsInterface"
-      | "transferOwnership"
       | "updateCourse"
       | "uri",
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined,
+  ): string;
+  encodeFunctionData(
+    functionFragment: "ESCROW_ROLE",
+    values?: undefined,
+  ): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>],
@@ -80,7 +117,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "buyCourse",
-    values: [PromiseOrValue<BigNumberish>],
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
   ): string;
   encodeFunctionData(
     functionFragment: "courses",
@@ -88,20 +125,41 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createCourse",
-    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>],
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+    ],
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCourse",
+    values: [PromiseOrValue<BigNumberish>],
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [PromiseOrValue<BytesLike>],
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>],
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<string>],
   ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "protocolFee",
-    values?: undefined,
+    functionFragment: "renounceRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined,
+    functionFragment: "revokeRole",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
     functionFragment: "safeBatchTransferFrom",
@@ -128,22 +186,16 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>],
   ): string;
   encodeFunctionData(
-    functionFragment: "setProtocolFee",
-    values: [PromiseOrValue<BigNumberish>],
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>],
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
     functionFragment: "updateCourse",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
       PromiseOrValue<string>,
     ],
   ): string;
@@ -152,6 +204,14 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>],
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike,
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ESCROW_ROLE",
+    data: BytesLike,
+  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
@@ -163,19 +223,22 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     functionFragment: "createCourse",
     data: BytesLike,
   ): Result;
+  decodeFunctionResult(functionFragment: "getCourse", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike,
+  ): Result;
+  decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike,
   ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "protocolFee",
+    functionFragment: "renounceRole",
     data: BytesLike,
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike,
-  ): Result;
+  decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeBatchTransferFrom",
     data: BytesLike,
@@ -189,15 +252,7 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
     data: BytesLike,
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setProtocolFee",
-    data: BytesLike,
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "supportsInterface",
-    data: BytesLike,
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
     data: BytesLike,
   ): Result;
   decodeFunctionResult(
@@ -208,22 +263,22 @@ export interface KnowledgeLayerCourseInterface extends utils.Interface {
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "CourseBought(uint256,address,uint256,uint256)": EventFragment;
-    "CourseCreated(uint256,address,uint256,string)": EventFragment;
-    "CoursePriceUpdated(uint256,uint256)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
-    "ProtocolFeeUpdated(uint256)": EventFragment;
+    "CourseCreated(uint256,uint256,uint256,uint256,address,string)": EventFragment;
+    "CourseUpdated(uint256,uint256,address,string)": EventFragment;
+    "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
+    "RoleGranted(bytes32,address,address)": EventFragment;
+    "RoleRevoked(bytes32,address,address)": EventFragment;
     "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
     "TransferSingle(address,address,address,uint256,uint256)": EventFragment;
     "URI(string,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CourseBought"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CourseCreated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "CoursePriceUpdated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ProtocolFeeUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CourseUpdated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TransferBatch"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TransferSingle"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
@@ -241,66 +296,70 @@ export type ApprovalForAllEvent = TypedEvent<
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
-export interface CourseBoughtEventObject {
-  courseId: BigNumber;
-  buyer: string;
-  price: BigNumber;
-  fee: BigNumber;
-}
-export type CourseBoughtEvent = TypedEvent<
-  [BigNumber, string, BigNumber, BigNumber],
-  CourseBoughtEventObject
->;
-
-export type CourseBoughtEventFilter = TypedEventFilter<CourseBoughtEvent>;
-
 export interface CourseCreatedEventObject {
   courseId: BigNumber;
-  seller: string;
+  ownerId: BigNumber;
+  platformId: BigNumber;
   price: BigNumber;
+  token: string;
   dataUri: string;
 }
 export type CourseCreatedEvent = TypedEvent<
-  [BigNumber, string, BigNumber, string],
+  [BigNumber, BigNumber, BigNumber, BigNumber, string, string],
   CourseCreatedEventObject
 >;
 
 export type CourseCreatedEventFilter = TypedEventFilter<CourseCreatedEvent>;
 
-export interface CoursePriceUpdatedEventObject {
+export interface CourseUpdatedEventObject {
   courseId: BigNumber;
   price: BigNumber;
+  token: string;
+  dataUri: string;
 }
-export type CoursePriceUpdatedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  CoursePriceUpdatedEventObject
+export type CourseUpdatedEvent = TypedEvent<
+  [BigNumber, BigNumber, string, string],
+  CourseUpdatedEventObject
 >;
 
-export type CoursePriceUpdatedEventFilter =
-  TypedEventFilter<CoursePriceUpdatedEvent>;
+export type CourseUpdatedEventFilter = TypedEventFilter<CourseUpdatedEvent>;
 
-export interface OwnershipTransferredEventObject {
-  previousOwner: string;
-  newOwner: string;
+export interface RoleAdminChangedEventObject {
+  role: string;
+  previousAdminRole: string;
+  newAdminRole: string;
 }
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferredEventObject
+export type RoleAdminChangedEvent = TypedEvent<
+  [string, string, string],
+  RoleAdminChangedEventObject
 >;
 
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
+export type RoleAdminChangedEventFilter =
+  TypedEventFilter<RoleAdminChangedEvent>;
 
-export interface ProtocolFeeUpdatedEventObject {
-  fee: BigNumber;
+export interface RoleGrantedEventObject {
+  role: string;
+  account: string;
+  sender: string;
 }
-export type ProtocolFeeUpdatedEvent = TypedEvent<
-  [BigNumber],
-  ProtocolFeeUpdatedEventObject
+export type RoleGrantedEvent = TypedEvent<
+  [string, string, string],
+  RoleGrantedEventObject
 >;
 
-export type ProtocolFeeUpdatedEventFilter =
-  TypedEventFilter<ProtocolFeeUpdatedEvent>;
+export type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
+
+export interface RoleRevokedEventObject {
+  role: string;
+  account: string;
+  sender: string;
+}
+export type RoleRevokedEvent = TypedEvent<
+  [string, string, string],
+  RoleRevokedEventObject
+>;
+
+export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
 export interface TransferBatchEventObject {
   operator: string;
@@ -365,6 +424,10 @@ export interface KnowledgeLayerCourse extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
+    ESCROW_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
     balanceOf(
       account: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
@@ -378,26 +441,54 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<[BigNumber[]]>;
 
     buyCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
     courses(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<
-      [string, BigNumber, string] & {
-        seller: string;
+      [BigNumber, BigNumber, BigNumber, string, string] & {
+        ownerId: BigNumber;
+        platformId: BigNumber;
         price: BigNumber;
+        token: string;
         dataUri: string;
       }
     >;
 
     createCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
+      _platformId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
+
+    getCourse(
+      _courseId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides,
+    ): Promise<[KnowledgeLayerCourse.CourseStructOutput]>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides,
+    ): Promise<[string]>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<ContractTransaction>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
+    ): Promise<[boolean]>;
 
     isApprovedForAll(
       account: PromiseOrValue<string>,
@@ -405,11 +496,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<[boolean]>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<ContractTransaction>;
 
-    protocolFee(overrides?: CallOverrides): Promise<[number]>;
-
-    renounceOwnership(
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
@@ -437,24 +532,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
-    setProtocolFee(
-      _protocolFee: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<ContractTransaction>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
     ): Promise<[boolean]>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<ContractTransaction>;
-
     updateCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
@@ -464,6 +551,10 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<[string]>;
   };
+
+  DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
+  ESCROW_ROLE(overrides?: CallOverrides): Promise<string>;
 
   balanceOf(
     account: PromiseOrValue<string>,
@@ -478,26 +569,54 @@ export interface KnowledgeLayerCourse extends BaseContract {
   ): Promise<BigNumber[]>;
 
   buyCourse(
+    _profileId: PromiseOrValue<BigNumberish>,
     _courseId: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+    overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
   courses(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides,
   ): Promise<
-    [string, BigNumber, string] & {
-      seller: string;
+    [BigNumber, BigNumber, BigNumber, string, string] & {
+      ownerId: BigNumber;
+      platformId: BigNumber;
       price: BigNumber;
+      token: string;
       dataUri: string;
     }
   >;
 
   createCourse(
+    _profileId: PromiseOrValue<BigNumberish>,
+    _platformId: PromiseOrValue<BigNumberish>,
     _price: PromiseOrValue<BigNumberish>,
+    _token: PromiseOrValue<string>,
     _dataUri: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
+
+  getCourse(
+    _courseId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides,
+  ): Promise<KnowledgeLayerCourse.CourseStructOutput>;
+
+  getRoleAdmin(
+    role: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides,
+  ): Promise<string>;
+
+  grantRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> },
+  ): Promise<ContractTransaction>;
+
+  hasRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides,
+  ): Promise<boolean>;
 
   isApprovedForAll(
     account: PromiseOrValue<string>,
@@ -505,11 +624,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
     overrides?: CallOverrides,
   ): Promise<boolean>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
+  renounceRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> },
+  ): Promise<ContractTransaction>;
 
-  protocolFee(overrides?: CallOverrides): Promise<number>;
-
-  renounceOwnership(
+  revokeRole(
+    role: PromiseOrValue<BytesLike>,
+    account: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
@@ -537,24 +660,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
-  setProtocolFee(
-    _protocolFee: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> },
-  ): Promise<ContractTransaction>;
-
   supportsInterface(
     interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides,
   ): Promise<boolean>;
 
-  transferOwnership(
-    newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> },
-  ): Promise<ContractTransaction>;
-
   updateCourse(
+    _profileId: PromiseOrValue<BigNumberish>,
     _courseId: PromiseOrValue<BigNumberish>,
     _price: PromiseOrValue<BigNumberish>,
+    _token: PromiseOrValue<string>,
     _dataUri: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
@@ -565,6 +680,10 @@ export interface KnowledgeLayerCourse extends BaseContract {
   ): Promise<string>;
 
   callStatic: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
+
+    ESCROW_ROLE(overrides?: CallOverrides): Promise<string>;
+
     balanceOf(
       account: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
@@ -578,6 +697,7 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<BigNumber[]>;
 
     buyCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<void>;
@@ -586,18 +706,45 @@ export interface KnowledgeLayerCourse extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
     ): Promise<
-      [string, BigNumber, string] & {
-        seller: string;
+      [BigNumber, BigNumber, BigNumber, string, string] & {
+        ownerId: BigNumber;
+        platformId: BigNumber;
         price: BigNumber;
+        token: string;
         dataUri: string;
       }
     >;
 
     createCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
+      _platformId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<void>;
+
+    getCourse(
+      _courseId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides,
+    ): Promise<KnowledgeLayerCourse.CourseStructOutput>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides,
+    ): Promise<string>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
+    ): Promise<void>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
+    ): Promise<boolean>;
 
     isApprovedForAll(
       account: PromiseOrValue<string>,
@@ -605,11 +752,17 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<boolean>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
+    ): Promise<void>;
 
-    protocolFee(overrides?: CallOverrides): Promise<number>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
+    ): Promise<void>;
 
     safeBatchTransferFrom(
       arg0: PromiseOrValue<string>,
@@ -635,24 +788,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<void>;
 
-    setProtocolFee(
-      _protocolFee: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides,
-    ): Promise<void>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
     ): Promise<boolean>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<void>;
-
     updateCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<void>;
@@ -675,52 +820,68 @@ export interface KnowledgeLayerCourse extends BaseContract {
       approved?: null,
     ): ApprovalForAllEventFilter;
 
-    "CourseBought(uint256,address,uint256,uint256)"(
+    "CourseCreated(uint256,uint256,uint256,uint256,address,string)"(
       courseId?: PromiseOrValue<BigNumberish> | null,
-      buyer?: PromiseOrValue<string> | null,
+      ownerId?: null,
+      platformId?: null,
       price?: null,
-      fee?: null,
-    ): CourseBoughtEventFilter;
-    CourseBought(
-      courseId?: PromiseOrValue<BigNumberish> | null,
-      buyer?: PromiseOrValue<string> | null,
-      price?: null,
-      fee?: null,
-    ): CourseBoughtEventFilter;
-
-    "CourseCreated(uint256,address,uint256,string)"(
-      courseId?: PromiseOrValue<BigNumberish> | null,
-      seller?: PromiseOrValue<string> | null,
-      price?: null,
+      token?: null,
       dataUri?: null,
     ): CourseCreatedEventFilter;
     CourseCreated(
       courseId?: PromiseOrValue<BigNumberish> | null,
-      seller?: PromiseOrValue<string> | null,
+      ownerId?: null,
+      platformId?: null,
       price?: null,
+      token?: null,
       dataUri?: null,
     ): CourseCreatedEventFilter;
 
-    "CoursePriceUpdated(uint256,uint256)"(
+    "CourseUpdated(uint256,uint256,address,string)"(
       courseId?: PromiseOrValue<BigNumberish> | null,
       price?: null,
-    ): CoursePriceUpdatedEventFilter;
-    CoursePriceUpdated(
+      token?: null,
+      dataUri?: null,
+    ): CourseUpdatedEventFilter;
+    CourseUpdated(
       courseId?: PromiseOrValue<BigNumberish> | null,
       price?: null,
-    ): CoursePriceUpdatedEventFilter;
+      token?: null,
+      dataUri?: null,
+    ): CourseUpdatedEventFilter;
 
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null,
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null,
-    ): OwnershipTransferredEventFilter;
+    "RoleAdminChanged(bytes32,bytes32,bytes32)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      previousAdminRole?: PromiseOrValue<BytesLike> | null,
+      newAdminRole?: PromiseOrValue<BytesLike> | null,
+    ): RoleAdminChangedEventFilter;
+    RoleAdminChanged(
+      role?: PromiseOrValue<BytesLike> | null,
+      previousAdminRole?: PromiseOrValue<BytesLike> | null,
+      newAdminRole?: PromiseOrValue<BytesLike> | null,
+    ): RoleAdminChangedEventFilter;
 
-    "ProtocolFeeUpdated(uint256)"(fee?: null): ProtocolFeeUpdatedEventFilter;
-    ProtocolFeeUpdated(fee?: null): ProtocolFeeUpdatedEventFilter;
+    "RoleGranted(bytes32,address,address)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
+    ): RoleGrantedEventFilter;
+    RoleGranted(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
+    ): RoleGrantedEventFilter;
+
+    "RoleRevoked(bytes32,address,address)"(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
+    ): RoleRevokedEventFilter;
+    RoleRevoked(
+      role?: PromiseOrValue<BytesLike> | null,
+      account?: PromiseOrValue<string> | null,
+      sender?: PromiseOrValue<string> | null,
+    ): RoleRevokedEventFilter;
 
     "TransferBatch(address,address,address,uint256[],uint256[])"(
       operator?: PromiseOrValue<string> | null,
@@ -760,6 +921,10 @@ export interface KnowledgeLayerCourse extends BaseContract {
   };
 
   estimateGas: {
+    DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    ESCROW_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
     balanceOf(
       account: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
@@ -773,8 +938,9 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<BigNumber>;
 
     buyCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
     courses(
@@ -783,9 +949,34 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<BigNumber>;
 
     createCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
+      _platformId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<BigNumber>;
+
+    getCourse(
+      _courseId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides,
+    ): Promise<BigNumber>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<BigNumber>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
     ): Promise<BigNumber>;
 
     isApprovedForAll(
@@ -794,11 +985,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<BigNumber>;
 
-    protocolFee(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renounceOwnership(
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
@@ -826,24 +1021,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
-    setProtocolFee(
-      _protocolFee: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
     ): Promise<BigNumber>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<BigNumber>;
-
     updateCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
@@ -855,6 +1042,12 @@ export interface KnowledgeLayerCourse extends BaseContract {
   };
 
   populateTransaction: {
+    DEFAULT_ADMIN_ROLE(
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>;
+
+    ESCROW_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     balanceOf(
       account: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
@@ -868,8 +1061,9 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     buyCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
     courses(
@@ -878,9 +1072,34 @@ export interface KnowledgeLayerCourse extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     createCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
+      _platformId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<PopulatedTransaction>;
+
+    getCourse(
+      _courseId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>;
+
+    getRoleAdmin(
+      role: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>;
+
+    grantRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<PopulatedTransaction>;
+
+    hasRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
@@ -889,11 +1108,15 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    renounceRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> },
+    ): Promise<PopulatedTransaction>;
 
-    protocolFee(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    renounceOwnership(
+    revokeRole(
+      role: PromiseOrValue<BytesLike>,
+      account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
@@ -921,24 +1144,16 @@ export interface KnowledgeLayerCourse extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 
-    setProtocolFee(
-      _protocolFee: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<PopulatedTransaction>;
-
     supportsInterface(
       interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
 
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<PopulatedTransaction>;
-
     updateCourse(
+      _profileId: PromiseOrValue<BigNumberish>,
       _courseId: PromiseOrValue<BigNumberish>,
       _price: PromiseOrValue<BigNumberish>,
+      _token: PromiseOrValue<string>,
       _dataUri: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
