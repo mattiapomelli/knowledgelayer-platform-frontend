@@ -21,14 +21,14 @@ export const CourseLessons = ({ course, showVideos }: CourseLessonsProps) => {
             {({ selected }) => (
               <div
                 className={cx(
-                  "rounded-box flex flex-col gap-2 bg-base-200 p-4 outline-none",
+                  "rounded-box flex flex-col gap-2 bg-base-200 px-6 py-4 outline-none",
                   { "cursor-pointer hover:bg-base-300": showVideos },
                 )}
               >
                 <h3 className="text-xl font-bold group-hover:underline">
                   {lesson.title}
                 </h3>
-                <p>{lesson.about}</p>
+                <p className="text-base-content-neutral">{lesson.about}</p>
                 {selected && showVideos && (
                   <LessonPlayer
                     courseId={course.id}
