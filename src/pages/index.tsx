@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <h1 className="mb-6 text-3xl font-bold underline decoration-primary">
-        Learn with your frens 🌿
+        Learn something new! 🚀
       </h1>
       <div className="flex flex-col gap-10 md:flex-row">
         <CourseCatalog className="flex-1" />

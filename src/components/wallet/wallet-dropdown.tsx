@@ -6,6 +6,7 @@ import CopyIcon from "@icons/copy.svg";
 import DisconnectIcon from "@icons/disconnect.svg";
 import ExternalLinkIcon from "@icons/externallink.svg";
 import { copyToClipboard } from "@utils/copy-to-clipboard";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { Address } from "../address";
 import { AddressAvatar } from "../address-avatar";
@@ -14,6 +15,7 @@ import {
   DropdownContent,
   DropdownTrigger,
   DropdownItem,
+  WrappedLink,
 } from "../basic/dropdown";
 
 interface WalletDropdownProps {
@@ -21,15 +23,27 @@ interface WalletDropdownProps {
 }
 
 export const WalletDropdown = ({ address }: WalletDropdownProps) => {
+  const { user } = useKnowledgeLayerContext();
   const { disconnect } = useDisconnect();
 
   return (
     <Dropdown className="inline-flex">
-      <DropdownTrigger className="rounded-btn flex items-center gap-2 bg-base-200 py-1.5 px-4 hover:bg-base-300">
+      <DropdownTrigger className="rounded-btn flex items-center gap-2 bg-base-200 px-4 py-1.5 hover:bg-base-300">
         <Address address={address} />
         <AddressAvatar address={address} />
       </DropdownTrigger>
       <DropdownContent className="right-0 mt-2">
+        {user && (
+          <DropdownItem
+            href={`user/${user.id}`}
+            rel="noopener noreferrer"
+            as={WrappedLink}
+            className="gap-2 text-sm"
+          >
+            <ExternalLinkIcon className="text-lg" />
+            Profile
+          </DropdownItem>
+        )}
         <DropdownItem
           onClick={() => copyToClipboard(address)}
           as="button"

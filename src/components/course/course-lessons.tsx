@@ -2,7 +2,7 @@ import { Tab } from "@headlessui/react";
 import cx from "classnames";
 import { Fragment } from "react";
 
-import { LessonPlayer } from "@components/lesson-player";
+import { LessonPlayer } from "@components/course/lesson-player";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 

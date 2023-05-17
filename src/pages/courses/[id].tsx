@@ -83,7 +83,7 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
         )}
       </div>
 
-      <CourseLessons course={course} showVideos />
+      <CourseLessons course={course} showVideos={hasPurchasedCourse} />
     </div>
   );
 };
