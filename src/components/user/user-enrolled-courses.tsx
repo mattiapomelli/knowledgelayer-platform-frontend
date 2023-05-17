@@ -1,8 +1,8 @@
-import { useEnrolledCourses } from "@lib/courses/use-enrolled-courses";
 import Link from "next/link";
 
 import { Spinner } from "@components/basic/spinner";
 import { CourseCard } from "@components/course/course-card";
+import { useEnrolledCourses } from "@lib/courses/use-enrolled-courses";
 
 import { Button } from "../basic/button";
 
