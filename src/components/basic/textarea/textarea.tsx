@@ -51,7 +51,11 @@ export const TextArea = forwardRef(
 
     return (
       <div className={cx({ "inline-block": !block, className })}>
-        {label && <Label htmlFor={controlId}>{label}</Label>}
+        {label && (
+          <div className="label py-0">
+            <Label htmlFor={controlId}>{label}</Label>
+          </div>
+        )}
         <div className="relative">
           <textarea
             id={controlId}

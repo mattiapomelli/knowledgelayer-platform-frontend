@@ -9,6 +9,7 @@ import { TextArea } from "@components/basic/textarea/textarea";
 import { FileDropzone } from "@components/file-dropzone";
 import { useUploadVideos } from "@hooks/use-upload-videos";
 import { useCreateCourse } from "@lib/courses/use-create-course";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import type { Asset } from "@livepeer/react";
 
@@ -16,6 +17,7 @@ interface CreateCourseFields {
   title: string;
   price: string;
   about: string;
+  keywords: string;
   lessons: {
     title: string;
     about: string;
@@ -24,16 +26,12 @@ interface CreateCourseFields {
 }
 
 export const CreateCourseForm = () => {
-  // const [asset, setAsset] = useState<Asset | undefined>();
-  const [assets, setAssets] = useState<Asset[] | undefined>();
-
+  const { user } = useKnowledgeLayerContext();
   const router = useRouter();
 
+  const [assets, setAssets] = useState<Asset[] | undefined>();
   const [image, setImage] = useState<File | undefined>();
-  // const [video, setVideo] = useState<File | undefined>();
   const [videos, setVideos] = useState<File[]>([]);
-
-  console.log("Videos: ", videos);
 
   const {
     register,
@@ -70,12 +68,11 @@ export const CreateCourseForm = () => {
   const { mutate: createCourse, isLoading } = useCreateCourse({
     onSuccess(receipt) {
       reset();
-
       if (!receipt) return;
-      const courseId = receipt.events?.find((e) => e.event === "CourseCreated")
-        ?.args?.courseId;
+      // const courseId = receipt.events?.find((e) => e.event === "CourseCreated")
+      //   ?.args?.courseId;
 
-      router.push(`/courses/${courseId}`);
+      router.push(`/user/${user?.id}`);
     },
   });
 
@@ -95,13 +92,14 @@ export const CreateCourseForm = () => {
       await uploadVideos();
     } else {
       if (!image) return;
-      const { title, about, price, lessons } = data;
+      const { title, about, price, lessons, keywords } = data;
 
       createCourse({
         price: ethers.utils.parseEther(price),
         title,
         about,
         image,
+        keywords: keywords.split(",").map((value) => value.trim()),
         lessons: lessons.map((lesson, index) => ({
           title: lesson.title,
           about: lesson.about,
@@ -114,7 +112,7 @@ export const CreateCourseForm = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col gap-10 md:flex-row">
+        <div className="flex flex-col gap-8">
           <div className="flex flex-1 flex-col gap-2">
             <h4 className="my-2 text-xl font-bold">Course details</h4>
             <Input
@@ -139,6 +137,12 @@ export const CreateCourseForm = () => {
               })}
               error={errors.about?.message}
             />
+            <Input
+              label="Categories (sep. by comma)"
+              block
+              {...register("keywords", { required: "Category is required" })}
+              error={errors.keywords?.message}
+            />
             <FileDropzone
               value={image}
               onValueChange={setImage}
@@ -153,7 +157,7 @@ export const CreateCourseForm = () => {
             <h4 className="my-2 text-xl font-bold">Lessons</h4>
 
             {fields.map((field, index) => (
-              <div key={field.id} className="mb-4 flex flex-col gap-2">
+              <div key={field.id} className="flex flex-col gap-2">
                 <Input
                   label={`Lesson ${index + 1} Title`}
                   block
@@ -185,7 +189,6 @@ export const CreateCourseForm = () => {
             ))}
             <Button
               type="button"
-              className="mt-2"
               color="neutral"
               onClick={() =>
                 append({
@@ -199,20 +202,22 @@ export const CreateCourseForm = () => {
           </div>
         </div>
 
-        <Button
-          className="mt-6"
-          block
-          type="submit"
-          loading={isLoading || uploadIsLoading}
-          disabled={isLoading || uploadIsLoading}
-        >
-          {assets?.length ? "Publish course" : "Upload videos"}
-        </Button>
-        {!assets?.length && (
-          <div className="mt-2">
-            {error?.message && <p className="text-error">{error.message}</p>}
-          </div>
-        )}
+        <div className="mt-8 flex flex-col gap-2">
+          {!user && <Button block>Create KL Id</Button>}
+          <Button
+            block
+            type="submit"
+            loading={isLoading || uploadIsLoading}
+            disabled={isLoading || uploadIsLoading || !user}
+          >
+            {assets?.length ? "Publish course" : "Upload videos"}
+          </Button>
+          {!assets?.length && (
+            <div className="mt-2">
+              {error?.message && <p className="text-error">{error.message}</p>}
+            </div>
+          )}
+        </div>
       </form>
     </>
   );

@@ -6,7 +6,6 @@ import { useCourses } from "@lib/courses/use-courses";
 
 const CourseCatalogInner = () => {
   const { data: courses, isLoading } = useCourses();
-  const filteredCourses = courses?.filter((course) => course.description);
 
   if (isLoading) {
     return (
@@ -25,7 +24,7 @@ const CourseCatalogInner = () => {
 
   return (
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-autofill">
-      {filteredCourses?.map((course) => (
+      {courses?.map((course) => (
         <CourseCard key={course.id} course={course} linkToPage />
       ))}
     </div>

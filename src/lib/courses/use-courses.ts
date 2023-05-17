@@ -7,7 +7,7 @@ import type { Course } from "./types";
 
 const getAllCourses = gql`
   {
-    courses {
+    courses(where: { description_not: null }) {
       id
       createdAt
       updatedAt

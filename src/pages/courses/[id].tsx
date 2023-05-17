@@ -1,7 +1,7 @@
+import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAccount } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
@@ -9,21 +9,21 @@ import { CourseLessons } from "@components/course/course-lessons";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
+import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
-  const { address } = useAccount();
+  const { user } = useKnowledgeLayerContext();
   const router = useRouter();
   const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
   const { mutate: buyCourse, isLoading } = useBuyCourse({
     onSuccess() {
-      router.push(`/dashboard`);
+      router.push(`/user/${user?.id}`);
     },
   });
 
-  const isSeller =
-    address?.toLowerCase() === course.seller.address.toLowerCase();
+  const isSeller = user?.id === course.seller.id;
 
   const onBuyCourse = async () => {
     buyCourse({
@@ -68,16 +68,25 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
                 You are enrolled! ✅
               </div>
             ) : (
-              <Button
-                className="mt-6"
-                size="lg"
-                block
-                onClick={onBuyCourse}
-                loading={isLoading}
-                disabled={isLoading}
-              >
-                Enroll
-              </Button>
+              <div className="mt-6 flex flex-col gap-2">
+                {!user && (
+                  <Button size="lg" block>
+                    Create KL Id
+                  </Button>
+                )}
+                <Button
+                  size="lg"
+                  block
+                  onClick={onBuyCourse}
+                  loading={isLoading}
+                  disabled={isLoading || !user}
+                >
+                  Enroll
+                </Button>
+                <span className="text-center font-bold">
+                  {ethers.utils.formatEther(course.price)} {course.token.symbol}
+                </span>
+              </div>
             )}
           </>
         )}

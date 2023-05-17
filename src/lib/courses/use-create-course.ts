@@ -14,6 +14,7 @@ export interface CreateCourseData {
   title: string;
   about: string;
   image: File;
+  keywords: string[];
   lessons: {
     title: string;
     about: string;
@@ -30,7 +31,14 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
 
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
   const mutation = useMutation(
-    async ({ title, about, image, price, lessons }: CreateCourseData) => {
+    async ({
+      title,
+      about,
+      image,
+      price,
+      keywords,
+      lessons,
+    }: CreateCourseData) => {
       if (!knowledgeLayerCourse || !user) return;
 
       const imageUrl = await uploadImage(image);
@@ -40,6 +48,7 @@ export const useCreateCourse = (options?: UseCreateCourseOptions) => {
         title,
         about,
         image_url: imageUrl,
+        keywords,
         lessons,
       });
       if (!dataUri) return;

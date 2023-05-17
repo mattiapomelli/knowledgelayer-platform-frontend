@@ -34,7 +34,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
       </DropdownTrigger>
       <DropdownContent className="right-0 mt-2">
         <DropdownItem
-          href={`user/${user.id}`}
+          href={`/user/${user.id}`}
           rel="noopener noreferrer"
           as={WrappedLink}
           className="gap-2 text-sm"

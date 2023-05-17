@@ -8,7 +8,7 @@ import type { Course } from "@lib/courses/types";
 const getUserEnrolledCourses = gql`
   query GetUserEnrolledCourses($id: String!) {
     user(id: $id) {
-      purchasedCourses {
+      purchasedCourses(where: { description_not: null }) {
         id
         createdAt
         updatedAt
