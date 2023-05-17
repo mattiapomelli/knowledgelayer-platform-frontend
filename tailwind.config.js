@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        main: ["Manrope", ...fontFamily.sans],
+        main: ["Rubik", ...fontFamily.sans],
       },
       colors: {
         "base-content-neutral": "hsl(var(--bc) / 0.6)",
