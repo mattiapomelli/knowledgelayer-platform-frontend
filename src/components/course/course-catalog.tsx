@@ -23,7 +23,7 @@ const CourseCatalogInner = () => {
     );
 
   return (
-    <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-autofill">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-autofill">
       {courses?.map((course) => (
         <CourseCard key={course.id} course={course} linkToPage />
       ))}
