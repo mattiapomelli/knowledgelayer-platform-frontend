@@ -15,6 +15,7 @@ import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
+import { useHasReviewedCourse } from "@lib/reviews/use-has-reviewed-course";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 
@@ -24,11 +25,15 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
   const openCreateProfileModal = useCreateProfileModal();
 
   const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
+  const { data: hasReviewedCourse, isLoading: isLoadingHasReviewed } =
+    useHasReviewedCourse(course.id);
   const { mutate: buyCourse, isLoading } = useBuyCourse({
     onSuccess() {
       router.push(`/user/${user?.id}`);
     },
   });
+
+  console.log("has reviewed course: ", hasReviewedCourse);
 
   const [showReviewModal, setShowReviewModal] = useState(false);
 
@@ -82,19 +87,22 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
                 <div className="rounded-btn mt-6 flex h-11 items-center justify-center bg-success/40 px-4 py-2 text-center">
                   You are enrolled! ✅
                 </div>
-                {/* TODO: show only if not reviewed already */}
-                <Button
-                  size="lg"
-                  block
-                  onClick={() => setShowReviewModal(true)}
-                >
-                  Review
-                </Button>
-                <CreateReviewModal
-                  open={showReviewModal}
-                  onClose={() => setShowReviewModal(false)}
-                  courseId={course.id}
-                />
+                {!hasReviewedCourse && !isLoadingHasReviewed && (
+                  <>
+                    <Button
+                      size="lg"
+                      block
+                      onClick={() => setShowReviewModal(true)}
+                    >
+                      Review
+                    </Button>
+                    <CreateReviewModal
+                      open={showReviewModal}
+                      onClose={() => setShowReviewModal(false)}
+                      courseId={course.id}
+                    />
+                  </>
+                )}
               </div>
             ) : (
               <div className="mt-6 flex flex-col gap-2">
