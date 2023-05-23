@@ -2,17 +2,19 @@ import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { CourseCategory } from "@components/course/course-category";
 import { CourseLessons } from "@components/course/course-lessons";
 import { CourseReviews } from "@components/course/course-reviews";
+import { CreateReviewModal } from "@components/modals/create-review-modal";
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
-import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 
@@ -27,6 +29,8 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
       router.push(`/user/${user?.id}`);
     },
   });
+
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   const isSeller = user?.id === course.seller.id;
 
@@ -74,8 +78,23 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
         {!isSeller && (
           <>
             {hasPurchasedCourse ? (
-              <div className="rounded-box mt-6 bg-success/40 px-4 py-2 text-center">
-                You are enrolled! ✅
+              <div className="mt-6 flex flex-col gap-2">
+                <div className="rounded-btn mt-6 flex h-11 items-center justify-center bg-success/40 px-4 py-2 text-center">
+                  You are enrolled! ✅
+                </div>
+                {/* TODO: show only if not reviewed already */}
+                <Button
+                  size="lg"
+                  block
+                  onClick={() => setShowReviewModal(true)}
+                >
+                  Review
+                </Button>
+                <CreateReviewModal
+                  open={showReviewModal}
+                  onClose={() => setShowReviewModal(false)}
+                  courseId={course.id}
+                />
               </div>
             ) : (
               <div className="mt-6 flex flex-col gap-2">

@@ -20,6 +20,7 @@ const getCreatedCourses = gql`
           address
         }
         price
+        keywords
         description {
           title
           about

@@ -27,3 +27,10 @@ export const KNOWLEDGELAYER_ESCROW_ADDRESS: {
   [hardhat.id]: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
   [polygonMumbai.id]: "0xb79a7AAB2663fc711258fb39df823b93A8463982",
 };
+
+export const KNOWLEDGELAYER_REVIEW_ADDRESS: {
+  [chainId: number]: `0x${string}`;
+} = {
+  [hardhat.id]: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+  [polygonMumbai.id]: "0x",
+};

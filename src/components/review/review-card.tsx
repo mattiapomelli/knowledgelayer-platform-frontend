@@ -1,4 +1,5 @@
 import { StarIcon } from "@heroicons/react/24/solid";
+import cx from "classnames";
 import Image from "next/image";
 
 import type { Review } from "@lib/reviews/types";
@@ -23,11 +24,19 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
         <h4 className="mt-1 font-semibold">{review.from.handle}</h4>
       </div>
 
-      <p className="my-1 flex gap-1">
-        {new Array(Number(review.rating)).fill(undefined).map((_, index) => (
-          <StarIcon key={index} className="h-4 w-4" />
+      <div className="my-1 flex gap-1">
+        {new Array(5).fill(undefined).map((_, index) => (
+          <StarIcon
+            key={index}
+            className={cx(
+              "h-4 w-4",
+              index < review.rating
+                ? "text-yellow-500"
+                : "text-base-content/20",
+            )}
+          />
         ))}
-      </p>
+      </div>
 
       <p className="text-base-content/70">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione

@@ -23,7 +23,7 @@ export const CourseReviewsInner = ({ courseId }: { courseId: string }) => {
     );
 
   return (
-    <div className="grid grid-cols-1 gap-x-6 gap-y-10">
+    <div className="flex flex-col gap-4">
       {reviews?.map((review) => (
         <ReviewCard key={review.id} review={review} />
       ))}
