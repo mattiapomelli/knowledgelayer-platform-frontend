@@ -3,8 +3,8 @@ import { useAccount, useSwitchNetwork } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { CHAIN } from "@constants/chains";
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { UserDropdown } from "./user-dropdown";
 

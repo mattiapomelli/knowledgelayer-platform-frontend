@@ -1,9 +1,9 @@
 import { useMutation } from "wagmi";
 
 import { ETH_ADDRESS, PLATFORM_ID } from "@constants/common";
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { uploadToIPFS } from "@utils/ipfs";
 import { uploadImage } from "@utils/upload-image";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { useKnowledgeLayerCourse } from "../../hooks/use-knowledgelayer-course";
 

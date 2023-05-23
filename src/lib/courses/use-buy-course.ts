@@ -1,9 +1,9 @@
 import { useMutation } from "wagmi";
 
 import { FEE_DIVIDER, PLATFORM_ID } from "@constants/common";
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useKnowledgeLayerEscrow } from "@hooks/use-knowledgelayer-escrow";
 import { useKnowledgeLayerPlatformID } from "@hooks/use-knowledgelayer-platform-id";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import { useKnowledgeLayerCourse } from "../../hooks/use-knowledgelayer-course";
 

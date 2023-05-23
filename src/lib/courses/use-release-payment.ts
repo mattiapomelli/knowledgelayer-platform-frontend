@@ -1,7 +1,7 @@
 import { useMutation } from "wagmi";
 
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useKnowledgeLayerEscrow } from "@hooks/use-knowledgelayer-escrow";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import type { ContractReceipt } from "ethers";
 

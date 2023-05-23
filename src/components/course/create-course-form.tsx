@@ -7,10 +7,10 @@ import { Button } from "@components/basic/button";
 import { Input } from "@components/basic/input";
 import { TextArea } from "@components/basic/textarea/textarea";
 import { FileDropzone } from "@components/file-dropzone";
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useUploadVideos } from "@hooks/use-upload-videos";
 import { useCreateCourse } from "@lib/courses/use-create-course";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import type { Asset } from "@livepeer/react";
 

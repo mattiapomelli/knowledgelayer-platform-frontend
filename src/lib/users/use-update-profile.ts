@@ -1,8 +1,8 @@
 import { useMutation } from "wagmi";
 
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useKnowledgeLayerID } from "@hooks/use-knowledgelayer-id";
 import { uploadToIPFS } from "@utils/ipfs";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
 
 import type { ContractReceipt } from "ethers";
 

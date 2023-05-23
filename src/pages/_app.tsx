@@ -20,7 +20,7 @@ import { ConnectModal } from "@components/modals/create-profile-modal";
 import { CHAIN } from "@constants/chains";
 import { createProfileModalAtom } from "@hooks/use-create-profile-modal";
 import { DefaultLayout } from "@layouts/default-layout";
-import { KnowledgeLayerProvider } from "context/knowledgelayer-provider";
+import { KnowledgeLayerProvider } from "@context/knowledgelayer-provider";
 import { env } from "env.mjs";
 
 import SEO from "../../next-seo.config";

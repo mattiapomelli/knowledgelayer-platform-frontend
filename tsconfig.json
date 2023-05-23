@@ -25,6 +25,7 @@
       "@constants/*": ["constants/*"],
       "@abis/*": ["abis/*"],
       "@lib/*": ["lib/*"],
+      "@context/*": ["context/*"],
       "@types": ["types"],
     }
   },

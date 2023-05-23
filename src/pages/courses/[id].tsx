@@ -12,7 +12,7 @@ import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
-import { useKnowledgeLayerContext } from "context/knowledgelayer-provider";
+import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 
