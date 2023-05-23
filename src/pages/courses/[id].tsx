@@ -2,7 +2,6 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import cx from "classnames";
 import { ethers } from "ethers";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -12,6 +11,7 @@ import { CourseCategory } from "@components/course/course-category";
 import { CourseLessons } from "@components/course/course-lessons";
 import { CourseReviews } from "@components/course/course-reviews";
 import { CreateReviewModal } from "@components/modals/create-review-modal";
+import { UserAvatar } from "@components/user/user-avatar";
 import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
@@ -61,23 +61,8 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
         </div>
         <h1 className="mt-4 text-3xl font-bold">{course.description.title}</h1>
 
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-4">
-            <div className="relative mt-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
-              <Image
-                src={course.seller.description?.image_url || "/placeholder.png"}
-                fill
-                className="object-cover"
-                alt="Profile"
-                priority
-              />
-            </div>
-            <Link href={`/user/${course.seller.id}`}>
-              <h4 className="mt-1 text-lg font-semibold hover:opacity-70">
-                {course.seller.handle}
-              </h4>
-            </Link>
-          </div>
+        <div className="my-2 flex items-center gap-6">
+          <UserAvatar user={course.seller} />
           <div className="my-1 flex gap-1">
             {new Array(5).fill(undefined).map((_, index) => (
               <StarIcon

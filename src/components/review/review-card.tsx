@@ -1,6 +1,7 @@
 import { StarIcon } from "@heroicons/react/24/solid";
 import cx from "classnames";
-import Image from "next/image";
+
+import { UserAvatar } from "@components/user/user-avatar";
 
 import type { Review } from "@lib/reviews/types";
 
@@ -11,18 +12,7 @@ interface ReviewCardProps {
 export const ReviewCard = ({ review }: ReviewCardProps) => {
   return (
     <div className="rounded-box flex flex-col gap-2 bg-base-200 p-4">
-      <div className="flex items-center gap-4">
-        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
-          <Image
-            src="/placeholder.png"
-            fill
-            alt="User"
-            priority
-            className="object-cover"
-          />
-        </div>
-        <h4 className="mt-1 font-semibold">{review.from.handle}</h4>
-      </div>
+      <UserAvatar user={review.from} />
 
       <div className="my-1 flex gap-1">
         {new Array(5).fill(undefined).map((_, index) => (
