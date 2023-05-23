@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 
 import type { User } from "@lib/users/types";
@@ -16,10 +16,10 @@ export const UserCard = ({ user }: UserCardProps) => {
       <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
         <Image
           src="/placeholder.png"
-          layout="fill"
-          objectFit="cover"
+          fill
           alt="User"
           priority
+          className="object-cover"
         />
       </div>
 

@@ -17,7 +17,6 @@ export const CourseCard = ({ course }: CourseCardProps) => {
   return (
     <Link
       href={`/courses/${course.id}`}
-      key={course.id}
       className="rounded-box flex flex-col gap-2 bg-base-200 p-4 hover:bg-base-300"
     >
       <div className="rounded-box relative h-44 overflow-hidden">

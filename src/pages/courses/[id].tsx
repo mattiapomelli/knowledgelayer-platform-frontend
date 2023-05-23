@@ -7,6 +7,7 @@ import { Button } from "@components/basic/button";
 import { Spinner } from "@components/basic/spinner";
 import { CourseCategory } from "@components/course/course-category";
 import { CourseLessons } from "@components/course/course-lessons";
+import { CourseReviews } from "@components/course/course-reviews";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
@@ -101,7 +102,10 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
         )}
       </div>
 
-      <CourseLessons course={course} showVideos={hasPurchasedCourse} />
+      <div className="flex flex-1 flex-col gap-8">
+        <CourseLessons course={course} showVideos={hasPurchasedCourse} />
+        <CourseReviews courseId={course.id} />
+      </div>
     </div>
   );
 };

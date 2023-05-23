@@ -14,7 +14,7 @@ interface CourseLessonsProps {
 export const CourseLessons = ({ course, showVideos }: CourseLessonsProps) => {
   return (
     <Tab.Group>
-      <Tab.List className="flex flex-1 flex-col gap-4">
+      <Tab.List className="flex flex-col gap-4">
         <h2 className="mb-2 text-2xl font-bold">Lessons</h2>
         {course.description.lessons.map((lesson, index) => (
           <Tab key={index} as={Fragment}>
