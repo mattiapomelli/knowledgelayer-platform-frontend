@@ -22,6 +22,7 @@ const getCourse = gql`
         symbol
       }
       price
+      rating
       description {
         title
         about

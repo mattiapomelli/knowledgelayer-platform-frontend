@@ -8,6 +8,7 @@ export interface Course {
   description: CourseDescription;
   price: string;
   token: Token;
+  rating: string;
 }
 
 export interface CourseDescription {

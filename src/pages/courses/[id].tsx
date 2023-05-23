@@ -1,3 +1,5 @@
+import { StarIcon } from "@heroicons/react/24/solid";
+import cx from "classnames";
 import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,22 +60,39 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
           />
         </div>
         <h1 className="mt-4 text-3xl font-bold">{course.description.title}</h1>
-        <div className="flex items-center gap-2">
-          <div className="relative mt-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
-            <Image
-              src={course.seller.description?.image_url || "/placeholder.png"}
-              fill
-              className="object-cover"
-              alt="Profile"
-              priority
-            />
+
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            <div className="relative mt-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
+              <Image
+                src={course.seller.description?.image_url || "/placeholder.png"}
+                fill
+                className="object-cover"
+                alt="Profile"
+                priority
+              />
+            </div>
+            <Link href={`/user/${course.seller.id}`}>
+              <h4 className="mt-1 text-lg font-semibold hover:opacity-70">
+                {course.seller.handle}
+              </h4>
+            </Link>
           </div>
-          <Link href={`/user/${course.seller.id}`}>
-            <h4 className="mt-1 text-lg font-semibold hover:opacity-70">
-              {course.seller.handle}
-            </h4>
-          </Link>
+          <div className="my-1 flex gap-1">
+            {new Array(5).fill(undefined).map((_, index) => (
+              <StarIcon
+                key={index}
+                className={cx(
+                  "h-4 w-4",
+                  index < Number(course.rating)
+                    ? "text-yellow-500"
+                    : "text-base-content/20",
+                )}
+              />
+            ))}
+          </div>
         </div>
+
         <p className="mt-4">{course.description.about}</p>
         <div className="mt-3 flex gap-2">
           {course.description.keywords.map((category) => (

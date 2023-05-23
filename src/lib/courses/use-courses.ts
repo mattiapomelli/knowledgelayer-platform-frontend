@@ -19,6 +19,7 @@ const getAllCourses = gql`
         address
       }
       price
+      rating
       description {
         title
         about

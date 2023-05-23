@@ -20,6 +20,7 @@ const getEnrolledCourses = gql`
           address
         }
         price
+        rating
         description {
           title
           about

@@ -20,7 +20,7 @@ export const CreateReviewModal = ({
   onClose,
   courseId,
 }: CreateReviewModalProps) => {
-  const [rating, setRating] = useState(3);
+  const [rating, setRating] = useState(1);
   const {
     register,
     handleSubmit,
