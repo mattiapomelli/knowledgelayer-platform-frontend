@@ -1,3 +1,5 @@
+import { StarIcon } from "@heroicons/react/24/solid";
+import cx from "classnames";
 import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,6 +43,19 @@ export const CourseCard = ({ course }: CourseCardProps) => {
             {ethers.utils.formatEther(course.price)} MATIC
           </span>
         </span>
+      </div>
+      <div className=" flex gap-1">
+        {new Array(5).fill(undefined).map((_, index) => (
+          <StarIcon
+            key={index}
+            className={cx(
+              "h-4 w-4",
+              index < Number(course.rating)
+                ? "text-yellow-500"
+                : "text-base-content/20",
+            )}
+          />
+        ))}
       </div>
 
       <p className="text-base-content/70">

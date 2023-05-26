@@ -31,6 +31,6 @@ export const KNOWLEDGELAYER_ESCROW_ADDRESS: {
 export const KNOWLEDGELAYER_REVIEW_ADDRESS: {
   [chainId: number]: `0x${string}`;
 } = {
-  [hardhat.id]: "0x222a23a15b6c3c507B9D4B8BA94306a2e973b94A",
+  [hardhat.id]: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
   [polygonMumbai.id]: "0x222a23a15b6c3c507B9D4B8BA94306a2e973b94A",
 };
