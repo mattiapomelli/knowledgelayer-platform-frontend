@@ -142,11 +142,13 @@ export interface KnowledgeLayerEscrowInterface extends utils.Interface {
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
-    "ProtocolFeeUpdated(uint256)": EventFragment;
-    "TransactionCreated(uint256,address,address,address,uint256,uint256,uint16,uint16,uint16)": EventFragment;
+    "Payment(uint256,uint8)": EventFragment;
+    "ProtocolFeeUpdated(uint16)": EventFragment;
+    "TransactionCreated(uint256,uint256,uint256,address,uint256,uint256,uint16,uint16,uint16)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Payment"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ProtocolFeeUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TransactionCreated"): EventFragment;
 }
@@ -163,11 +165,19 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
+export interface PaymentEventObject {
+  transactionId: BigNumber;
+  paymentType: number;
+}
+export type PaymentEvent = TypedEvent<[BigNumber, number], PaymentEventObject>;
+
+export type PaymentEventFilter = TypedEventFilter<PaymentEvent>;
+
 export interface ProtocolFeeUpdatedEventObject {
-  fee: BigNumber;
+  fee: number;
 }
 export type ProtocolFeeUpdatedEvent = TypedEvent<
-  [BigNumber],
+  [number],
   ProtocolFeeUpdatedEventObject
 >;
 
@@ -176,8 +186,8 @@ export type ProtocolFeeUpdatedEventFilter =
 
 export interface TransactionCreatedEventObject {
   id: BigNumber;
-  sender: string;
-  receiver: string;
+  senderId: BigNumber;
+  receiverId: BigNumber;
   token: string;
   amount: BigNumber;
   courseId: BigNumber;
@@ -188,8 +198,8 @@ export interface TransactionCreatedEventObject {
 export type TransactionCreatedEvent = TypedEvent<
   [
     BigNumber,
-    string,
-    string,
+    BigNumber,
+    BigNumber,
     string,
     BigNumber,
     BigNumber,
@@ -391,13 +401,19 @@ export interface KnowledgeLayerEscrow extends BaseContract {
       newOwner?: PromiseOrValue<string> | null,
     ): OwnershipTransferredEventFilter;
 
-    "ProtocolFeeUpdated(uint256)"(fee?: null): ProtocolFeeUpdatedEventFilter;
+    "Payment(uint256,uint8)"(
+      transactionId?: null,
+      paymentType?: null,
+    ): PaymentEventFilter;
+    Payment(transactionId?: null, paymentType?: null): PaymentEventFilter;
+
+    "ProtocolFeeUpdated(uint16)"(fee?: null): ProtocolFeeUpdatedEventFilter;
     ProtocolFeeUpdated(fee?: null): ProtocolFeeUpdatedEventFilter;
 
-    "TransactionCreated(uint256,address,address,address,uint256,uint256,uint16,uint16,uint16)"(
+    "TransactionCreated(uint256,uint256,uint256,address,uint256,uint256,uint16,uint16,uint16)"(
       id?: null,
-      sender?: null,
-      receiver?: null,
+      senderId?: null,
+      receiverId?: null,
       token?: null,
       amount?: null,
       courseId?: null,
@@ -407,8 +423,8 @@ export interface KnowledgeLayerEscrow extends BaseContract {
     ): TransactionCreatedEventFilter;
     TransactionCreated(
       id?: null,
-      sender?: null,
-      receiver?: null,
+      senderId?: null,
+      receiverId?: null,
       token?: null,
       amount?: null,
       courseId?: null,

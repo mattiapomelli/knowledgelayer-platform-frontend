@@ -69,7 +69,7 @@ export const CreateReviewModal = ({
           error={errors.content?.message}
         />
         <Button block type="submit" disabled={isLoading} loading={isLoading}>
-          Create Profile
+          Submit Review
         </Button>
       </form>
     </Modal>

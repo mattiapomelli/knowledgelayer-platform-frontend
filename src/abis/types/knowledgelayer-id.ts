@@ -37,12 +37,10 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "getHandlePrice(string)": FunctionFragment;
     "getOriginatorPlatformIdByAddress(address)": FunctionFragment;
-    "hasActivity(uint256)": FunctionFragment;
     "ids(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "isDelegate(uint256,address)": FunctionFragment;
     "isOwnerOrDelegate(uint256,address)": FunctionFragment;
-    "isServiceContract(address)": FunctionFragment;
     "isValid(uint256)": FunctionFragment;
     "isWhitelisted(address,string,bytes32[])": FunctionFragment;
     "knowledgeLayerPlatformId()": FunctionFragment;
@@ -60,8 +58,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setHasActivity(uint256)": FunctionFragment;
-    "setIsServiceContract(address,bool)": FunctionFragment;
     "setWhitelistMerkleRoot(bytes32)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -87,12 +83,10 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
       | "getApproved"
       | "getHandlePrice"
       | "getOriginatorPlatformIdByAddress"
-      | "hasActivity"
       | "ids"
       | "isApprovedForAll"
       | "isDelegate"
       | "isOwnerOrDelegate"
-      | "isServiceContract"
       | "isValid"
       | "isWhitelisted"
       | "knowledgeLayerPlatformId"
@@ -110,8 +104,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
-      | "setHasActivity"
-      | "setIsServiceContract"
       | "setWhitelistMerkleRoot"
       | "supportsInterface"
       | "symbol"
@@ -161,10 +153,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
     values: [PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
-    functionFragment: "hasActivity",
-    values: [PromiseOrValue<BigNumberish>],
-  ): string;
-  encodeFunctionData(
     functionFragment: "ids",
     values: [PromiseOrValue<string>],
   ): string;
@@ -179,10 +167,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isOwnerOrDelegate",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>],
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isServiceContract",
-    values: [PromiseOrValue<string>],
   ): string;
   encodeFunctionData(
     functionFragment: "isValid",
@@ -258,14 +242,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>],
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setHasActivity",
-    values: [PromiseOrValue<BigNumberish>],
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIsServiceContract",
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>],
   ): string;
   encodeFunctionData(
@@ -346,10 +322,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
     functionFragment: "getOriginatorPlatformIdByAddress",
     data: BytesLike,
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "hasActivity",
-    data: BytesLike,
-  ): Result;
   decodeFunctionResult(functionFragment: "ids", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
@@ -358,10 +330,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "isDelegate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isOwnerOrDelegate",
-    data: BytesLike,
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isServiceContract",
     data: BytesLike,
   ): Result;
   decodeFunctionResult(functionFragment: "isValid", data: BytesLike): Result;
@@ -403,14 +371,6 @@ export interface KnowledgeLayerIDInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll",
-    data: BytesLike,
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setHasActivity",
-    data: BytesLike,
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIsServiceContract",
     data: BytesLike,
   ): Result;
   decodeFunctionResult(
@@ -683,11 +643,6 @@ export interface KnowledgeLayerID extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<[BigNumber]>;
 
-    hasActivity(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides,
-    ): Promise<[boolean]>;
-
     ids(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
@@ -708,11 +663,6 @@ export interface KnowledgeLayerID extends BaseContract {
     isOwnerOrDelegate(
       _profileId: PromiseOrValue<BigNumberish>,
       _address: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<[boolean]>;
-
-    isServiceContract(
-      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<[boolean]>;
 
@@ -802,17 +752,6 @@ export interface KnowledgeLayerID extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<ContractTransaction>;
-
-    setHasActivity(
-      _profileId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<ContractTransaction>;
-
-    setIsServiceContract(
-      _address: PromiseOrValue<string>,
-      _isServiceContract: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>;
 
@@ -924,11 +863,6 @@ export interface KnowledgeLayerID extends BaseContract {
     overrides?: CallOverrides,
   ): Promise<BigNumber>;
 
-  hasActivity(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides,
-  ): Promise<boolean>;
-
   ids(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides,
@@ -949,11 +883,6 @@ export interface KnowledgeLayerID extends BaseContract {
   isOwnerOrDelegate(
     _profileId: PromiseOrValue<BigNumberish>,
     _address: PromiseOrValue<string>,
-    overrides?: CallOverrides,
-  ): Promise<boolean>;
-
-  isServiceContract(
-    arg0: PromiseOrValue<string>,
     overrides?: CallOverrides,
   ): Promise<boolean>;
 
@@ -1043,17 +972,6 @@ export interface KnowledgeLayerID extends BaseContract {
   setApprovalForAll(
     operator: PromiseOrValue<string>,
     approved: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> },
-  ): Promise<ContractTransaction>;
-
-  setHasActivity(
-    _profileId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> },
-  ): Promise<ContractTransaction>;
-
-  setIsServiceContract(
-    _address: PromiseOrValue<string>,
-    _isServiceContract: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>;
 
@@ -1165,11 +1083,6 @@ export interface KnowledgeLayerID extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<BigNumber>;
 
-    hasActivity(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides,
-    ): Promise<boolean>;
-
     ids(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
@@ -1190,11 +1103,6 @@ export interface KnowledgeLayerID extends BaseContract {
     isOwnerOrDelegate(
       _profileId: PromiseOrValue<BigNumberish>,
       _address: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<boolean>;
-
-    isServiceContract(
-      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<boolean>;
 
@@ -1282,17 +1190,6 @@ export interface KnowledgeLayerID extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
-      overrides?: CallOverrides,
-    ): Promise<void>;
-
-    setHasActivity(
-      _profileId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides,
-    ): Promise<void>;
-
-    setIsServiceContract(
-      _address: PromiseOrValue<string>,
-      _isServiceContract: PromiseOrValue<boolean>,
       overrides?: CallOverrides,
     ): Promise<void>;
 
@@ -1499,11 +1396,6 @@ export interface KnowledgeLayerID extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<BigNumber>;
 
-    hasActivity(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides,
-    ): Promise<BigNumber>;
-
     ids(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
@@ -1524,11 +1416,6 @@ export interface KnowledgeLayerID extends BaseContract {
     isOwnerOrDelegate(
       _profileId: PromiseOrValue<BigNumberish>,
       _address: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<BigNumber>;
-
-    isServiceContract(
-      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<BigNumber>;
 
@@ -1611,17 +1498,6 @@ export interface KnowledgeLayerID extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<BigNumber>;
-
-    setHasActivity(
-      _profileId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<BigNumber>;
-
-    setIsServiceContract(
-      _address: PromiseOrValue<string>,
-      _isServiceContract: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>;
 
@@ -1734,11 +1610,6 @@ export interface KnowledgeLayerID extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
 
-    hasActivity(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides,
-    ): Promise<PopulatedTransaction>;
-
     ids(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
@@ -1759,11 +1630,6 @@ export interface KnowledgeLayerID extends BaseContract {
     isOwnerOrDelegate(
       _profileId: PromiseOrValue<BigNumberish>,
       _address: PromiseOrValue<string>,
-      overrides?: CallOverrides,
-    ): Promise<PopulatedTransaction>;
-
-    isServiceContract(
-      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
 
@@ -1848,17 +1714,6 @@ export interface KnowledgeLayerID extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<PopulatedTransaction>;
-
-    setHasActivity(
-      _profileId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> },
-    ): Promise<PopulatedTransaction>;
-
-    setIsServiceContract(
-      _address: PromiseOrValue<string>,
-      _isServiceContract: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>;
 

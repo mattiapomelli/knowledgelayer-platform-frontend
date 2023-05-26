@@ -7,13 +7,14 @@ import type { Course } from "./types";
 
 const getAllCourses = gql`
   {
-    courses(where: { description_not: null }) {
+    courses(where: { description_: { id_not: null } }) {
       id
       createdAt
       updatedAt
       seller {
         id
         address
+        handle
       }
       token {
         address

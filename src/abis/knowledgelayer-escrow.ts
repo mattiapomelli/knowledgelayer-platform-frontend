@@ -50,8 +50,27 @@ export const KnowledgeLayerEscrowAbi = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "fee",
+        name: "transactionId",
         type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "enum KnowledgeLayerEscrow.PaymentType",
+        name: "paymentType",
+        type: "uint8",
+      },
+    ],
+    name: "Payment",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint16",
+        name: "fee",
+        type: "uint16",
       },
     ],
     name: "ProtocolFeeUpdated",
@@ -68,15 +87,15 @@ export const KnowledgeLayerEscrowAbi = [
       },
       {
         indexed: false,
-        internalType: "address",
-        name: "sender",
-        type: "address",
+        internalType: "uint256",
+        name: "senderId",
+        type: "uint256",
       },
       {
         indexed: false,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
+        internalType: "uint256",
+        name: "receiverId",
+        type: "uint256",
       },
       {
         indexed: false,

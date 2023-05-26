@@ -17,6 +17,7 @@ const getCourse = gql`
         about
         name
         role
+        image_url
       }
     }
   }

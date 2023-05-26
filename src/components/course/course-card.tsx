@@ -2,8 +2,6 @@ import { ethers } from "ethers";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Address } from "../address";
-
 import { CourseCategory } from "./course-category";
 
 import type { Course } from "@lib/courses/types";
@@ -35,7 +33,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
 
       <div className="mt-1 flex items-center gap-4">
         <span>
-          By: <Address address={course.seller.address} className="font-bold" />
+          By: <span className="font-bold">{course.seller.handle}.kl</span>
         </span>
         <span>
           Price:{" "}

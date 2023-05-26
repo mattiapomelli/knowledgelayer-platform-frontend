@@ -396,25 +396,6 @@ export const KnowledgeLayerIDAbi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "hasActivity",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "",
         type: "address",
@@ -493,25 +474,6 @@ export const KnowledgeLayerIDAbi = [
       },
     ],
     name: "isOwnerOrDelegate",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "isServiceContract",
     outputs: [
       {
         internalType: "bool",
@@ -854,37 +816,6 @@ export const KnowledgeLayerIDAbi = [
       },
     ],
     name: "setApprovalForAll",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_profileId",
-        type: "uint256",
-      },
-    ],
-    name: "setHasActivity",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_address",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "_isServiceContract",
-        type: "bool",
-      },
-    ],
-    name: "setIsServiceContract",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

@@ -134,7 +134,10 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
       </div>
 
       <div className="flex flex-1 flex-col gap-8">
-        <CourseLessons course={course} showVideos={hasPurchasedCourse} />
+        <CourseLessons
+          course={course}
+          showVideos={hasPurchasedCourse || isSeller}
+        />
         <CourseReviews courseId={course.id} />
       </div>
     </div>

@@ -17,6 +17,7 @@ const getAllUsers = gql`
         about
         name
         role
+        image_url
       }
       createdCourses {
         id
