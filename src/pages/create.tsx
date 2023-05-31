@@ -21,7 +21,7 @@ const CreateCoursePage: NextPage = () => {
   if (!address) {
     return (
       <div className="my-14 flex flex-col items-center gap-3">
-        <p>Connect your KL id</p>
+        <p>Connect your wallet to create a course</p>
         <UserStatus />
       </div>
     );
