@@ -5,8 +5,8 @@ import { graphQlRequest } from "@utils/graphql-client";
 
 import type { User } from "./types";
 
-const getCourse = gql`
-  query getCourse($id: String!) {
+const getUser = gql`
+  query getUser($id: String!) {
     user(id: $id) {
       id
       createdAt
@@ -27,8 +27,6 @@ export const useUser = (id: string) => {
   return useQuery({
     queryKey: ["user", id],
     queryFn: async () =>
-      graphQlRequest<{ user: User }>(getCourse, { id }).then(
-        (data) => data.user,
-      ),
+      graphQlRequest<{ user: User }>(getUser, { id }).then((data) => data.user),
   });
 };
