@@ -12,6 +12,7 @@ const getUser = gql`
       createdAt
       handle
       address
+      rating
       description {
         title
         about

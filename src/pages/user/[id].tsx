@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { Spinner } from "@components/basic/spinner";
 import { Tabs } from "@components/basic/tabs";
+import { StarRating } from "@components/star-rating";
 import { UserCreatedCourses } from "@components/user/user-created-courses";
 import { UserEnrolledCourses } from "@components/user/user-enrolled-courses";
 import { useUser } from "@lib/users/use-user";
@@ -33,9 +34,10 @@ const UserInfo = ({ user }: { user: User }) => {
             priority
           />
         </div>
-        <h1 className="mt-1 text-xl font-semibold md:text-2xl">
-          {user.handle}
-        </h1>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-xl font-semibold md:text-2xl">{user.handle}</h1>
+          <StarRating rating={Number(user.rating)} />
+        </div>
       </div>
       <p className="mt-4">{user.description?.about}</p>
 
