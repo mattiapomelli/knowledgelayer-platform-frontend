@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
-import { useQuery } from "wagmi";
 
 import { graphQlRequest } from "@utils/graphql-client";
 
@@ -30,7 +30,9 @@ const getAllUsers = gql`
 `;
 
 export const useUsers = () => {
-  return useQuery(["users"], async () =>
-    graphQlRequest<{ users: User[] }>(getAllUsers).then((data) => data.users),
-  );
+  return useQuery({
+    queryKey: ["users"],
+    queryFn: async () =>
+      graphQlRequest<{ users: User[] }>(getAllUsers).then((data) => data.users),
+  });
 };

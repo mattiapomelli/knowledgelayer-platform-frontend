@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
-import { useQuery } from "wagmi";
 
 import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { graphQlRequest } from "@utils/graphql-client";
@@ -20,10 +20,12 @@ const getHasReviewedCourse = gql`
 export const useHasReviewedCourse = (courseId: string) => {
   const { user } = useKnowledgeLayerContext();
 
-  return useQuery(["has-reviewed-course", courseId, user?.id], async () =>
-    graphQlRequest<{ reviews: Review[] }>(getHasReviewedCourse, {
-      courseId: Number(courseId),
-      userId: Number(user?.id),
-    }).then((data) => data.reviews.length > 0),
-  );
+  return useQuery({
+    queryKey: ["has-reviewed-course", courseId, user?.id],
+    queryFn: async () =>
+      graphQlRequest<{ reviews: Review[] }>(getHasReviewedCourse, {
+        courseId: Number(courseId),
+        userId: Number(user?.id),
+      }).then((data) => data.reviews.length > 0),
+  });
 };

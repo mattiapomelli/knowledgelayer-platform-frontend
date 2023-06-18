@@ -145,9 +145,9 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
 };
 
 const CoursePageInner = ({ id }: { id: string }) => {
-  const { data: course, isLoading } = useCourse(id);
+  const { data: course } = useCourse(id);
 
-  if (!course || isLoading) {
+  if (!course) {
     return (
       <div className="flex justify-center">
         <Spinner />

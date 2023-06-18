@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
-import { useQuery } from "wagmi";
 
 import { graphQlRequest } from "@utils/graphql-client";
 
@@ -39,9 +39,11 @@ export interface UserCreatedCourses {
 }
 
 export const useCreatedCourses = (userId: string) => {
-  return useQuery(["created-courses", userId], async () =>
-    graphQlRequest<UserCreatedCourses>(getCreatedCourses, {
-      id: userId,
-    }).then((data) => data.user.createdCourses),
-  );
+  return useQuery({
+    queryKey: ["created-courses", userId],
+    queryFn: async () =>
+      graphQlRequest<UserCreatedCourses>(getCreatedCourses, {
+        id: userId,
+      }).then((data) => data.user.createdCourses),
+  });
 };
