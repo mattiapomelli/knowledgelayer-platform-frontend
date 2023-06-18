@@ -1,4 +1,5 @@
-import { useAccount, useQuery } from "wagmi";
+import { useQuery } from "@tanstack/react-query";
+import { useAccount } from "wagmi";
 
 import { useKnowledgeLayerCourse } from "@hooks/use-knowledgelayer-course";
 

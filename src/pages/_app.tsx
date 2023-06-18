@@ -8,10 +8,14 @@ import {
 } from "@livepeer/react";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useAtom } from "jotai";
 import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -55,31 +59,54 @@ const livePeerClient = createReactClient({
   }),
 });
 
+const queryClient = new QueryClient();
+const ReactQueryDevtoolsProduction = dynamic(
+  () =>
+    // eslint-disable-next-line import/extensions
+    import("@tanstack/react-query-devtools/build/lib/index.prod.js").then(
+      (d) => ({
+        default: d.ReactQueryDevtools,
+      }),
+    ),
+  { ssr: false },
+);
+
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
   const [open, setOpen] = useAtom(createProfileModalAtom);
+
+  const [showReactQueryDevtools, setShowReactQueryDevtools] = useState(false);
+  useEffect(() => {
+    // @ts-expect-error - window doesn't have toggleDevtools but we're adding it
+    window.toggleDevtools = () => setShowReactQueryDevtools((old) => !old);
+  }, []);
 
   const getLayout =
     (Component as ExtendedPage).getLayout ||
     ((page) => <DefaultLayout>{page}</DefaultLayout>);
 
   return (
-    <WagmiConfig client={client}>
-      <SessionProvider session={pageProps.session} refetchInterval={0}>
-        <RainbowKitSiweNextAuthProvider>
-          <RainbowKitProvider chains={chains}>
-            <LivepeerConfig client={livePeerClient}>
-              <ThemeProvider>
-                <KnowledgeLayerProvider>
-                  <DefaultSeo {...SEO} />
-                  {getLayout(<Component {...pageProps} />)}
-                  <ConnectModal open={open} onClose={() => setOpen(false)} />
-                </KnowledgeLayerProvider>
-              </ThemeProvider>
-            </LivepeerConfig>
-          </RainbowKitProvider>
-        </RainbowKitSiweNextAuthProvider>
-      </SessionProvider>
-    </WagmiConfig>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      {showReactQueryDevtools && <ReactQueryDevtoolsProduction />}
+
+      <WagmiConfig client={client}>
+        <SessionProvider session={pageProps.session} refetchInterval={0}>
+          <RainbowKitSiweNextAuthProvider>
+            <RainbowKitProvider chains={chains}>
+              <LivepeerConfig client={livePeerClient}>
+                <ThemeProvider>
+                  <KnowledgeLayerProvider>
+                    <DefaultSeo {...SEO} />
+                    {getLayout(<Component {...pageProps} />)}
+                    <ConnectModal open={open} onClose={() => setOpen(false)} />
+                  </KnowledgeLayerProvider>
+                </ThemeProvider>
+              </LivepeerConfig>
+            </RainbowKitProvider>
+          </RainbowKitSiweNextAuthProvider>
+        </SessionProvider>
+      </WagmiConfig>
+    </QueryClientProvider>
   );
 }
 

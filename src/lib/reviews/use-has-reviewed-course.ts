@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
-import { useQuery } from "wagmi";
 
 import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { graphQlRequest } from "@utils/graphql-client";
