@@ -31,9 +31,11 @@ const getCourseReviews = gql`
 `;
 
 export const useCourseReviews = (courseId: string) => {
-  return useQuery(["course-reviews", courseId], async () =>
-    graphQlRequest<{ reviews: Review[] }>(getCourseReviews, {
-      courseId: Number(courseId),
-    }).then((data) => data.reviews),
-  );
+  return useQuery({
+    queryKey: ["course-reviews", courseId],
+    queryFn: async () =>
+      graphQlRequest<{ reviews: Review[] }>(getCourseReviews, {
+        courseId: Number(courseId),
+      }).then((data) => data.reviews),
+  });
 };

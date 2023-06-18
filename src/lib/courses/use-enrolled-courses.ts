@@ -39,9 +39,11 @@ export interface UserEnrolledCourses {
 }
 
 export const useEnrolledCourses = (userId: string) => {
-  return useQuery(["enrolled-courses", userId], async () =>
-    graphQlRequest<UserEnrolledCourses>(getEnrolledCourses, {
-      id: userId,
-    }).then((data) => data.user.purchasedCourses),
-  );
+  return useQuery({
+    queryKey: ["enrolled-courses", userId],
+    queryFn: async () =>
+      graphQlRequest<UserEnrolledCourses>(getEnrolledCourses, {
+        id: userId,
+      }).then((data) => data.user.purchasedCourses),
+  });
 };

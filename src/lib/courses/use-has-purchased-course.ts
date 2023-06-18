@@ -8,10 +8,14 @@ export const useHasPurchasedCourse = (courseId: string) => {
 
   const knowledgeLayerCourse = useKnowledgeLayerCourse();
 
-  return useQuery(["has-bought-course", address, courseId], async () => {
-    if (!knowledgeLayerCourse || !address) return false;
+  return useQuery({
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: ["has-bought-course", address, courseId],
+    queryFn: async () => {
+      if (!knowledgeLayerCourse || !address) return false;
 
-    const balance = await knowledgeLayerCourse.balanceOf(address, courseId);
-    return balance.gt(0);
+      const balance = await knowledgeLayerCourse.balanceOf(address, courseId);
+      return balance.gt(0);
+    },
   });
 };

@@ -39,9 +39,11 @@ const getCourse = gql`
 `;
 
 export const useCourse = (id: string) => {
-  return useQuery(["course", id], async () =>
-    graphQlRequest<{ course: CourseWithLessons }>(getCourse, { id }).then(
-      (data) => data.course,
-    ),
-  );
+  return useQuery({
+    queryKey: ["course", id],
+    queryFn: async () =>
+      graphQlRequest<{ course: CourseWithLessons }>(getCourse, { id }).then(
+        (data) => data.course,
+      ),
+  });
 };
