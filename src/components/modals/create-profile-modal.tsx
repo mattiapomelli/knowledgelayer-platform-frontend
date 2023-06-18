@@ -3,11 +3,15 @@ import { useForm } from "react-hook-form";
 import { Button } from "@components/basic/button";
 import { Input } from "@components/basic/input";
 import { Modal } from "@components/basic/modal";
+import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
 import { useCreateProfile } from "@lib/users/use-create-profile";
 
 import type { BaseModalProps } from "@components/basic/modal";
 
-export const ConnectModal = ({ open, onClose }: BaseModalProps) => {
+export const CreateProfileModal = ({ open, onClose }: BaseModalProps) => {
+  const { refetch: refetchKnowledgeLayerActiveUser } =
+    useKnowledgeLayerActiveUser();
+
   const {
     register,
     handleSubmit,
@@ -17,6 +21,7 @@ export const ConnectModal = ({ open, onClose }: BaseModalProps) => {
 
   const { mutate: createProfile, isLoading } = useCreateProfile({
     onSuccess() {
+      refetchKnowledgeLayerActiveUser();
       reset();
       onClose();
     },

@@ -3,13 +3,13 @@ import { useAccount, useSwitchNetwork } from "wagmi";
 
 import { Button } from "@components/basic/button";
 import { CHAIN } from "@constants/chains";
-import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
+import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
 
 import { UserDropdown } from "./user-dropdown";
 
 export const UserStatus = () => {
-  const { user } = useKnowledgeLayerContext();
+  const { user } = useKnowledgeLayerActiveUser();
   const openCreateProfileModal = useCreateProfileModal();
 
   const { address } = useAccount();
