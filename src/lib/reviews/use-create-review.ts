@@ -1,6 +1,6 @@
 import { useMutation } from "wagmi";
 
-import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
+import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
 import { uploadToIPFS } from "@utils/ipfs";
 
 import { useKnowledgeLayerReview } from "../../hooks/use-knowledgelayer-review";
@@ -18,7 +18,7 @@ interface UseCreateReviewOptions {
 }
 
 export const useCreateReview = (options?: UseCreateReviewOptions) => {
-  const { user } = useKnowledgeLayerContext();
+  const { user } = useKnowledgeLayerActiveUser();
 
   const knowledgeLayerReview = useKnowledgeLayerReview(true);
   const mutation = useMutation(

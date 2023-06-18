@@ -20,9 +20,8 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
-import { ConnectModal } from "@components/modals/create-profile-modal";
+import { CreateProfileModal } from "@components/modals/create-profile-modal";
 import { CHAIN } from "@constants/chains";
-import { KnowledgeLayerProvider } from "@context/knowledgelayer-provider";
 import { createProfileModalAtom } from "@hooks/use-create-profile-modal";
 import { DefaultLayout } from "@layouts/default-layout";
 import { env } from "env.mjs";
@@ -95,11 +94,12 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
             <RainbowKitProvider chains={chains}>
               <LivepeerConfig client={livePeerClient}>
                 <ThemeProvider>
-                  <KnowledgeLayerProvider>
-                    <DefaultSeo {...SEO} />
-                    {getLayout(<Component {...pageProps} />)}
-                    <ConnectModal open={open} onClose={() => setOpen(false)} />
-                  </KnowledgeLayerProvider>
+                  <DefaultSeo {...SEO} />
+                  {getLayout(<Component {...pageProps} />)}
+                  <CreateProfileModal
+                    open={open}
+                    onClose={() => setOpen(false)}
+                  />
                 </ThemeProvider>
               </LivepeerConfig>
             </RainbowKitProvider>

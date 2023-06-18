@@ -1,7 +1,7 @@
 import { useMutation } from "wagmi";
 
-import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useKnowledgeLayerID } from "@hooks/use-knowledgelayer-id";
+import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
 import { uploadToIPFS } from "@utils/ipfs";
 
 import type { ContractReceipt } from "ethers";
@@ -17,7 +17,7 @@ interface UseUpdateProfileOptions {
 }
 
 export const useUpdateProfile = (options?: UseUpdateProfileOptions) => {
-  const { user } = useKnowledgeLayerContext();
+  const { user } = useKnowledgeLayerActiveUser();
 
   const knowledgeLayerID = useKnowledgeLayerID(true);
   const mutation = useMutation(

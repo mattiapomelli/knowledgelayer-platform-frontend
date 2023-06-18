@@ -12,17 +12,17 @@ import { CourseLessons } from "@components/course/course-lessons";
 import { CourseReviews } from "@components/course/course-reviews";
 import { CreateReviewModal } from "@components/modals/create-review-modal";
 import { UserAvatar } from "@components/user/user-avatar";
-import { useKnowledgeLayerContext } from "@context/knowledgelayer-provider";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
 import { useHasReviewedCourse } from "@lib/reviews/use-has-reviewed-course";
+import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
-  const { user } = useKnowledgeLayerContext();
+  const { user } = useKnowledgeLayerActiveUser();
   const router = useRouter();
   const openCreateProfileModal = useCreateProfileModal();
 
