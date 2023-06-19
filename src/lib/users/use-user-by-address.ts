@@ -24,7 +24,17 @@ const getUserByAddress = gql`
   }
 `;
 
-export const useUserByAddress = ({ address }: { address?: `0x${string}` }) => {
+interface QueryOptions {
+  staleTime?: number;
+}
+
+export const useUserByAddress = ({
+  address,
+  queryOptions,
+}: {
+  address?: `0x${string}`;
+  queryOptions?: QueryOptions;
+}) => {
   const { data: user, ...rest } = useQuery({
     queryKey: ["user-by-address", address],
     queryFn: async () => {
@@ -41,6 +51,7 @@ export const useUserByAddress = ({ address }: { address?: `0x${string}` }) => {
       return res.users[0];
     },
     enabled: !!address,
+    ...queryOptions,
   });
 
   return {
