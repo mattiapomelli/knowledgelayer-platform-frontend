@@ -1,5 +1,3 @@
-import { StarIcon } from "@heroicons/react/24/solid";
-import cx from "classnames";
 import { ethers } from "ethers";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -11,6 +9,7 @@ import { CourseCategory } from "@components/course/course-category";
 import { CourseLessons } from "@components/course/course-lessons";
 import { CourseReviews } from "@components/course/course-reviews";
 import { CreateReviewModal } from "@components/modals/create-review-modal";
+import { StarRating } from "@components/star-rating";
 import { UserAvatar } from "@components/user/user-avatar";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useBuyCourse } from "@lib/courses/use-buy-course";
@@ -61,19 +60,10 @@ const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
 
         <div className="my-2 flex items-center gap-6">
           <UserAvatar user={course.seller} />
-          <div className="my-1 flex gap-1">
-            {new Array(5).fill(undefined).map((_, index) => (
-              <StarIcon
-                key={index}
-                className={cx(
-                  "h-4 w-4",
-                  index < Number(course.rating)
-                    ? "text-yellow-500"
-                    : "text-base-content/20",
-                )}
-              />
-            ))}
-          </div>
+          <StarRating
+            containerClassName="my-1"
+            rating={Number(course.rating)}
+          />
         </div>
 
         <p className="mt-4">{course.description.about}</p>

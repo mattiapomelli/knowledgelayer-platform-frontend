@@ -1,5 +1,3 @@
-import { StarIcon } from "@heroicons/react/24/solid";
-import cx from "classnames";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -7,6 +5,7 @@ import { Button } from "@components/basic/button";
 import { Label } from "@components/basic/label";
 import { Modal } from "@components/basic/modal";
 import { TextArea } from "@components/basic/textarea/textarea";
+import { StarRating } from "@components/star-rating";
 import { useCreateReview } from "@lib/reviews/use-create-review";
 
 import type { BaseModalProps } from "@components/basic/modal";
@@ -48,18 +47,11 @@ export const CreateReviewModal = ({
       <p className="mb-6">Review the course and instructor.</p>
       <div className="mb-4">
         <Label>Rating</Label>
-        <div className="mt-2 flex gap-1">
-          {new Array(5).fill(undefined).map((_, index) => (
-            <button key={index} onClick={() => setRating(index + 1)}>
-              <StarIcon
-                className={cx(
-                  "h-4 w-4",
-                  index < rating ? "text-yellow-500" : "text-base-content/20",
-                )}
-              />
-            </button>
-          ))}
-        </div>
+        <StarRating
+          rating={rating}
+          onRatingChange={setRating}
+          containerClassName="mt-2"
+        />
       </div>
       <form onSubmit={onSubmit} className="flex flex-col gap-3">
         <TextArea
