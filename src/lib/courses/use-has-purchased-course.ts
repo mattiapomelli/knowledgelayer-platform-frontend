@@ -10,7 +10,7 @@ export const useHasPurchasedCourse = (courseId: string) => {
 
   return useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ["has-bought-course", address, courseId],
+    queryKey: ["has-purchased-course", address, courseId],
     queryFn: async () => {
       if (!knowledgeLayerCourse || !address) return false;
 

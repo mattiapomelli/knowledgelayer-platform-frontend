@@ -15,6 +15,7 @@ const getEnrolledCourses = gql`
         seller {
           id
           address
+          handle
         }
         token {
           address

@@ -5,8 +5,6 @@ import { useCourseReviews } from "@lib/reviews/use-reviews";
 export const CourseReviewsInner = ({ courseId }: { courseId: string }) => {
   const { data: reviews, isLoading } = useCourseReviews(courseId);
 
-  console.log("Reviews: ", reviews);
-
   if (isLoading) {
     return (
       <div className="my-14 flex justify-center">
