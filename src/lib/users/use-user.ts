@@ -6,7 +6,7 @@ import { graphQlRequest } from "@utils/graphql-client";
 import type { User } from "./types";
 
 const getUser = gql`
-  query getUser($id: String!) {
+  query GetUser($id: String!) {
     user(id: $id) {
       id
       createdAt

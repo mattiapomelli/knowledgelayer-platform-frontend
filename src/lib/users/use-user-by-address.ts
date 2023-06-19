@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
 import invariant from "tiny-invariant";
-import { useAccount } from "wagmi";
 
 import { graphQlRequest } from "@utils/graphql-client";
 
@@ -19,14 +18,15 @@ const getUserByAddress = gql`
         about
         name
         role
+        image_url
       }
     }
   }
 `;
 
-const useKnowledgeLayerUser = ({ address }: { address?: `0x${string}` }) => {
+export const useUserByAddress = ({ address }: { address?: `0x${string}` }) => {
   const { data: user, ...rest } = useQuery({
-    queryKey: ["knowledge-layer-user", address],
+    queryKey: ["user-by-address", address],
     queryFn: async () => {
       invariant(address);
 
@@ -47,10 +47,4 @@ const useKnowledgeLayerUser = ({ address }: { address?: `0x${string}` }) => {
     user,
     ...rest,
   };
-};
-
-export const useKnowledgeLayerActiveUser = () => {
-  const { address } = useAccount();
-
-  return useKnowledgeLayerUser({ address });
 };

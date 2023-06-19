@@ -1,7 +1,7 @@
 import { useMutation } from "wagmi";
 
 import { ETH_ADDRESS, PLATFORM_ID } from "@constants/common";
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 import { uploadToIPFS } from "@utils/ipfs";
 import { uploadImage } from "@utils/upload-image";
 
@@ -27,7 +27,7 @@ interface UseCreateCourseOptions {
 }
 
 export const useCreateCourse = (options?: UseCreateCourseOptions) => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
 
   const knowledgeLayerCourse = useKnowledgeLayerCourse(true);
   const mutation = useMutation(

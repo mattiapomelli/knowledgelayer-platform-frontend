@@ -10,7 +10,7 @@ import { FileDropzone } from "@components/file-dropzone";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
 import { useUploadVideos } from "@hooks/use-upload-videos";
 import { useCreateCourse } from "@lib/courses/use-create-course";
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 
 import type { Asset } from "@livepeer/react";
 
@@ -27,7 +27,7 @@ interface CreateCourseFields {
 }
 
 export const CreateCourseForm = () => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
   const router = useRouter();
   const openCreateProfileModal = useCreateProfileModal();
 
