@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { gql } from "graphql-request";
 
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 import { graphQlRequest } from "@utils/graphql-client";
 
 import type { Review } from "./types";
@@ -18,7 +18,7 @@ const getHasReviewedCourse = gql`
 `;
 
 export const useHasReviewedCourse = (courseId: string) => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
 
   return useQuery({
     queryKey: ["has-reviewed-course", courseId, user?.id],

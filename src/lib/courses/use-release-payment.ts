@@ -1,7 +1,7 @@
 import { useMutation } from "wagmi";
 
 import { useKnowledgeLayerEscrow } from "@hooks/use-knowledgelayer-escrow";
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 
 import type { ContractReceipt } from "ethers";
 
@@ -14,7 +14,7 @@ interface UseReleasePaymentOptions {
 }
 
 export const useReleasePayment = (options?: UseReleasePaymentOptions) => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
 
   const knowledgeLayerEscrow = useKnowledgeLayerEscrow(true);
   const mutation = useMutation(

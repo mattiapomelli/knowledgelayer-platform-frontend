@@ -3,7 +3,7 @@ import { useMutation } from "wagmi";
 import { FEE_DIVIDER, PLATFORM_ID } from "@constants/common";
 import { useKnowledgeLayerEscrow } from "@hooks/use-knowledgelayer-escrow";
 import { useKnowledgeLayerPlatformID } from "@hooks/use-knowledgelayer-platform-id";
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 
 import { useKnowledgeLayerCourse } from "../../hooks/use-knowledgelayer-course";
 
@@ -18,7 +18,7 @@ interface UseBuyCourseOptions {
 }
 
 export const useBuyCourse = (options?: UseBuyCourseOptions) => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
 
   const knowledgeLayerPlatformID = useKnowledgeLayerPlatformID();
   const knowledgeLayerCourse = useKnowledgeLayerCourse();

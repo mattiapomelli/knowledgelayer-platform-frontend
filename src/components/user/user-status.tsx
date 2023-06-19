@@ -4,12 +4,12 @@ import { useAccount, useSwitchNetwork } from "wagmi";
 import { Button } from "@components/basic/button";
 import { CHAIN } from "@constants/chains";
 import { useCreateProfileModal } from "@hooks/use-create-profile-modal";
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 
 import { UserDropdown } from "./user-dropdown";
 
 export const UserStatus = () => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
   const openCreateProfileModal = useCreateProfileModal();
 
   const { address } = useAccount();

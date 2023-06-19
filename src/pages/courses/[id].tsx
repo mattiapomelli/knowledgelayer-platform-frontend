@@ -16,12 +16,12 @@ import { useBuyCourse } from "@lib/courses/use-buy-course";
 import { useCourse } from "@lib/courses/use-course";
 import { useHasPurchasedCourse } from "@lib/courses/use-has-purchased-course";
 import { useHasReviewedCourse } from "@lib/reviews/use-has-reviewed-course";
-import { useKnowledgeLayerActiveUser } from "@lib/users/use-active-knowledge-layer-user";
+import { useActiveUser } from "@lib/users/use-active-user";
 
 import type { CourseWithLessons } from "@lib/courses/types";
 
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
-  const { user } = useKnowledgeLayerActiveUser();
+  const { user } = useActiveUser();
   const router = useRouter();
   const openCreateProfileModal = useCreateProfileModal();
 
