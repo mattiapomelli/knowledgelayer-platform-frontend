@@ -15,6 +15,7 @@ const getCreatedCourses = gql`
         seller {
           id
           address
+          handle
         }
         token {
           address
