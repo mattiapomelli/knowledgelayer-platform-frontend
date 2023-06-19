@@ -23,19 +23,17 @@ import type { CourseWithLessons } from "@lib/courses/types";
 
 const CourseInfo = ({ course }: { course: CourseWithLessons }) => {
   const { user } = useActiveUser();
-  const router = useRouter();
   const openCreateProfileModal = useCreateProfileModal();
 
-  const { data: hasPurchasedCourse } = useHasPurchasedCourse(course.id);
+  const { data: hasPurchasedCourse, refetch: refetchHasPurchasedCourse } =
+    useHasPurchasedCourse(course.id);
   const { data: hasReviewedCourse, isLoading: isLoadingHasReviewed } =
     useHasReviewedCourse(course.id);
   const { mutate: buyCourse, isLoading } = useBuyCourse({
     onSuccess() {
-      router.push(`/user/${user?.id}`);
+      refetchHasPurchasedCourse();
     },
   });
-
-  console.log("has reviewed course: ", hasReviewedCourse);
 
   const [showReviewModal, setShowReviewModal] = useState(false);
 
